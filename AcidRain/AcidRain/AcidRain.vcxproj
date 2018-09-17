@@ -139,7 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.c" />
+    <ClCompile Include="gamestart.c" />
+    <ClCompile Include="acidrain.c" />
+    <ClCompile Include="ranking.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gamestart.h" />
+    <ClInclude Include="ranking.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
