@@ -2,20 +2,20 @@
 #include "gamestart.h"
 #include "ranking.h"
 
-int printMenu();
+int printAndSelectMenu();
 
 int main(void) {
 	int numberSelectedByUser;
 
-	numberSelectedByUser = printMenu();
+	numberSelectedByUser = printAndSelectMenu();
 
 	while (1) {
 		switch (numberSelectedByUser) {
 		case 1:
-			printf("1선택\n");
+			gamestartPrint();
 			break;
 		case 2:
-			printf("2선택\n");
+			rankingPrint();
 			break;
 		case 3:
 			printf("게임을 종료합니다.\n");
@@ -30,7 +30,7 @@ int main(void) {
 	return 0;
 }
 
-int printMenu() {
+int printAndSelectMenu() {
 	int selectNumber;
 
 	printf(">> Acid Rain\n");
