@@ -12,10 +12,10 @@ int main(void) {
 	while (1) {
 		switch (numberSelectedByUser) {
 		case 1:
-			gamestartPrint();
+			gameStart();
 			break;
 		case 2:
-			rankingPrint();
+			ranking();
 			break;
 		case 3:
 			printf("게임을 종료합니다.\n");
