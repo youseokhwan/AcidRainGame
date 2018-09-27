@@ -2,5 +2,5 @@
 #include "ranking.h"
 
 void ranking() {
-	printf("2 랭킹을 선택했을 때 나타나는 테스트 문구입니다.\n");
+	printf("ranking() 함수가 정상적으로 실행됨\n");
 }

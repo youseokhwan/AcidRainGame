@@ -1,0 +1,53 @@
+[33mcommit 7c6f56198b6be05d36b18fd280ea437ca5c9a4ce[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: youseokhwan <tjrghks115@naver.com>
+Date:   Mon Sep 24 14:44:41 2018 +0900
+
+    Final practice
+
+[33mcommit 1712756c284d0465141105badae11ab1e45a16b4[m
+Author: youseokhwan <tjrghks115@naver.com>
+Date:   Fri Sep 21 23:47:10 2018 +0900
+
+    Practice other functions
+
+[33mcommit 06f341fd1e6020e59429f77522db5fc0428b5958[m
+Author: youseokhwan <tjrghks115@naver.com>
+Date:   Thu Sep 20 19:05:35 2018 +0900
+
+    Practice pthread
+
+[33mcommit 5a8cf48c8a65c11563a9894d7f61b02ee4c5b201[m
+Author: youseokhwan <tjrghks115@naver.com>
+Date:   Tue Sep 18 23:06:12 2018 +0900
+
+    Define struct in gamestart.h
+
+[33mcommit 5ccae591a50c68c4aa9b603ba98195838f691092[m
+Author: youseokhwan <tjrghks115@naver.com>
+Date:   Tue Sep 18 00:13:26 2018 +0900
+
+    Create README.md
+
+[33mcommit 9b6c71089ceeffcc0dab60e239186e2e189ba9aa[m
+Author: youseokhwan <tjrghks115@naver.com>
+Date:   Mon Sep 17 22:07:47 2018 +0900
+
+    Very small update
+
+[33mcommit 8cc4dd45dc4e1d818889f79c5b5814f185eeaa35[m
+Author: youseokhwan <tjrghks115@naver.com>
+Date:   Mon Sep 17 16:40:01 2018 +0900
+
+    Update header files
+
+[33mcommit b2f0318f7ce81a2cf3504d0e9d683af2bfbd6c5b[m
+Author: youseokhwan <tjrghks115@naver.com>
+Date:   Mon Sep 17 10:45:39 2018 +0900
+
+    Divide header files
+
+[33mcommit 04dfe426c2c70b05c7c98a360ae7aa9939e55f27[m
+Author: youseokhwan <tjrghks115@naver.com>
+Date:   Sun Sep 16 12:38:23 2018 +0900
+
+    Create simple menu

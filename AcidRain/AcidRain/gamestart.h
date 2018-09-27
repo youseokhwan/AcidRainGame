@@ -1,9 +1,11 @@
 #ifndef __GAMESTART_H__
 #define __GAMESTART_H__
 
+void gotoxy(int x, int y);
+
 void gameStart(); // 게임시작 눌렀을 때 진입하는 함수
 
-struct gameStatus {
+typedef struct _gameStatus {
 	int leftLife; // 남은 목숨(최초 5개)
 	int stage;
 	int score;
@@ -12,8 +14,9 @@ struct gameStatus {
 };
 
 struct word {
-	char* wordName;
-	int currentLocation; // 0부터 시작해서 10되면 라이프 감소하는 알고리즘
+	char* word; // 단어
+	int isPrint; // 단어가 화면에 나타나고 있는지 여부(true가 나타남)
+	int printCount; // 단어가 현재 몇 번째 줄에 위치하는지에 대한 값 
 };
 
 #endif

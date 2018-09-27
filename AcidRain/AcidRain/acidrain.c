@@ -1,10 +1,20 @@
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+// 18.09.16 ~ 
+// made by youseokhwan(https://github.com/youseokhwan/AcidRainGame)
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+
 #include <stdio.h>
+#include <Windows.h>
+#include <stdlib.h>
+#include <time.h>
+#include "acidrain.h"
 #include "gamestart.h"
 #include "ranking.h"
 
-int printAndSelectMenu();
-
 int main(void) {
+	setcursortype(NOCURSOR); // 커서 깜빡이지 않게하는 함수
+	srand(time(NULL));
+
 	int numberSelectedByUser;
 
 	numberSelectedByUser = printAndSelectMenu();
@@ -12,14 +22,15 @@ int main(void) {
 	while (1) {
 		switch (numberSelectedByUser) {
 		case 1:
-			gameStart();
+			gameStart(); // gameStart.c
 			break;
 		case 2:
-			ranking();
+			ranking(); // ranking.c
 			break;
 		case 3:
 			printf("게임을 종료합니다.\n");
 			exit(0);
+			// break;
 		default:
 			printf("잘못선택하셨습니다. 다시 선택해주세요.\n");
 		}

@@ -3,5 +3,4 @@
 
 void ranking();
 
-
 #endif
