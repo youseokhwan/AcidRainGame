@@ -11,6 +11,8 @@
 #include "gamestart.h"
 #include "ranking.h"
 
+
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ Main Function  ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 int main(void) {
 	setcursortype(NOCURSOR); // 커서 깜빡이지 않게하는 함수
 	srand(time(NULL));
@@ -40,6 +42,7 @@ int main(void) {
 
 	return 0;
 }
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ Main Function ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 int printAndSelectMenu() {
 	int selectNumber;
