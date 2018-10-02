@@ -1,7 +1,17 @@
 #ifndef __GAMESTART_H__
 #define __GAMESTART_H__
 
+#include <stdio.h>
+#include <conio.h>
+#include <Windows.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
 #include <pthread.h>
+
+#define NUMBER_OF_WORD_LIST 50
+#define MAX_STAGE 10
+#define NUMBER_OF_WORD_IN_CURRENT_STAGE 10
 
 void gotoxy(int x, int y); // 콘솔에서 커서 이동시키는 함수
 
@@ -18,6 +28,7 @@ struct word {
 	char* word; // 단어
 	int isPrint; // 단어가 화면에 나타나고 있는지 여부(true가 출력, false가 출력X)
 	int printCount; // 단어가 현재 몇 번째 줄에 위치하는지에 대한 값
+	int x, y; // 해당 단어의 x, y 좌표 - gotoxy()의 인자로 사용
 };
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드 관련 선언 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -26,8 +37,6 @@ void* bottomThreadFunc(void* arg); // bottomThread에서 사용될 함수
 
 pthread_t topThread, bottomThread; // 쓰레드 선언
 int intTemp; // pthread_join()에 넣을 인자(딱히 사용 안함)
-void* voidPointerTemp;
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 쓰레드 관련 선언 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-
 
 #endif

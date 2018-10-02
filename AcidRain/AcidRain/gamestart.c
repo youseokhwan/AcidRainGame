@@ -1,14 +1,4 @@
-#include <stdio.h>
-#include <conio.h>
-#include <Windows.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
 #include "gamestart.h"
-
-#define NUMBER_OF_WORD_LIST 50
-#define MAX_STAGE 10
-#define NUMBER_OF_WORD_IN_CURRENT_STAGE 10
 
 void gotoxy(int x, int y) {
 	COORD CursorPosition = { x, y };
@@ -18,7 +8,12 @@ void gotoxy(int x, int y) {
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드에 사용할 함수 정의 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 void* topThreadFunc(void* arg) {
 	printf("topThread가 정상적으로 실행됨\n");
-	// Not yet completed
+
+	struct word* _word = (struct word*)arg;
+	
+	for (int i = 0; i < NUMBER_OF_WORD_IN_CURRENT_STAGE; i++) {
+		printf("%s\n", _word[i].word);
+	}
 
 	return NULL;
 }
@@ -26,8 +21,14 @@ void* topThreadFunc(void* arg) {
 void* bottomThreadFunc(void* arg) {
 	Sleep(200);
 	printf("bottomThread가 정상적으로 실행됨\n");
+
+	struct word* _word = (struct word*)arg;
+
+	for (int i = 0; i < NUMBER_OF_WORD_IN_CURRENT_STAGE; i++) {
+		printf("%d\n", _word[i].printCount);
+	}
+
 	system("pause>nul");
-	// Not yet completed
 
 	return NULL;
 }
@@ -74,6 +75,8 @@ void gameStart() {
 			}
 			wordInCurrentStage[i].isPrint = 0;
 			wordInCurrentStage[i].printCount = 1; // 1부터 시작해서 10에 도달하면 점수 깎임
+			wordInCurrentStage[i].x = 0;
+			wordInCurrentStage[i].y = 0;
 		}
 		// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 현재 스테이지 단어 초기화 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
@@ -90,17 +93,16 @@ void gameStart() {
 
 		// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드 호출 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 		intTemp = 0;
-		voidPointerTemp = &intTemp;
 
-		pthread_create(&topThread, NULL, topThreadFunc, (void*)voidPointerTemp); // topThread 생성
-		pthread_create(&bottomThread, NULL, bottomThreadFunc, (void*)voidPointerTemp); // bottomThread 생성
+		pthread_create(&topThread, NULL, topThreadFunc, (void*)wordInCurrentStage); // topThread 생성
+		pthread_create(&bottomThread, NULL, bottomThreadFunc, (void*)wordInCurrentStage); // bottomThread 생성
 
 		pthread_join(topThread, (void**)&intTemp); // topThread 해제
 		pthread_join(bottomThread, (void**)&bottomThread); // bottomThread 해제
 		// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 쓰레드 호출 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 
-		gameStatus.stage++; // 스테이지 1 증가
+		gameStatus.stage++; // 스테이지 1
 	}
 
 }

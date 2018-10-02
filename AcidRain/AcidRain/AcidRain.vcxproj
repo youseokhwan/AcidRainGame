@@ -142,12 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="consoleprint.c" />
     <ClCompile Include="gamestart.c" />
-    <ClCompile Include="acidrain.c" />
+    <ClCompile Include="main.c" />
     <ClCompile Include="ranking.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="acidrain.h" />
+    <ClInclude Include="consoleprint.h" />
     <ClInclude Include="gamestart.h" />
     <ClInclude Include="ranking.h" />
   </ItemGroup>
