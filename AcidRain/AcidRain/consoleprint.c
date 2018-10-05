@@ -1,11 +1,11 @@
 #include "consoleprint.h"
 
-void gotoxy(int x, int y) {
+void gotoxy(int x, int y) { // 커서 특정 좌표로 이동
 	COORD CursorPosition = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CursorPosition);
 }
 
-void setCursorType(CURSOR_TYPE c) {
+void setCursorType(CURSOR_TYPE c) { // 커서 깜빡이지 않게 설정
 	CONSOLE_CURSOR_INFO curInfo;
 	switch (c) {
 	case NOCURSOR:
@@ -24,7 +24,7 @@ void setCursorType(CURSOR_TYPE c) {
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &curInfo);
 }
 
-int printAndSelectMenu() {
+int printAndSelectMenu() { // 최초 메뉴 출력 및 유저입력
 	int selectNumber;
 
 	printf(">> Acid Rain\n");
@@ -37,12 +37,12 @@ int printAndSelectMenu() {
 	return selectNumber;
 }
 
-void printUpAndDownBorderLine() {
+void printUpAndDownBorderLine() { // 경계선 출력
 	gotoxy(0, 1); printf("===============================================================\n");
 	gotoxy(0, 22); printf("===============================================================\n");
 }
 
-void clearBoard() {
+void clearBoard() { // 화면 지우기
 	gotoxy(0, 0);
 	printf("                                                                ");
 	printf("                                                                ");
@@ -56,7 +56,7 @@ void clearBoard() {
 	}
 }
 
-void printStatus() {
+void printStatus() { // gameStatus( ) 정보 출력
 	gotoxy(0, 0); printf("Stage: %d", gameStatus.stage);
 	gotoxy(25, 0);
 	if (gameStatus.life == 1) {
