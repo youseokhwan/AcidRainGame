@@ -3,24 +3,18 @@
 // made by youseokhwan(https://github.com/youseokhwan/AcidRainGame)
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
-#include <stdio.h>
-#include <Windows.h>
-#include <stdlib.h>
-#include <time.h>
 #include "consoleprint.h"
 #include "gamestart.h"
 #include "ranking.h"
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ Main Function  ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 int main(void) {
-	setcursortype(NOCURSOR); // 커서 깜빡이지 않게하는 함수
+	setCursorType(NOCURSOR); // 커서 깜빡이지 않게하는 함수
 	srand(time(NULL));
 
-	int numberSelectedByUser;
+	int numberSelectedByUser = printAndSelectMenu();
 
-	numberSelectedByUser = printAndSelectMenu();
-
-	while (1) {
+	while (true) {
 		switch (numberSelectedByUser) {
 		case 1:
 			gameStart(); // gameStart.c

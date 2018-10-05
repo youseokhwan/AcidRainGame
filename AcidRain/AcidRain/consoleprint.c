@@ -1,22 +1,27 @@
 #include "consoleprint.h"
 
-void setcursortype(CURSOR_TYPE c) {
-	CONSOLE_CURSOR_INFO CurInfo;
+void gotoxy(int x, int y) {
+	COORD CursorPosition = { x, y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CursorPosition);
+}
+
+void setCursorType(CURSOR_TYPE c) {
+	CONSOLE_CURSOR_INFO curInfo;
 	switch (c) {
 	case NOCURSOR:
-		CurInfo.dwSize = 1;
-		CurInfo.bVisible = FALSE;
+		curInfo.dwSize = 1;
+		curInfo.bVisible = FALSE;
 		break;
 	case SOLIDCURSOR:
-		CurInfo.dwSize = 100;
-		CurInfo.bVisible = TRUE;
+		curInfo.dwSize = 100;
+		curInfo.bVisible = TRUE;
 		break;
 	case NORMALCURSOR:
-		CurInfo.dwSize = 20;
-		CurInfo.bVisible = TRUE;
+		curInfo.dwSize = 20;
+		curInfo.bVisible = TRUE;
 		break;
 	}
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo);
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &curInfo);
 }
 
 int printAndSelectMenu() {
@@ -30,4 +35,35 @@ int printAndSelectMenu() {
 	scanf_s("%d", &selectNumber);
 
 	return selectNumber;
+}
+
+void printUpAndDownBorderLine() {
+	gotoxy(0, 1); printf("===============================================================\n");
+	gotoxy(0, 22); printf("===============================================================\n");
+}
+
+void clearBoard() {
+	gotoxy(0, 0);
+	printf("                                                                ");
+	printf("                                                                ");
+	printf("                                                                ");
+
+	for (int i = 2; i <= 21; i++) {
+		gotoxy(0, i);
+		printf("                                                                ");
+		printf("                                                                ");
+		printf("                                                                ");
+	}
+}
+
+void printStatus() {
+	gotoxy(0, 0); printf("Stage: %d", gameStatus.stage);
+	gotoxy(25, 0);
+	if (gameStatus.life == 1) {
+		printf("Life: %d", gameStatus.life);
+	}
+	else {
+		printf("Lifes: %d", gameStatus.life);
+	}
+	gotoxy(50, 0); printf("Score: %d", gameStatus.score);
 }
