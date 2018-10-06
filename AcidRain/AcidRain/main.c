@@ -9,13 +9,13 @@
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ Main Function  ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 int main(void) {
+	system("title Acid Rain (A simple word typing game)"); // 콘솔 타이틀 변경
 	setCursorType(NOCURSOR); // 커서 깜빡이지 않게하는 함수
-	srand(time(NULL));
 
 	int numberSelectedByUser = printAndSelectMenu();
 
 	while (true) {
-		switch (numberSelectedByUser) {
+		switch (numberSelectedByUser) { // 나중에 키보드 입력으로 바꾸기?
 		case 1:
 			gameStart(); // gameStart.c
 			break;
@@ -24,13 +24,15 @@ int main(void) {
 			break;
 		case 3:
 			printf("게임을 종료합니다.\n");
+			system("pause>nul");
 			exit(0);
-			// break;
 		default:
 			printf("잘못선택하셨습니다. 다시 선택해주세요.\n");
+			system("pause>nul");
 		}
 
-		break;
+		system("cls");
+		numberSelectedByUser = printAndSelectMenu();
 	}
 
 	return 0;

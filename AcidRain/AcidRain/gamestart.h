@@ -13,13 +13,16 @@
 #define MAX_STAGE 10
 #define THE_NUMBER_OF_WORDS_IN_STAGE 10
 
+#define BACKSPACE_KEY 8
+#define ENTER_KEY 13
+#define SPACEBAR_KEY 32
+
 void gameStart(); // "1. 게임시작" 눌렀을 때 진입하는 함수
 
 struct _gameStatus {
 	int life; // 남은 목숨(최초 5개)
 	int stage;
 	int score;
-	int correctInputCount; // 정답 입력한 횟수
 	int correctInputCountInStage; // 현재 스테이지에서 정답 입력한 횟수
 } gameStatus;
 
@@ -30,10 +33,10 @@ struct word {
 } wordInCurrentStage[THE_NUMBER_OF_WORDS_IN_STAGE];
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드 관련 선언 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+pthread_t topThread, bottomThread; // 쓰레드 선언
+
 void* topThreadFunc(void* arg); // topThread에서 사용될 함수
 void* bottomThreadFunc(void* arg); // bottomThread에서 사용될 함수
-
-pthread_t topThread, bottomThread; // 쓰레드 선언
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 쓰레드 관련 선언 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 #endif

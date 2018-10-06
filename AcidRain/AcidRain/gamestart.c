@@ -3,17 +3,20 @@
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드에 사용할 함수 정의 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 void* topThreadFunc(void* arg) {
-	int theSpeedOfWordDrop[MAX_STAGE] = { 1500, 1000, 900, 800, 750, 700, 650, 600, 550, 200 }; // 단어 떨어지는 스피드 조절
+
+	int theSpeedOfWordDrop[MAX_STAGE] = { 1200, 1000, 900, 800, 750, 700, 650, 600, 550, 200 }; // 단어 떨어지는 스피드 조절
 	int pulseCount = 0; // 단어 내려가는 작업이 진행된 횟수
 	gameStatus.correctInputCountInStage = 0; // 유저가 해당 스테이지에서 맞춘 정답의 개수
 	
+	srand(time(NULL)); // 난수 시드값
 	for (int i = 0; i < THE_NUMBER_OF_WORDS_IN_STAGE; i++) { // 해당 언어의 랜덤 x값 지정
-		wordInCurrentStage[i].x = (rand() % 60) + 2;
+		wordInCurrentStage[i].x = (rand() % 56) + 1;
 	}
 
 	clearBoard(); // 화면 지우기
 	printStatus(); // 스테이지, 라이프, 점수 출력
 	printUpAndDownBorderLine(); // 경계선 출력
+	printPrompt(); // 유저 입력창 출력
 	gotoxy(0, 2);  printf("Stage %d START!!", gameStatus.stage);
 	system("pause>nul");
 
@@ -21,6 +24,7 @@ void* topThreadFunc(void* arg) {
 		clearBoard(); // 화면 지우기
 		printStatus(); // 스테이지, 라이프, 점수 출력
 		printUpAndDownBorderLine(); // 경계선 출력
+		printPrompt(); // 유저 입력창 출력
 
 		if (gameStatus.life == 0) { // 남은 목숨이 0이면 게임 종료 및 ranking( ) 실행
 			gotoxy(0, 2); printf("Game Over!!\n");
@@ -31,15 +35,13 @@ void* topThreadFunc(void* arg) {
 		}
 
 		if (gameStatus.correctInputCountInStage == THE_NUMBER_OF_WORDS_IN_STAGE) { // 단어를 모두 입력하면 다음 스테이지로 넘어감
+			gameStatus.score += gameStatus.stage * 100; // 클리어 시 스테이지*100 만큼 점수 증가
 			gotoxy(0, 2); printf("%d 스테이지 클리어!!\n", gameStatus.stage);
 			system("pause>nul");
 
 			break;
 		}
 
-		//if (pulseCount % 2 == 0) {
-		//	wordInCurrentStage[pulseCount/2].isPrint = true;
-		//}
 		wordInCurrentStage[pulseCount].isPrint = true; // 단어 하나씩 isPrint값 true로 변경
 
 		for (int i = 0; i < THE_NUMBER_OF_WORDS_IN_STAGE; i++) { // isPrint값이 true면 단어 출력
@@ -52,7 +54,7 @@ void* topThreadFunc(void* arg) {
 		for (int i = 0; i <= pulseCount; i++) { // 출력된 단어들 y값 ++
 			wordInCurrentStage[i].y++;
 
-			if (wordInCurrentStage[i].y == 22) { // 바닥에 도달하면 isPrint 값을 false로 변경하고, life--;
+			if (wordInCurrentStage[i].y == 22 && wordInCurrentStage[i].isPrint == true) { // 바닥에 도달하면 isPrint 값을 false로 변경하고, life--;
 				wordInCurrentStage[i].isPrint = false;
 				gameStatus.life--;
 			}
@@ -67,18 +69,45 @@ void* topThreadFunc(void* arg) {
 }
 
 void* bottomThreadFunc(void* arg) {
-	//Sleep(200);
-	//printf("bottomThread가 정상적으로 실행됨\n");
+	int x = 9, y = 24; // gotoxy(x, y)의 arg로 각각 사용 - 초깃값은 (10, 24)
 
-	//struct word* _word = (struct word*)arg;
+	while (true) {
+		if ((gameStatus.life == 0) || (gameStatus.correctInputCountInStage == THE_NUMBER_OF_WORDS_IN_STAGE)) { // topThread와 동시에 종료
+			break;
+		}
 
-	//for (int i = 0; i < THE_NUMBER_OF_WORDS_IN_STAGE; i++) {
-	//	printf("%d\n", _word[i].printCount);
-	//}
+		if (_kbhit()) {
+			int keyboardInput = _getch(); _getch(); // 유저 키보드 값 입력받음
 
-	//system("pause>nul");
+			if (keyboardInput == BACKSPACE_KEY && x != 9) { // 백스페이스 구현
+				gotoxy(x - 1, y);  printf(" "); // 한 글자 지우기
+				x--;
+			}
+			else if (keyboardInput == BACKSPACE_KEY && x == 9) {
+				// empty
+			}
+			else if (keyboardInput == SPACEBAR_KEY) {
+				// empty
+			}
+			else if (keyboardInput == ENTER_KEY) { // 엔터키 구현
+				gotoxy(9, 24); printf("                                   "); // 1) 커서 맨 앞으로 두고 문장을 다 지운다
+				x = 9; y = 24; // 2) 커서를 초깃값으로 돌린다
 
-	//return NULL;
+				// 입력 버퍼 만들고 정답 맞으면 -> score++, correctAnswer++, isPrint->false
+				// 정답 관계없이 엔터눌리면 버퍼 값 초기화도 해야함
+			}
+			else if (x < 19) {
+				gotoxy(x, y);  printf("%c", keyboardInput);
+				x++;
+			}
+			else {
+				// empty;
+			}
+		}
+
+	}
+
+	return NULL;
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 쓰레드에 사용할 함수 정의 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
@@ -94,7 +123,6 @@ void gameStart() {
 	gameStatus.life = 5;
 	gameStatus.score = 0;
 	gameStatus.stage = 1;
-	gameStatus.correctInputCount = 0;
 
 	while (true) {
 		system("cls");
@@ -114,6 +142,7 @@ void gameStart() {
 			break;
 		}	
 
+		srand(time(NULL)); // 난수 시드값
 		for (int i = 0; i < THE_NUMBER_OF_WORDS_IN_STAGE; i++) { // 전체 리스트에서 현재 스테이지에 쓸 단어 난수 추출
 			wordInCurrentStage[i].word = wordList[rand() % THE_NUMBER_OF_WORDS];
 			for (int j = 0; j < i; j++) {
@@ -128,7 +157,6 @@ void gameStart() {
 			wordInCurrentStage[i].y = 2;
 		}
 
-		// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드 호출 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 		int intTemp = 0;
 		void* voidPointerTemp = &intTemp;
 
@@ -137,7 +165,6 @@ void gameStart() {
 
 		pthread_join(topThread, (void**)&intTemp); // topThread 해제
 		pthread_join(bottomThread, (void**)&intTemp); // bottomThread 해제
-		// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 쓰레드 호출 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 		gameStatus.stage++; // 스테이지 증가
 	}
