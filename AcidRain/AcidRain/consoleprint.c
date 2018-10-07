@@ -37,7 +37,7 @@ int printAndSelectMenu() { // 최초 메뉴 출력 및 유저입력
 	return selectNumber;
 }
 
-void printUpAndDownBorderLine() { // 경계선 출력
+void printBorderLine() { // 경계선 출력
 	gotoxy(0, 1); printf("===============================================================\n");
 	gotoxy(0, 22); printf("===============================================================\n");
 }

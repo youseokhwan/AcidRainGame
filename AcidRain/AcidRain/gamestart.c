@@ -3,38 +3,37 @@
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드에 사용할 함수 정의 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 void* topThreadFunc(void* arg) {
+	int theSpeedOfWordDrop[MAX_STAGE] = { 1000, 700, 650, 600, 550, 500, 450, 400, 350, 100 }; // 단어 떨어지는 스피드 조절
 
-	int theSpeedOfWordDrop[MAX_STAGE] = { 1200, 1000, 900, 800, 750, 700, 650, 600, 550, 200 }; // 단어 떨어지는 스피드 조절
-	int pulseCount = 0; // 단어 내려가는 작업이 진행된 횟수
-	gameStatus.correctInputCountInStage = 0; // 유저가 해당 스테이지에서 맞춘 정답의 개수
+	gameStatus.isPrintCount = 0;
+	gameStatus.pulseCount = 0; // 단어 내려가는 작업이 진행된 횟수
+	gameStatus.correctAnswerCount = 0; // 현재 스테이지에서 정답 입력한 횟수 0으로 초기화
 	
-	srand(time(NULL)); // 난수 시드값
-	for (int i = 0; i < THE_NUMBER_OF_WORDS_IN_STAGE; i++) { // 해당 언어의 랜덤 x값 지정
-		wordInCurrentStage[i].x = (rand() % 56) + 1;
-	}
-
+	// 최초 출력
 	clearBoard(); // 화면 지우기
 	printStatus(); // 스테이지, 라이프, 점수 출력
-	printUpAndDownBorderLine(); // 경계선 출력
+	printBorderLine(); // 경계선 출력
 	printPrompt(); // 유저 입력창 출력
-	gotoxy(0, 2);  printf("Stage %d START!!", gameStatus.stage);
+
+	gotoxy(0, 2); printf("Stage %d START!!", gameStatus.stage);
 	system("pause>nul");
 
 	while (true) {
 		clearBoard(); // 화면 지우기
 		printStatus(); // 스테이지, 라이프, 점수 출력
-		printUpAndDownBorderLine(); // 경계선 출력
+		printBorderLine(); // 경계선 출력
 		printPrompt(); // 유저 입력창 출력
 
 		if (gameStatus.life == 0) { // 남은 목숨이 0이면 게임 종료 및 ranking( ) 실행
 			gotoxy(0, 2); printf("Game Over!!\n");
+			gotoxy(0, 3); printf("Completed Stage: %d / Final Score: %d", gameStatus.stage-1, gameStatus.score);
 			system("pause>nul");
 
 			// ranking( ) 실행
 			break;
 		}
 
-		if (gameStatus.correctInputCountInStage == THE_NUMBER_OF_WORDS_IN_STAGE) { // 단어를 모두 입력하면 다음 스테이지로 넘어감
+		if (gameStatus.correctAnswerCount == THE_NUMBER_OF_WORDS_IN_STAGE) { // 단어를 모두 입력하면 다음 스테이지로 넘어감
 			gameStatus.score += gameStatus.stage * 100; // 클리어 시 스테이지*100 만큼 점수 증가
 			gotoxy(0, 2); printf("%d 스테이지 클리어!!\n", gameStatus.stage);
 			system("pause>nul");
@@ -42,7 +41,25 @@ void* topThreadFunc(void* arg) {
 			break;
 		}
 
-		wordInCurrentStage[pulseCount].isPrint = true; // 단어 하나씩 isPrint값 true로 변경
+		// (단어 입력 다 못했을 시 && 죽진 않았을 시)의 종료 조건
+		for (int i = 0; i < THE_NUMBER_OF_WORDS_IN_STAGE; i++) {
+			if (wordInCurrentStage[i].isPrint == false) {
+				gameStatus.isPrintCount++;
+			}
+		}
+
+		if (gameStatus.isPrintCount == 10 && gameStatus.pulseCount > 10) {
+			gameStatus.score += gameStatus.stage * 100; // 클리어 시 스테이지*100 만큼 점수 증가
+			gotoxy(0, 2); printf("%d 스테이지 클리어!!\n", gameStatus.stage);
+			system("pause>nul");
+
+			break;
+		}
+		else {
+			gameStatus.isPrintCount = 0;
+		}
+
+		wordInCurrentStage[gameStatus.pulseCount].isPrint = true; // 단어 하나씩 isPrint값 true로 변경
 
 		for (int i = 0; i < THE_NUMBER_OF_WORDS_IN_STAGE; i++) { // isPrint값이 true면 단어 출력
 			if (wordInCurrentStage[i].isPrint == true) {
@@ -51,19 +68,25 @@ void* topThreadFunc(void* arg) {
 			}
 		}
 
-		for (int i = 0; i <= pulseCount; i++) { // 출력된 단어들 y값 ++
+		for (int i = 0; i <= gameStatus.pulseCount; i++) { // 출력된 단어들 y값 ++
 			wordInCurrentStage[i].y++;
+		}
 
-			if (wordInCurrentStage[i].y == 22 && wordInCurrentStage[i].isPrint == true) { // 바닥에 도달하면 isPrint 값을 false로 변경하고, life--;
-				wordInCurrentStage[i].isPrint = false;
+		for (int i = 0; i < THE_NUMBER_OF_WORDS_IN_STAGE; i++) { // 라이프 깎이는 조건
+			if (wordInCurrentStage[i].y == 22 && wordInCurrentStage[i].isPrint == true) { // 바닥에 도달하면 life--; isPrint 값을 false로 변경
 				gameStatus.life--;
+
+				wordInCurrentStage[i].isPrint = false;
 			}
 		}
 
-		pulseCount++;
+		gameStatus.pulseCount++;
 
 		Sleep(theSpeedOfWordDrop[gameStatus.stage-1]); // 단어의 낙하속도 조절부
 	}
+
+	gameStatus.pulseCount = 0;
+	gameStatus.correctAnswerCount = 0;
 
 	return NULL;
 }
@@ -71,23 +94,39 @@ void* topThreadFunc(void* arg) {
 void* bottomThreadFunc(void* arg) {
 	int x = 9, y = 24; // gotoxy(x, y)의 arg로 각각 사용 - 초깃값은 (10, 24)
 
+	char inputBuffer[10];
+	int index = 0;
+
+	for (int i = 0; i < 10; i++) {
+		inputBuffer[i] = NULL;
+	}
+
 	while (true) {
-		if ((gameStatus.life == 0) || (gameStatus.correctInputCountInStage == THE_NUMBER_OF_WORDS_IN_STAGE)) { // topThread와 동시에 종료
+		// topThread와 같은 종료 조건 3개
+		if (gameStatus.life == 0) {
+			break;
+		}
+
+		if (gameStatus.correctAnswerCount == THE_NUMBER_OF_WORDS_IN_STAGE) {
+			break;
+		}
+
+		if (gameStatus.isPrintCount == 10 && gameStatus.pulseCount > 10) {
 			break;
 		}
 
 		if (_kbhit()) {
-			int keyboardInput = _getch(); _getch(); // 유저 키보드 값 입력받음
+			int keyboardInput = _getch(); _getch(); // 유저 키보드 값 입력받음, 뒤 바이트는 버리기위해 _getch( ) 두 번 연속 사용함
 
 			if (keyboardInput == BACKSPACE_KEY && x != 9) { // 백스페이스 구현
 				gotoxy(x - 1, y);  printf(" "); // 한 글자 지우기
-				x--;
+				x--; index--;
 			}
 			else if (keyboardInput == BACKSPACE_KEY && x == 9) {
-				// empty
+				// empty!
 			}
 			else if (keyboardInput == SPACEBAR_KEY) {
-				// empty
+				// empty!
 			}
 			else if (keyboardInput == ENTER_KEY) { // 엔터키 구현
 				gotoxy(9, 24); printf("                                   "); // 1) 커서 맨 앞으로 두고 문장을 다 지운다
@@ -95,13 +134,32 @@ void* bottomThreadFunc(void* arg) {
 
 				// 입력 버퍼 만들고 정답 맞으면 -> score++, correctAnswer++, isPrint->false
 				// 정답 관계없이 엔터눌리면 버퍼 값 초기화도 해야함
+				inputBuffer[index] = NULL;
+				for (int i = 0; i < THE_NUMBER_OF_WORDS_IN_STAGE; i++) {
+					if (strcmp(inputBuffer, wordInCurrentStage[i].word) == 0) { // 단어가 일치하면
+						gameStatus.score += 10;
+						gameStatus.correctAnswerCount++;
+						wordInCurrentStage[i].isPrint = false;
+					}
+					else {
+						// empty!
+					}
+				}
+
+				for (int i = 0; i < 10; i++) {
+					inputBuffer[i] = NULL;
+				}
+
+				index = 0;
 			}
 			else if (x < 19) {
 				gotoxy(x, y);  printf("%c", keyboardInput);
 				x++;
+
+				inputBuffer[index++] = keyboardInput;
 			}
 			else {
-				// empty;
+				// empty!
 			}
 		}
 
@@ -134,8 +192,10 @@ void gameStart() {
 		}
 
 		if (gameStatus.stage > MAX_STAGE) { // 모든 스테이지 클리어
-			printUpAndDownBorderLine();
-			gotoxy(0, 2); printf("모든 스테이지를 클리어하셨습니다!!\n");
+			printBorderLine();
+			gotoxy(0, 2); printf("Complete Final Stage!!\n");
+			gotoxy(0, 3); printf("Final Score: %d", gameStatus.score);
+			system("pause>null");
 
 			// ranking( ) 실행
 
@@ -153,7 +213,7 @@ void gameStart() {
 			}
 			// 나머지 제원 값 초기화
 			wordInCurrentStage[i].isPrint = false;
-			wordInCurrentStage[i].x = 0;
+			wordInCurrentStage[i].x = (rand() % 56) + 1; // 해당 언어의 랜덤 x값 지정
 			wordInCurrentStage[i].y = 2;
 		}
 

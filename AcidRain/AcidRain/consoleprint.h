@@ -8,7 +8,7 @@
 int printAndSelectMenu(); // 최초 메뉴 출력 및 유저입력
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ topThreadFunc에서 사용 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-void printUpAndDownBorderLine(); // 경계선 출력
+void printBorderLine(); // 경계선 출력
 void clearBoard(); // 화면 지우기
 void printStatus(); // gameStatus( ) 정보 출력
 void printPrompt(); // 유저 입력칸에 프롬프트 출력

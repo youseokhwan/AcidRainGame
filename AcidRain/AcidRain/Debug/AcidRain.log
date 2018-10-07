@@ -1,4 +1,8 @@
 ﻿  gamestart.c
-d:\gitfolder\acidraingame\acidrain\acidrain\gamestart.c(11): warning C4244: '함수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\gitfolder\acidraingame\acidrain\acidrain\gamestart.c(145): warning C4244: '함수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\gitfolder\acidraingame\acidrain\acidrain\gamestart.c(101): warning C4047: '=': 'char'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+d:\gitfolder\acidraingame\acidrain\acidrain\gamestart.c(137): warning C4047: '=': 'char'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+d:\gitfolder\acidraingame\acidrain\acidrain\gamestart.c(150): warning C4047: '=': 'char'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+d:\gitfolder\acidraingame\acidrain\acidrain\gamestart.c(205): warning C4244: '함수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  main.c
+  코드를 생성하고 있습니다...
   AcidRain.vcxproj -> D:\gitfolder\AcidRainGame\AcidRain\Debug\AcidRain.exe

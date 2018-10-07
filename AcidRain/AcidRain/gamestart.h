@@ -23,7 +23,9 @@ struct _gameStatus {
 	int life; // 남은 목숨(최초 5개)
 	int stage;
 	int score;
-	int correctInputCountInStage; // 현재 스테이지에서 정답 입력한 횟수
+	int correctAnswerCount; // 현재 스테이지에서 정답 입력한 횟수
+	int pulseCount; // 단어 내려가는 작업이 진행된 횟수
+	int isPrintCount; // 단어 모두 지워졌을 때를 나타내기 위한 변수(입력해서 사라졌거나, 바닥에 도달해서 사라졌거나)
 } gameStatus;
 
 struct word {
