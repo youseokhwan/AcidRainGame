@@ -1,7 +1,6 @@
 #ifndef __GAMESTART_H__
 #define __GAMESTART_H__
 
-#include <conio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>

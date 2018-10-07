@@ -2,6 +2,7 @@
 #define __CONSOLEPRINT_H__
 
 #include <stdio.h>
+#include <conio.h>
 #include <Windows.h>
 #include "gamestart.h"
 

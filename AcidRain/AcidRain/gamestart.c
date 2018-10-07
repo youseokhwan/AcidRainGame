@@ -3,7 +3,7 @@
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드에 사용할 함수 정의 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 void* topThreadFunc(void* arg) {
-	int theSpeedOfWordDrop[MAX_STAGE] = { 1000, 700, 650, 600, 550, 500, 450, 400, 350, 100 }; // 단어 떨어지는 스피드 조절
+	int theSpeedOfWordDrop[MAX_STAGE] = { 1000, 700, 650, 600, 550, 500, 450, 400, 350, 300 }; // 단어 떨어지는 스피드 조절
 
 	gameStatus.isPrintCount = 0;
 	gameStatus.pulseCount = 0; // 단어 내려가는 작업이 진행된 횟수
@@ -28,6 +28,8 @@ void* topThreadFunc(void* arg) {
 			gotoxy(0, 2); printf("Game Over!!\n");
 			gotoxy(0, 3); printf("Completed Stage: %d / Final Score: %d", gameStatus.stage-1, gameStatus.score);
 			system("pause>nul");
+			system("pause>nul");
+			system("pause>nul");
 
 			// ranking( ) 실행
 			break;
@@ -35,7 +37,7 @@ void* topThreadFunc(void* arg) {
 
 		if (gameStatus.correctAnswerCount == THE_NUMBER_OF_WORDS_IN_STAGE) { // 단어를 모두 입력하면 다음 스테이지로 넘어감
 			gameStatus.score += gameStatus.stage * 100; // 클리어 시 스테이지*100 만큼 점수 증가
-			gotoxy(0, 2); printf("%d 스테이지 클리어!!\n", gameStatus.stage);
+			gotoxy(0, 2); printf("Stage %d Clear!!\n", gameStatus.stage);
 			system("pause>nul");
 
 			break;
@@ -50,7 +52,7 @@ void* topThreadFunc(void* arg) {
 
 		if (gameStatus.isPrintCount == 10 && gameStatus.pulseCount > 10) {
 			gameStatus.score += gameStatus.stage * 100; // 클리어 시 스테이지*100 만큼 점수 증가
-			gotoxy(0, 2); printf("%d 스테이지 클리어!!\n", gameStatus.stage);
+			gotoxy(0, 2); printf("Stage %d Clear!!\n", gameStatus.stage);
 			system("pause>nul");
 
 			break;
@@ -98,7 +100,7 @@ void* bottomThreadFunc(void* arg) {
 	int index = 0;
 
 	for (int i = 0; i < 10; i++) {
-		inputBuffer[i] = NULL;
+		inputBuffer[i] = (char)NULL;
 	}
 
 	while (true) {
@@ -134,7 +136,7 @@ void* bottomThreadFunc(void* arg) {
 
 				// 입력 버퍼 만들고 정답 맞으면 -> score++, correctAnswer++, isPrint->false
 				// 정답 관계없이 엔터눌리면 버퍼 값 초기화도 해야함
-				inputBuffer[index] = NULL;
+				inputBuffer[index] = (char)NULL;
 				for (int i = 0; i < THE_NUMBER_OF_WORDS_IN_STAGE; i++) {
 					if (strcmp(inputBuffer, wordInCurrentStage[i].word) == 0) { // 단어가 일치하면
 						gameStatus.score += 10;
@@ -147,12 +149,12 @@ void* bottomThreadFunc(void* arg) {
 				}
 
 				for (int i = 0; i < 10; i++) {
-					inputBuffer[i] = NULL;
+					inputBuffer[i] = (char)NULL;
 				}
 
 				index = 0;
 			}
-			else if (x < 19) {
+			else if (x < 18) {
 				gotoxy(x, y);  printf("%c", keyboardInput);
 				x++;
 
@@ -192,9 +194,16 @@ void gameStart() {
 		}
 
 		if (gameStatus.stage > MAX_STAGE) { // 모든 스테이지 클리어
-			printBorderLine();
+			gameStatus.stage--;
+
+			clearBoard(); // 화면 지우기
+			printStatus(); // 스테이지, 라이프, 점수 출력
+			printBorderLine(); // 경계선 출력
+
 			gotoxy(0, 2); printf("Complete Final Stage!!\n");
 			gotoxy(0, 3); printf("Final Score: %d", gameStatus.score);
+			system("pause>null");
+			system("pause>null");
 			system("pause>null");
 
 			// ranking( ) 실행
@@ -202,7 +211,7 @@ void gameStart() {
 			break;
 		}	
 
-		srand(time(NULL)); // 난수 시드값
+		srand((unsigned int)time(NULL)); // 난수 시드값
 		for (int i = 0; i < THE_NUMBER_OF_WORDS_IN_STAGE; i++) { // 전체 리스트에서 현재 스테이지에 쓸 단어 난수 추출
 			wordInCurrentStage[i].word = wordList[rand() % THE_NUMBER_OF_WORDS];
 			for (int j = 0; j < i; j++) {

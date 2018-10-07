@@ -25,16 +25,16 @@ void setCursorType(CURSOR_TYPE c) { // 커서 깜빡이지 않게 설정
 }
 
 int printAndSelectMenu() { // 최초 메뉴 출력 및 유저입력
-	int selectNumber;
+	int userInput = 0;
 
 	printf(">> Acid Rain\n");
-	printf("1. 게임시작\n");
-	printf("2. 랭킹\n");
-	printf("3. 종료\n");
+	printf("1. Start\n");
+	printf("2. Ranking\n");
+	printf("3. Exit\n");
 	printf(">> ");
-	scanf_s("%d", &selectNumber);
+	scanf_s("%d", &userInput);
 
-	return selectNumber;
+	return userInput;
 }
 
 void printBorderLine() { // 경계선 출력
