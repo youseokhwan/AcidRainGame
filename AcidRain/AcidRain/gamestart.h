@@ -33,11 +33,7 @@ struct word {
 	int x, y; // 해당 단어의 x, y 좌표 - gotoxy()의 인자로 사용
 } wordInCurrentStage[THE_NUMBER_OF_WORDS_IN_STAGE];
 
-// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드 관련 선언 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-pthread_t topThread, bottomThread; // 쓰레드 선언
-
 void* topThreadFunc(void* arg); // topThread에서 사용될 함수
 void* bottomThreadFunc(void* arg); // bottomThread에서 사용될 함수
-// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 쓰레드 관련 선언 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 #endif

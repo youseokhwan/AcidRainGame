@@ -38,7 +38,7 @@ int main(void) {
 			ranking(); // ranking.c
 		}
 		else if (numberSelectedByUser == 3) {
-			printf("Good bye");
+			printf("Good Bye :)\n");
 			system("pause>nul");
 			exit(0);
 		}

@@ -226,8 +226,9 @@ void gameStart() {
 			wordInCurrentStage[i].y = 2;
 		}
 
-		int intTemp = 0;
-		void* voidPointerTemp = &intTemp;
+		pthread_t topThread, bottomThread; // 쓰레드 선언
+		int intTemp = 0; // pthread_join에 사용할 arg
+		void* voidPointerTemp = &intTemp; // pthread_create에 사용할 arg
 
 		pthread_create(&topThread, NULL, topThreadFunc, (void*)voidPointerTemp); // topThread 생성
 		pthread_create(&bottomThread, NULL, bottomThreadFunc, (void*)voidPointerTemp); // bottomThread 생성
