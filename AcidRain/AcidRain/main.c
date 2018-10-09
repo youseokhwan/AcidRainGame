@@ -2,6 +2,7 @@
 // 18.09.16 v0.0 프로젝트 시작
 // 18.10.07 v1.0 gamestart.c 구현 완료
 // 18.10.07 v1.1 버퍼 사이즈 수정
+// 18.10.09 v1.2 입력버퍼 오류 수정
 // made by youseokhwan(https://github.com/youseokhwan/AcidRainGame)
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
@@ -28,31 +29,31 @@ int main(void) {
 	
 	//setCursorType(NOCURSOR); // 커서 깜빡이지 않게하는 함수
 
-	//selectMenu();
+	selectMenu();
 
-	int numberSelectedByUser = printAndSelectMenu();
+	//int numberSelectedByUser = printAndSelectMenu();
 
-	while (true) {
-		if (numberSelectedByUser == 1) {
-			gameStart(); // gameStart.c
-		}
-		else if (numberSelectedByUser == 2) {
-			enterRankingFromMenu(); // ranking.c
-		}
-		else if (numberSelectedByUser == 3) {
-			printf("Good Bye :)\n");
-			system("pause>nul");
-			exit(0);
-		}
-		else {
-			printf("That's the wrong input!\n");
-			printf("Try again, please\n");
-			system("pause>nul");
-		}
+	//while (true) {
+	//	if (numberSelectedByUser == 1) {
+	//		gameStart(); // gameStart.c
+	//	}
+	//	else if (numberSelectedByUser == 2) {
+	//		enterRankingFromMenu(); // ranking.c
+	//	}
+	//	else if (numberSelectedByUser == 3) {
+	//		printf("Good Bye :)\n");
+	//		system("pause>nul");
+	//		exit(0);
+	//	}
+	//	else {
+	//		printf("That's the wrong input!\n");
+	//		printf("Try again, please\n");
+	//		system("pause>nul");
+	//	}
 
-		system("cls");
-		numberSelectedByUser = printAndSelectMenu();
-	}
+	//	system("cls");
+	//	numberSelectedByUser = printAndSelectMenu();
+	//}
 
 	return 0;
 }

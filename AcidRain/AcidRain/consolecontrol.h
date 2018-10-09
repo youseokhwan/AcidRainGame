@@ -18,8 +18,8 @@
 #define UP_KEY 72
 #define DOWN_KEY 80
 
-int printAndSelectMenu(); // 최초 메뉴 출력 및 유저입력
-//void selectMenu();
+//int printAndSelectMenu(); // 최초 메뉴 출력 및 유저입력
+void selectMenu();
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ topThreadFunc에서 사용 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 void printBorderLine(); // 경계선 출력

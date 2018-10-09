@@ -2,8 +2,8 @@
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드에 사용할 함수 정의 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 void* topThreadFunc(void* arg) {
-	//int theSpeedOfWordDrop[MAX_STAGE] = { 1000, 700, 650, 600, 550, 500, 450, 400, 350, 300 }; // 단어 떨어지는 스피드 조절
-	int theSpeedOfWordDrop[MAX_STAGE] = { 300, 300, 300, 300, 300, 300, 300, 300, 300, 300 }; // 단어 떨어지는 스피드 조절
+	int theSpeedOfWordDrop[MAX_STAGE] = { 1000, 700, 650, 600, 550, 500, 450, 400, 350, 300 }; // 단어 떨어지는 스피드 조절
+	//int theSpeedOfWordDrop[MAX_STAGE] = { 300, 300, 300, 300, 300, 300, 300, 300, 300, 300 }; // 단어 떨어지는 스피드 조절
 
 	gameStatus.isPrintCount = 0;
 	gameStatus.pulseCount = 0; // 단어 내려가는 작업이 진행된 횟수
@@ -25,8 +25,6 @@ void* topThreadFunc(void* arg) {
 		printPrompt(); // 유저 입력창 출력
 
 		if (gameStatus.life == 0) { // 남은 목숨이 0이면 게임 종료 및 ranking( ) 실행		
-			printf("라이프0 이여서 걸림");
-
 			gotoxy(0, 2); printf("Game Over!!\n");
 			gotoxy(0, 3); printf("Completed Stage: %d / Final Score: %d", gameStatus.stage-1, gameStatus.score);
 			system("pause>nul");
@@ -37,10 +35,6 @@ void* topThreadFunc(void* arg) {
 		}
 
 		if (gameStatus.correctAnswerCount == THE_NUMBER_OF_WORDS_IN_STAGE) { // 단어를 모두 입력하면 다음 스테이지로 넘어감
-
-			printf("10개 다 맞춰서 걸림\n");
-			printf("%d", gameStatus.correctAnswerCount);
-
 			gameStatus.score += gameStatus.stage * 100; // 클리어 시 스테이지*100 만큼 점수 증가
 			gotoxy(0, 2); printf("Stage %d Clear!!\n", gameStatus.stage);
 			gameStatus.stage++;

@@ -10,7 +10,7 @@ void addRecord() {
 	}
 
 	gotoxy(0, 5); printf("Enter a name: ");
-	scanf_s("%s", record[recordIndex].name, 20);
+	scanf_s("%s", record[recordIndex].name, 10);
 	fflush(stdin);
 
 	record[recordIndex].rank = recordIndex + 1;
@@ -42,6 +42,9 @@ void printRecords() {
 	}
 
 	system("pause>nul");
+
+	system("cls");
+	selectMenu();
 }
 
 void enterRankingFromMenu() {

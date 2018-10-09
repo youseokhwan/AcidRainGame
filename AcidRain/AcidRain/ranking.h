@@ -8,7 +8,7 @@
 int recordIndex;
 
 struct _record {
-	char* name; // 이름
+	char name[10]; // 이름
 	int rank; // 순위
 	int stage; // 클리어한 최종 스테이지
 	int score; // 최종 점수
