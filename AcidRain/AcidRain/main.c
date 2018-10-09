@@ -1,12 +1,11 @@
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 // 18.09.16 v0.0 프로젝트 시작
 // 18.10.07 v1.0 gamestart.c 구현 완료
+// 18.10.07 v1.1 버퍼 사이즈 수정
 // made by youseokhwan(https://github.com/youseokhwan/AcidRainGame)
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
-#include "consoleprint.h"
-#include "gamestart.h"
-#include "ranking.h"
+#include "consolecontrol.h"
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ Main Function ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 int main(void) {
@@ -28,6 +27,8 @@ int main(void) {
 	
 	//setCursorType(NOCURSOR); // 커서 깜빡이지 않게하는 함수
 
+	//selectMenu();
+
 	int numberSelectedByUser = printAndSelectMenu();
 
 	while (true) {
@@ -35,7 +36,7 @@ int main(void) {
 			gameStart(); // gameStart.c
 		}
 		else if (numberSelectedByUser == 2) {
-			ranking(); // ranking.c
+			enterRankingFromMenu(); // ranking.c
 		}
 		else if (numberSelectedByUser == 3) {
 			printf("Good Bye :)\n");

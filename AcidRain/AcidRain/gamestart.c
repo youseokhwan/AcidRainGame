@@ -1,5 +1,4 @@
 #include "gamestart.h"
-#include "consoleprint.h"
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드에 사용할 함수 정의 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 void* topThreadFunc(void* arg) {
@@ -188,7 +187,7 @@ void gameStart() {
 		system("cls");
 
 		if (gameStatus.life == 0) {
-			// ranking( ) 실행
+			enterRankingFromGamePlay(); // 랭킹화면으로 진입
 
 			break;
 		}
@@ -206,7 +205,7 @@ void gameStart() {
 			system("pause>null");
 			system("pause>null");
 
-			// ranking( ) 실행
+			enterRankingFromGamePlay(); // 랭킹화면으로 진입
 
 			break;
 		}	

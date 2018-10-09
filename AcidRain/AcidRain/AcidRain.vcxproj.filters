@@ -21,10 +21,10 @@
     <ClCompile Include="ranking.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="consoleprint.c">
+    <ClCompile Include="main.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="main.c">
+    <ClCompile Include="consolecontrol.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +35,7 @@
     <ClInclude Include="ranking.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="consoleprint.h">
+    <ClInclude Include="consolecontrol.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,20 +1,11 @@
 #ifndef __GAMESTART_H__
 #define __GAMESTART_H__
 
-#include <stdlib.h>
-#include <stdbool.h>
-#include <time.h>
-#include <string.h>
-#include <pthread.h>
-#include "consoleprint.h"
+#include "consolecontrol.h"
 
 #define THE_NUMBER_OF_WORDS 50
 #define MAX_STAGE 10
 #define THE_NUMBER_OF_WORDS_IN_STAGE 10
-
-#define BACKSPACE_KEY 8
-#define ENTER_KEY 13
-#define SPACEBAR_KEY 32
 
 void gameStart(); // "1. 게임시작" 눌렀을 때 진입하는 함수
 
