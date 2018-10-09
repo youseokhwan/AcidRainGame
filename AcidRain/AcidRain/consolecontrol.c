@@ -33,6 +33,7 @@ int printAndSelectMenu() { // 최초 메뉴 출력 및 유저입력
 	printf("3. Exit\n");
 	printf(">> ");
 	scanf_s("%d", &userInput);
+	fflush(stdin);
 
 	return userInput;
 }

@@ -2,7 +2,8 @@
 
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 쓰레드에 사용할 함수 정의 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 void* topThreadFunc(void* arg) {
-	int theSpeedOfWordDrop[MAX_STAGE] = { 1000, 700, 650, 600, 550, 500, 450, 400, 350, 300 }; // 단어 떨어지는 스피드 조절
+	//int theSpeedOfWordDrop[MAX_STAGE] = { 1000, 700, 650, 600, 550, 500, 450, 400, 350, 300 }; // 단어 떨어지는 스피드 조절
+	int theSpeedOfWordDrop[MAX_STAGE] = { 300, 300, 300, 300, 300, 300, 300, 300, 300, 300 }; // 단어 떨어지는 스피드 조절
 
 	gameStatus.isPrintCount = 0;
 	gameStatus.pulseCount = 0; // 단어 내려가는 작업이 진행된 횟수
@@ -23,20 +24,26 @@ void* topThreadFunc(void* arg) {
 		printBorderLine(); // 경계선 출력
 		printPrompt(); // 유저 입력창 출력
 
-		if (gameStatus.life == 0) { // 남은 목숨이 0이면 게임 종료 및 ranking( ) 실행
+		if (gameStatus.life == 0) { // 남은 목숨이 0이면 게임 종료 및 ranking( ) 실행		
+			printf("라이프0 이여서 걸림");
+
 			gotoxy(0, 2); printf("Game Over!!\n");
 			gotoxy(0, 3); printf("Completed Stage: %d / Final Score: %d", gameStatus.stage-1, gameStatus.score);
 			system("pause>nul");
 			system("pause>nul");
 			system("pause>nul");
 
-			// ranking( ) 실행
 			break;
 		}
 
 		if (gameStatus.correctAnswerCount == THE_NUMBER_OF_WORDS_IN_STAGE) { // 단어를 모두 입력하면 다음 스테이지로 넘어감
+
+			printf("10개 다 맞춰서 걸림\n");
+			printf("%d", gameStatus.correctAnswerCount);
+
 			gameStatus.score += gameStatus.stage * 100; // 클리어 시 스테이지*100 만큼 점수 증가
 			gotoxy(0, 2); printf("Stage %d Clear!!\n", gameStatus.stage);
+			gameStatus.stage++;
 			system("pause>nul");
 
 			break;
@@ -49,15 +56,18 @@ void* topThreadFunc(void* arg) {
 			}
 		}
 
-		if (gameStatus.isPrintCount == 10 && gameStatus.pulseCount > 10) {
-			gameStatus.score += gameStatus.stage * 100; // 클리어 시 스테이지*100 만큼 점수 증가
-			gotoxy(0, 2); printf("Stage %d Clear!!\n", gameStatus.stage);
-			system("pause>nul");
+		if (gameStatus.pulseCount > 10) { // 단어 10개가 모두 출력된 이후
+			if (gameStatus.isPrintCount == THE_NUMBER_OF_WORDS_IN_STAGE) {
+				gameStatus.score += gameStatus.stage * 100; // 클리어 시 스테이지*100 만큼 점수 증가
+				gotoxy(0, 2); printf("Stage %d Clear!!\n", gameStatus.stage);
+				gameStatus.stage++;
+				system("pause>nul");
 
-			break;
-		}
-		else {
-			gameStatus.isPrintCount = 0;
+				break;
+			}
+			else {
+				gameStatus.isPrintCount = 0;
+			}
 		}
 
 		wordInCurrentStage[gameStatus.pulseCount].isPrint = true; // 단어 하나씩 isPrint값 true로 변경
@@ -118,6 +128,7 @@ void* bottomThreadFunc(void* arg) {
 
 		if (_kbhit()) {
 			int keyboardInput = _getch(); _getch(); // 유저 키보드 값 입력받음, 뒤 바이트는 버리기위해 _getch( ) 두 번 연속 사용함
+			fflush(stdin);
 
 			if (keyboardInput == BACKSPACE_KEY && x != 9) { // 백스페이스 구현
 				gotoxy(x - 1, y);  printf(" "); // 한 글자 지우기
@@ -235,6 +246,6 @@ void gameStart() {
 		pthread_join(topThread, (void**)&intTemp); // topThread 해제
 		pthread_join(bottomThread, (void**)&intTemp); // bottomThread 해제
 
-		gameStatus.stage++; // 스테이지 증가
+		// gameStatus.stage++; // 스테이지 증가
 	}
 }

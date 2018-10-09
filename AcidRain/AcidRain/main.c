@@ -17,6 +17,7 @@ int main(void) {
 	printf("2. 표시(테스트할때만 사용)\n>> ");
 	int cursorUserSelect = 0;
 	scanf_s("%d", &cursorUserSelect);
+	fflush(stdin);
 
 	if (cursorUserSelect == 1) {
 		setCursorType(NOCURSOR); // 커서 깜빡이지 않게하는 함수

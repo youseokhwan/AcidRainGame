@@ -10,7 +10,8 @@ void addRecord() {
 	}
 
 	gotoxy(0, 5); printf("Enter a name: ");
-	scanf_s("%s", record[recordIndex].name);
+	scanf_s("%s", record[recordIndex].name, 20);
+	fflush(stdin);
 
 	record[recordIndex].rank = recordIndex + 1;
 	record[recordIndex].stage = gameStatus.stage - 1;
