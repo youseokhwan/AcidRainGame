@@ -1,8 +1,0 @@
-﻿  consoleprint.c
-d:\gitfolder\acidraingame\acidrain\acidrain\gamestart.h(9): fatal error C1083: 포함 파일을 열 수 없습니다. 'pthread.h': No such file or directory
-  gamestart.c
-d:\gitfolder\acidraingame\acidrain\acidrain\gamestart.h(9): fatal error C1083: 포함 파일을 열 수 없습니다. 'pthread.h': No such file or directory
-  main.c
-d:\gitfolder\acidraingame\acidrain\acidrain\gamestart.h(9): fatal error C1083: 포함 파일을 열 수 없습니다. 'pthread.h': No such file or directory
-  ranking.c
-d:\gitfolder\acidraingame\acidrain\acidrain\gamestart.h(9): fatal error C1083: 포함 파일을 열 수 없습니다. 'pthread.h': No such file or directory
