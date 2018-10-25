@@ -2,20 +2,23 @@
 // https://github.com/youseokhwan/AcidRainGame
 // 18.10.25 v0.1 기본 틀 구성
 
-
 #include "console.h"
 
 int main(void) {
 	initialConsoleSetting(); // 콘솔 최초설정
 	
 	while (true) { // 메뉴 출력 및 선택하여 진행
+		system("cls");
+
 		int num = 0;
 		
-		system("cls");
 		printf("Acid Rain\n");
-		printf("1 게임시작, 2 랭킹, 3 로그보기, 4 끝내기\n");
+		printf("1 게임시작\n");
+		printf("2 랭킹\n");
+		printf("3 진행로그\n");
+		printf("4 끝내기\n");
 		printf("선택 >> ");
-		scanf_s("%d", &num);
+		scanf_s("%d", &num); fflush(stdin);
 
 		switch (num) {
 		case 1:
@@ -28,7 +31,7 @@ int main(void) {
 			showLog();
 			break;
 		case 4:
-			printf("게임을 종료합니다...\n");
+			printf("게임을 종료합니다.\n");
 			exit(0);
 		default:
 			printf("다시 선택해주세요.\n");
