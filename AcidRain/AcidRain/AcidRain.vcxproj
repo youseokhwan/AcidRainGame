@@ -19,7 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="console.c" />
+    <ClCompile Include="gamestart.c" />
+    <ClCompile Include="log.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="ranking.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="console.h" />
+    <ClInclude Include="gamestart.h" />
+    <ClInclude Include="log.h" />
+    <ClInclude Include="ranking.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
