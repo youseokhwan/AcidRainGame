@@ -10,7 +10,7 @@ int main(void) {
 	while (true) { // 메뉴 출력 및 선택하여 진행
 		system("cls");
 
-		int num = 0;
+		int selectNum = 0;
 		
 		printf("Acid Rain\n");
 		printf("1 게임시작\n");
@@ -18,9 +18,9 @@ int main(void) {
 		printf("3 진행로그\n");
 		printf("4 끝내기\n");
 		printf("선택 >> ");
-		scanf_s("%d", &num); fflush(stdin);
+		scanf_s("%d", &selectNum); fflush(stdin);
 
-		switch (num) {
+		switch (selectNum) {
 		case 1:
 			gameStart();
 			break;
