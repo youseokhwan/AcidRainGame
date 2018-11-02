@@ -2,6 +2,8 @@
 
 void initialConsoleSetting() {
 	system("title Acid Rain"); // 콘솔 타이틀 변경
+	system("mode con: cols=64 lines=27");
+
 	setCursorType(NOCURSOR); // 커서 깜빡이지 않도록 설정
 }
 
@@ -56,6 +58,6 @@ void printStatus() { // gameStatus( ) 정보 출력
 	gotoxy(50, 0); printf("Score: %d", gameStatus.score);
 }
 
-void printPrompt() {
+void printPrompt() { // 입력창 출력
 	gotoxy(0, 24);  printf("Input >>");
 }
