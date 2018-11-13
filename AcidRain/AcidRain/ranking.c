@@ -1,11 +1,9 @@
 #include "ranking.h"
 
-void rankingFromMenu() {
-	printf("rankingFromMenu( )가 정상적으로 실행됨\n");
-	system("pause>nul");
+void rankingFromMenu() { // 랭킹(메뉴에서 진입)
+
 }
 
-void rankingFromGame() {
-	printf("rankingFromGame( )가 정상적으로 실행됨\n");
-	system("pause>nul");
+void rankingFromGame() { // 랭킹(게임에서 진입)
+
 }

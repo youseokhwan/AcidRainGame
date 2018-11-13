@@ -1,0 +1,234 @@
+#include "game.h"
+
+void gameStart() { // 게임시작
+	system("cls");
+
+	// 전체 단어 리스트 생성
+	char* wordList[WORD] = { "art", "able", "acid", "about", "air", "aim", "also", "ant", "arm", "army",
+		"ball", "blue", "bag", "band", "beat", "beef", "belt", "bill", "bike", "boat",
+		"cafe", "cake", "call", "camp", "camo", "care", "case", "cave", "cat", "chef",
+		"data", "dark", "day", "deer", "deep", "dog", "door", "draw", "drum", "drug",
+		"each", "easy", "echo", "edge", "egg", "evil", "even", "exam", "eye", "else" };
+
+	// gameStatus 초기화
+	gameStatus.life = 5;
+	gameStatus.score = 0;
+	gameStatus.stage = 1;
+	gameStatus.correctAnswer = 0;
+	gameStatus.printCount = 0;
+
+	while (true) { // 스테이지 진입
+		printStatus(); // status값 출력
+		printBorderLine(); // 경계선 출력
+		printPrompt(); // 입력 창 출력
+
+		if (gameStatus.life == 0) { // 라이프 0이면 게임 종료
+			clearStatus();
+			clearBoard();
+			clearPrompt();
+
+			gotoxy(0, 2); printf("Game Over!!\n");
+			gotoxy(0, 3); printf("클리어한 스테이지: %d / 최종 스코어: %d", gameStatus.stage - 1, gameStatus.score);
+			system("pause>nul");
+
+			rankingFromGame(); // 랭킹으로 진입
+
+			break;
+		}
+		else if (gameStatus.stage > STAGE) { // 모든 스테이지 클리어
+			clearStatus();
+			clearBoard();
+
+			gotoxy(0, 2); printf("모든 스테이지를 클리어하였습니다!!\n");
+			gotoxy(0, 3); printf("최종 스코어: %d", gameStatus.score);
+			system("pause>null");
+
+			rankingFromGame(); // 랭킹으로 진입
+
+			break;
+		}
+		else {
+			// 현재 스테이지 단어 추출
+			srand((unsigned int)time(NULL)); // 난수 시드값
+			for (int i = 0; i < WORD_IN_STAGE; i++) { // 전체 리스트에서 현재 스테이지에 쓸 단어 난수 추출
+				wordInStage[i].word = wordList[rand() % WORD];
+				for (int j = 0; j < i; j++) {
+					if (strcmp(wordInStage[i].word, wordInStage[j].word) == 0) { // 중복 검사
+						i--;
+
+						break;
+					}
+				}
+
+				wordInStage[i].isPrint = false;
+				wordInStage[i].x = (rand() % 56) + 1; // 해당 언어의 랜덤 x값 지정
+				wordInStage[i].y = 2;
+			}
+
+			gameStatus.updateCount = 0;
+			gotoxy(0, 2); printf("스테이지 %d 시작!!", gameStatus.stage);
+			system("pause>nul");
+
+			// 단어 입력부분 초깃값 설정
+			int inputX = 9, inputY = 24; // 초깃값
+			char inputBuffer[BUFFER];
+			int iterator = 0;
+
+			for (int i = 0; i < BUFFER; i++) {
+				inputBuffer[i] = (char)NULL;
+			}
+
+			gameStatus.startClock = clock();
+			while (true) { // 단어 출력 및 입력 구현
+
+#ifndef TEST_MODE
+				gotoxy(0, 26); printf("           ");
+				gotoxy(0, 26); printf("%d", gameStatus.correctAnswer);
+#endif
+
+				// 라이프 0이거나 모든 스테이지 클리어 시 종료
+				if (gameStatus.life == 0 || gameStatus.stage > STAGE) {
+					// break 후 상위 while 루프에서 작업 수행
+
+					break;
+				}
+
+				// 단어 모두 정답이면
+				if (gameStatus.correctAnswer == WORD_IN_STAGE) {
+					clearBoard();
+
+					gameStatus.score += gameStatus.stage * 100;
+					gotoxy(0, 2); printf("스테이지 %d 클리어!!", gameStatus.stage++);
+
+					gameStatus.correctAnswer = 0;
+					system("pause>nul");
+
+					break;
+				}
+
+				// 단어 모두 맞추지 못했지만 죽진 않았을 시
+				for (int i = 0; i < WORD_IN_STAGE; i++) {
+					if (wordInStage[i].isPrint == false) {
+						gameStatus.printCount++;
+					}
+				}
+
+				if (gameStatus.updateCount >= WORD_IN_STAGE) { // clock( ) 이용해서 바꿔야함
+					if (gameStatus.printCount == WORD_IN_STAGE) {
+						gameStatus.score += gameStatus.stage * 100;
+						gameStatus.correctAnswer = 0;
+
+						gotoxy(0, 2); printf("스테이지 %d 클리어!!\n", gameStatus.stage++);
+						system("pause>nul");
+
+						break;
+					}
+					else {
+						gameStatus.printCount = 0;
+					}
+				}
+				else {
+					gameStatus.printCount = 0;
+				}
+
+				// 단어 출력 부분
+				if ((clock()-gameStatus.startClock) % 500 == 0) {
+					clearBoard();
+
+					if (gameStatus.updateCount <= WORD_IN_STAGE) {
+						wordInStage[gameStatus.updateCount].isPrint = true;
+					}
+
+					for (int i = 0; i < WORD_IN_STAGE; i++) { // isPrint값이 true면 단어 출력
+						if (wordInStage[i].isPrint == true) {
+							gotoxy(wordInStage[i].x, wordInStage[i].y);
+							printf("%s", wordInStage[i].word);
+						}
+					}
+
+					for (int i = 0; i < WORD_IN_STAGE; i++) { // 라이프 깎이는 조건
+						if (wordInStage[i].y == 22 && wordInStage[i].isPrint == true) { // 바닥에 도달하면 life--; isPrint 값을 false로 변경
+							gameStatus.life--;
+
+							wordInStage[i].isPrint = false;
+
+							clearStatus();
+							printStatus();
+							printBorderLine();
+						}
+					}
+
+					for (int i = 0; i <= gameStatus.updateCount; i++) { // 출력된 단어들 y값 ++
+						wordInStage[i].y++;
+					}
+
+					gameStatus.updateCount++;
+				}
+
+				// 단어 입력 부분
+
+				while (_kbhit()) {
+					int keyboardInput = _getch(); _getch(); // 키보드 값 입력받음, 뒤 바이트 버리기위해 _getch() 두 번 사용
+
+					if (keyboardInput == BACKSPACE && inputX != 9) {
+						gotoxy(--inputX, inputY); printf(" ");
+						iterator--;
+					}
+					else if (keyboardInput == BACKSPACE && inputX == 9) {
+						// empty!!
+					}
+					else if (keyboardInput == SPACEBAR) {
+						// empty!!
+					}
+					else if (keyboardInput == ENTER) {
+						inputX = 9; inputY = 24;
+						gotoxy(inputX, inputY); printf("                  ");
+
+						inputBuffer[iterator] = (char)NULL;
+						for (int i = 0; i < WORD_IN_STAGE; i++) {
+							if (strcmp(inputBuffer, wordInStage[i].word) == 0) {
+								gameStatus.score += 10;
+								clearStatus();
+								printStatus();
+
+								gameStatus.correctAnswer++;
+								wordInStage[i].isPrint = false;
+
+								clearBoard();
+								for (int j = 0; j < WORD_IN_STAGE; j++) { // isPrint값이 true면 단어 출력
+									if (wordInStage[j].isPrint == true) {
+										gotoxy(wordInStage[j].x, wordInStage[j].y);
+										printf("%s", wordInStage[j].word);
+									}
+								}
+							}
+							else {
+								// empty!!
+							}
+						}
+
+						for (int i = 0; i < BUFFER; i++) {
+							inputBuffer[i] = (char)NULL;
+						}
+
+						iterator = 0;
+					}
+					else if (inputX < 18) {
+						gotoxy(inputX, inputY); printf("%c", keyboardInput);
+						inputX++;
+
+						if (iterator < BUFFER) {
+							inputBuffer[iterator] = keyboardInput;
+							if (iterator != BUFFER - 1) {
+								iterator++;
+							}
+						}
+					}
+					else {
+						// empty!!
+					}
+				}
+			}
+		}
+	}
+}

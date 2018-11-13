@@ -15,10 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="acidrain.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="console.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="gamestart.c">
+    <ClCompile Include="game.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="ranking.c">
@@ -27,15 +30,12 @@
     <ClCompile Include="log.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="main.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="gamestart.h">
+    <ClInclude Include="game.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="ranking.h">

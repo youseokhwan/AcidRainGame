@@ -1,21 +1,9 @@
-#ifndef __RANKING_H__
-#define __RANKING_H__
+#ifndef RANKING_H
+#define RANKING_H
 
 #include "console.h"
 
-#define THE_NUMBER_OF_USER 10
-#define BUFFER_OF_NAME 10
-#define BUFFER_OF_TIME 20
-
-void rankingFromMenu();
-void rankingFromGame();
-
-struct _user {
-	int rank; // 순위
-	char name[BUFFER_OF_NAME]; // 이름
-	int stage; // 스테이지
-	int score; // 점수
-	char time[BUFFER_OF_TIME]; // 등록시간
-}user[THE_NUMBER_OF_USER];
+void rankingFromMenu(); // 랭킹(메뉴에서 진입)
+void rankingFromGame(); // 랭킹(게임에서 진입)
 
 #endif

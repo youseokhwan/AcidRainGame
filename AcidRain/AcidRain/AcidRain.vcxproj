@@ -19,21 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="acidrain.c" />
     <ClCompile Include="console.c" />
-    <ClCompile Include="gamestart.c" />
+    <ClCompile Include="game.c" />
     <ClCompile Include="log.c" />
-    <ClCompile Include="main.c" />
     <ClCompile Include="ranking.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h" />
-    <ClInclude Include="gamestart.h" />
+    <ClInclude Include="game.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="ranking.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{1E9B470B-CBA4-4685-85C8-CFA97A4E83B3}</ProjectGuid>
+    <ProjectGuid>{883CFBBA-5EEC-49CE-9478-A229545BC04A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>AcidRain</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>

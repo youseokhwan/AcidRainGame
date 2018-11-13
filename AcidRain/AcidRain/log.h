@@ -1,9 +1,8 @@
-#ifndef __LOG_H__
-#define __LOG_H__
+#ifndef LOG_H
+#define LOG_H
 
 #include "console.h"
 
-void inputLog();
-void showLog();
+void showLog(); // 로그보기
 
 #endif

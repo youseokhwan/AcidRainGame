@@ -1,2 +1,7 @@
-﻿  gamestart.c
-  AcidRain.vcxproj -> C:\Users\ysh_bootcamp\Desktop\GitHub\AcidRainGame\AcidRain\Debug\AcidRain.exe
+﻿  acidrain.c
+  console.c
+  game.c
+  log.c
+  ranking.c
+  코드를 생성하고 있습니다...
+  AcidRain.vcxproj -> C:\Users\ysh_bootcamp\Desktop\AcidRain\Debug\AcidRain.exe
