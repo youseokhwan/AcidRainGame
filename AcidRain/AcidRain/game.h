@@ -3,10 +3,11 @@
 
 #include "console.h"
 
-#define WORD 50 // 나중에 파일 입출력으로 다시 구성
+#define WORD 100
 #define STAGE 10
 #define WORD_IN_STAGE 10
-#define BUFFER 10
+#define INPUT_BUFFER 10
+#define FILE_BUFFER 1000
 
 #define BACKSPACE 8
 #define ENTER 13

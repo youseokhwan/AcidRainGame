@@ -1,6 +1,8 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <time.h>
 #include <conio.h>
 #include <stdio.h>

@@ -2,8 +2,6 @@
 // https://github.com/youseokhwan/AcidRainGame
 // 18.10.25 ~ 개발 중
 
-//#define TEST_MODE
-
 #include "console.h"
 
 int main(void) {

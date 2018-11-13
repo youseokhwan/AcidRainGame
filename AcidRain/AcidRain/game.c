@@ -1,14 +1,37 @@
 #include "game.h"
 
+// #define ANSWER_TEST
+// #define WORD_TEST
+
 void gameStart() { // 게임시작
 	system("cls");
 
+#ifdef WORD_TEST
 	// 전체 단어 리스트 생성
 	char* wordList[WORD] = { "art", "able", "acid", "about", "air", "aim", "also", "ant", "arm", "army",
 		"ball", "blue", "bag", "band", "beat", "beef", "belt", "bill", "bike", "boat",
 		"cafe", "cake", "call", "camp", "camo", "care", "case", "cave", "cat", "chef",
 		"data", "dark", "day", "deer", "deep", "dog", "door", "draw", "drum", "drug",
 		"each", "easy", "echo", "edge", "egg", "evil", "even", "exam", "eye", "else" };
+#endif
+
+	// 전체 단어 리스트 생성(파일 입출력)
+	FILE *fp;
+	char fileBuffer[FILE_BUFFER];
+
+	fp = fopen("word_list.txt", "rt");
+	while (!feof(fp)) {
+		fgets(fileBuffer, FILE_BUFFER, fp);
+	}
+	fclose(fp);
+
+	char* wordList[WORD];
+	char* ptr = strtok(fileBuffer, " ");
+
+	for (int i = 0; i < WORD; i++) {
+		wordList[i] = ptr;
+		ptr = strtok(NULL, " ");
+	}
 
 	// gameStatus 초기화
 	gameStatus.life = 5;
@@ -28,7 +51,7 @@ void gameStart() { // 게임시작
 			clearPrompt();
 
 			gotoxy(0, 2); printf("Game Over!!\n");
-			gotoxy(0, 3); printf("클리어한 스테이지: %d / 최종 스코어: %d", gameStatus.stage - 1, gameStatus.score);
+			gotoxy(0, 3); printf("완료한 스테이지: %d / 최종 스코어: %d", gameStatus.stage - 1, gameStatus.score);
 			system("pause>nul");
 
 			rankingFromGame(); // 랭킹으로 진입
@@ -71,17 +94,17 @@ void gameStart() { // 게임시작
 
 			// 단어 입력부분 초깃값 설정
 			int inputX = 9, inputY = 24; // 초깃값
-			char inputBuffer[BUFFER];
+			char inputBuffer[INPUT_BUFFER];
 			int iterator = 0;
 
-			for (int i = 0; i < BUFFER; i++) {
+			for (int i = 0; i < INPUT_BUFFER; i++) {
 				inputBuffer[i] = (char)NULL;
 			}
 
 			gameStatus.startClock = clock();
 			while (true) { // 단어 출력 및 입력 구현
 
-#ifndef TEST_MODE
+#ifdef ANSWER_TEST
 				gotoxy(0, 26); printf("           ");
 				gotoxy(0, 26); printf("%d", gameStatus.correctAnswer);
 #endif
@@ -132,7 +155,7 @@ void gameStart() { // 게임시작
 				}
 
 				// 단어 출력 부분
-				if ((clock()-gameStatus.startClock) % 500 == 0) {
+				if ((clock()-gameStatus.startClock) % 500 == 0) { // 속도조절 구현해야함!!
 					clearBoard();
 
 					if (gameStatus.updateCount <= WORD_IN_STAGE) {
@@ -188,7 +211,7 @@ void gameStart() { // 게임시작
 						// 정답 검사
 						inputBuffer[iterator] = (char)NULL;
 						for (int i = 0; i < WORD_IN_STAGE; i++) {
-							if (strcmp(inputBuffer, wordInStage[i].word) == 0) {
+							if (strcmp(inputBuffer, wordInStage[i].word) == 0 && wordInStage[i].isPrint == true) {
 								gameStatus.score += 10;
 								clearStatus();
 								printStatus();
@@ -211,7 +234,7 @@ void gameStart() { // 게임시작
 						}
 
 						// 입력 버퍼 초기화
-						for (int i = 0; i < BUFFER; i++) {
+						for (int i = 0; i < INPUT_BUFFER; i++) {
 							inputBuffer[i] = (char)NULL;
 						}
 						iterator = 0;
@@ -220,9 +243,9 @@ void gameStart() { // 게임시작
 						gotoxy(inputX, inputY); printf("%c", keyboardInput);
 						inputX++;
 
-						if (iterator < BUFFER) {
+						if (iterator < INPUT_BUFFER) {
 							inputBuffer[iterator] = keyboardInput;
-							if (iterator != BUFFER - 1) {
+							if (iterator != INPUT_BUFFER - 1) {
 								iterator++;
 							}
 						}
