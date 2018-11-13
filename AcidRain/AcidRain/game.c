@@ -170,20 +170,22 @@ void gameStart() { // 게임시작
 				while (_kbhit()) {
 					int keyboardInput = _getch(); _getch(); // 키보드 값 입력받음, 뒤 바이트 버리기위해 _getch() 두 번 사용
 
-					if (keyboardInput == BACKSPACE && inputX != 9) {
+					if (keyboardInput == BACKSPACE && inputX != 9) { // 커서가 맨 앞에 있지 않을 때 백스페이스 입력 시 한글자 지움
 						gotoxy(--inputX, inputY); printf(" ");
 						iterator--;
 					}
-					else if (keyboardInput == BACKSPACE && inputX == 9) {
+					else if (keyboardInput == BACKSPACE && inputX == 9) { // 커서 맨 앞에 있으면 백스페이스 무시
 						// empty!!
 					}
-					else if (keyboardInput == SPACEBAR) {
+					else if (keyboardInput == SPACEBAR) { // 스페이스바 입력 무시
 						// empty!!
 					}
-					else if (keyboardInput == ENTER) {
+					else if (keyboardInput == ENTER) { // 엔터 입력 시
+						// 정답 여부 관계없이 입력부 초기화
 						inputX = 9; inputY = 24;
 						gotoxy(inputX, inputY); printf("                  ");
 
+						// 정답 검사
 						inputBuffer[iterator] = (char)NULL;
 						for (int i = 0; i < WORD_IN_STAGE; i++) {
 							if (strcmp(inputBuffer, wordInStage[i].word) == 0) {
@@ -194,6 +196,7 @@ void gameStart() { // 게임시작
 								gameStatus.correctAnswer++;
 								wordInStage[i].isPrint = false;
 
+								// 재 출력
 								clearBoard();
 								for (int j = 0; j < WORD_IN_STAGE; j++) { // isPrint값이 true면 단어 출력
 									if (wordInStage[j].isPrint == true) {
@@ -207,13 +210,13 @@ void gameStart() { // 게임시작
 							}
 						}
 
+						// 입력 버퍼 초기화
 						for (int i = 0; i < BUFFER; i++) {
 							inputBuffer[i] = (char)NULL;
 						}
-
 						iterator = 0;
 					}
-					else if (inputX < 18) {
+					else if (inputX < 18) { // 단어 입력
 						gotoxy(inputX, inputY); printf("%c", keyboardInput);
 						inputX++;
 
