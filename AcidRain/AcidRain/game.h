@@ -25,6 +25,7 @@ struct _gameStatus {
 	int printCount; // 현재 true인 word.isPrint의 개수
 	int updateCount; // update된 횟수
 	int startClock; // 해당 스테이지 시작한 시간
+	int dropSpeed[STAGE]; // 단어 떨어지는 속도값 저장
 } gameStatus;
 
 struct word {

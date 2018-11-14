@@ -39,6 +39,9 @@ void gameStart() { // 게임시작
 	gameStatus.stage = 1;
 	gameStatus.correctAnswer = 0;
 	gameStatus.printCount = 0;
+	for (int i = 0; i < STAGE; i++) {
+		gameStatus.dropSpeed[i] = 1000 - 90 * i;
+	}
 
 	while (true) { // 스테이지 진입
 		printStatus(); // status값 출력
@@ -102,7 +105,7 @@ void gameStart() { // 게임시작
 			}
 
 			gameStatus.startClock = clock();
-			while (true) { // 단어 출력 및 입력 구현
+			while(true) { // 단어 출력 및 입력 구현
 
 #ifdef ANSWER_TEST
 				gotoxy(0, 26); printf("           ");
@@ -155,7 +158,7 @@ void gameStart() { // 게임시작
 				}
 
 				// 단어 출력 부분
-				if ((clock()-gameStatus.startClock) % 500 == 0) { // 속도조절 구현해야함!!
+				if ((clock()-gameStatus.startClock) % gameStatus.dropSpeed[gameStatus.stage] == 0) {
 					clearBoard();
 
 					if (gameStatus.updateCount <= WORD_IN_STAGE) {
@@ -189,7 +192,6 @@ void gameStart() { // 게임시작
 				}
 
 				// 단어 입력 부분
-
 				while (_kbhit()) {
 					int keyboardInput = _getch(); _getch(); // 키보드 값 입력받음, 뒤 바이트 버리기위해 _getch() 두 번 사용
 
@@ -253,8 +255,8 @@ void gameStart() { // 게임시작
 					else {
 						// empty!!
 					}
-				}
-			}
-		}
-	}
-}
+				}//while (_kbhit( ))
+			}//while(true)
+		}//else
+	}//while(true)
+}//void gameStart( )

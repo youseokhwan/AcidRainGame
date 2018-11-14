@@ -35,9 +35,13 @@ int main(void) {
 			printf("게임을 종료합니다.\n");
 			exit(0);
 		default:
-			printf("다시 선택해주세요.\n");
+			system("cls");
+			scanf("%*s");
+
+			printf("잘못된 입력입니다.\n");
+			system("pause>nul");
 		}
-	}
+	}//while(true)
 
 	return 0;
-}
+}//int main(void)
