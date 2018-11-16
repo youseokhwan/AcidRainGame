@@ -1,12 +1,13 @@
 #include "game.h"
 
-// #define ANSWER_TEST
-// #define WORD_TEST
+// #define ANSWER_COUNT_TEST
+// #define WORD_FILE_IO_CANCEL_FOR_TEST
+#define FAST_SPEED_FOR_TEST
 
 void gameStart() { // 게임시작
 	system("cls");
 
-#ifdef WORD_TEST
+#ifdef WORD_FILE_IO_CANCEL_FOR_TEST
 	// 전체 단어 리스트 생성
 	char* wordList[WORD] = { "art", "able", "acid", "about", "air", "aim", "also", "ant", "arm", "army",
 		"ball", "blue", "bag", "band", "beat", "beef", "belt", "bill", "bike", "boat",
@@ -14,7 +15,7 @@ void gameStart() { // 게임시작
 		"data", "dark", "day", "deer", "deep", "dog", "door", "draw", "drum", "drug",
 		"each", "easy", "echo", "edge", "egg", "evil", "even", "exam", "eye", "else" };
 #endif
-
+#ifndef WORD_FILE_IO_CANCEL_FOR_TEST
 	// 전체 단어 리스트 생성(파일 입출력)
 	FILE *fp;
 	char fileBuffer[FILE_BUFFER];
@@ -32,6 +33,7 @@ void gameStart() { // 게임시작
 		wordList[i] = ptr;
 		ptr = strtok(NULL, " ");
 	}
+#endif
 
 	// gameStatus 초기화
 	gameStatus.life = 5;
@@ -40,7 +42,12 @@ void gameStart() { // 게임시작
 	gameStatus.correctAnswer = 0;
 	gameStatus.printCount = 0;
 	for (int i = 0; i < STAGE; i++) {
-		gameStatus.dropSpeed[i] = 1000 - 90 * i;
+#ifndef FAST_SPEED_FOR_TEST
+		gameStatus.dropSpeed[i] = 800 - 80 * i;
+#endif
+#ifdef FAST_SPEED_FOR_TEST
+		gameStatus.dropSpeed[i] = 200;
+#endif
 	}
 
 	while (true) { // 스테이지 진입
@@ -54,7 +61,7 @@ void gameStart() { // 게임시작
 			clearPrompt();
 
 			gotoxy(0, 2); printf("Game Over!!\n");
-			gotoxy(0, 3); printf("완료한 스테이지: %d / 최종 스코어: %d", gameStatus.stage - 1, gameStatus.score);
+			gotoxy(0, 3); printf("완료한 스테이지: %d / 최종 스코어: %d", --gameStatus.stage, gameStatus.score);
 			system("pause>nul");
 
 			rankingFromGame(); // 랭킹으로 진입
@@ -107,9 +114,9 @@ void gameStart() { // 게임시작
 			gameStatus.startClock = clock();
 			while(true) { // 단어 출력 및 입력 구현
 
-#ifdef ANSWER_TEST
+#ifdef ANSWER_COUNT_TEST
 				gotoxy(0, 26); printf("           ");
-				gotoxy(0, 26); printf("%d", gameStatus.correctAnswer);
+				gotoxy(0, 26); printf("%d", gameStatus.correctAnswer1);
 #endif
 
 				// 라이프 0이거나 모든 스테이지 클리어 시 종료
