@@ -2,6 +2,7 @@
 #define CONSOLE_H
 
 #define _CRT_SECURE_NO_WARNINGS
+#pragma comment(lib,"winmm.lib")
 
 #include <time.h>
 #include <conio.h>
@@ -10,13 +11,21 @@
 #include <string.h>
 #include <stdbool.h>
 #include <Windows.h>
+#include <mmsystem.h>
 
 #include "game.h"
 #include "log.h"
 #include "ranking.h"
 
+#define SOUND_FAIL "sound\\fail.wav"
+#define SOUND_SELECT "sound\\select.wav"
+#define SOUND_CORRECT "sound\\correct.wav"
+#define SOUND_ALL_CLEAR "sound\\allClear.wav"
+#define SOUND_INCORRECT "sound\\incorrect.wav"
+#define SOUND_STAGE_CLEAR "sound\\stageClear.wav"
+
 typedef enum { NOCURSOR, SOLIDCURSOR, NORMALCURSOR } CURSOR_TYPE;
-void setCursorType(CURSOR_TYPE c); // 커서 깜빡이지 않게 설정
+void setCursorType(CURSOR_TYPE c); // 커서 숨기기
 
 void consoleSetting(); // 최초 콘솔세팅
 

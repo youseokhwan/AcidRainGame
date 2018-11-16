@@ -3,8 +3,8 @@
 int recordIndex = 0;
 
 void addRecord() { // 랭킹 추가
-	if (recordIndex > RECORD - 1) { // 레코드 10개 꽉차면 Error 출력 및 종료! -> 추후 수정
-		printf("Error!!");
+	if (recordIndex > RECORD) { // 레코드 10개 꽉차면 Error 출력 및 종료! -> 추후 수정
+		gotoxy(0, 5); printf("레코드가 꽉 차서 더 이상 랭킹등록을 할 수 없습니다.");
 
 		return;
 	}
@@ -13,7 +13,7 @@ void addRecord() { // 랭킹 추가
 	gotoxy(0, 7); printf("※ 알파벳 대문자 5글자 이내로 입력해주세요! ex) YSH");
 	gotoxy(11, 5); scanf_s("%s", record[recordIndex].name, NAME_BUFFER);
 
-	record[recordIndex].rank = recordIndex + 1; // 우선 맨 밑에 넣어두고 나중에 sort
+	record[recordIndex].rank = recordIndex + 1; // 우선 맨 밑에 넣어두고 add한 record와 함께 rank값 다시 초기화
 	record[recordIndex].stage = gameStatus.stage;
 	record[recordIndex].score = gameStatus.score;
 
@@ -28,18 +28,31 @@ void addRecord() { // 랭킹 추가
 	record[recordIndex].time.min = record[recordIndex].timeStruct.tm_min;
 	record[recordIndex].time.sec = record[recordIndex].timeStruct.tm_sec;
 
+	// rank값 초기화(나름 sort)
+	for (int i = 0; i <= recordIndex; i++) {
+		int rankCount = 1;
+		for (int j = 0; j <= recordIndex; j++) {
+			if (record[i].score < record[j].score) {
+				rankCount++;
+			}
+		}
+
+		record[i].rank = rankCount;
+	}
+
 	recordIndex++;
 }
 
 void printRecords() { // 랭킹 출력
 	system("cls");
+	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC);
 
 	gotoxy(0, 0); printf("<< Ranking >>");
 	gotoxy(0, 2); printf("Rank");
 	gotoxy(8, 2); printf("Name");
 	gotoxy(18, 2); printf("Stage");
 	gotoxy(29, 2); printf("Score");
-	gotoxy(40, 2); printf("Time");
+	gotoxy(46, 2); printf("Time");
 
 	gotoxy(0, 3); printf("===============================================================");
 
@@ -51,11 +64,11 @@ void printRecords() { // 랭킹 출력
 			gotoxy(1, record[i].rank + 3); printf("%d", record[i].rank);
 			gotoxy(8, record[i].rank + 3); printf("%s", record[i].name);
 			gotoxy(20, record[i].rank + 3); printf("%d", record[i].stage);
-			gotoxy(29, record[i].rank + 3); printf("%d", record[i].score);
+			gotoxy(29, record[i].rank + 3); printf("%04d", record[i].score);
 
 			// 시간 출력
 			gotoxy(40, record[i].rank + 3);
-			printf("%d-%d-%d %d:%d:%d", record[i].time.year, record[i].time.month, record[i].time.day, record[i].time.hour, record[i].time.min, record[i].time.sec);
+			printf("%02d-%02d-%02d %02d:%02d:%02d", record[i].time.year, record[i].time.month, record[i].time.day, record[i].time.hour, record[i].time.min, record[i].time.sec);
 		}
 	}
 

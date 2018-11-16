@@ -1,10 +1,14 @@
 #include "console.h"
 
+#define CURSOR_HIDE
+
 void consoleSetting() { // 최초 콘솔 세팅 
 	system("title Acid Rain"); // 콘솔 타이틀 변경
 	system("mode con: cols=64 lines=27");
 
-	setCursorType(NOCURSOR); // 커서 깜빡이지 않도록 설정
+#ifdef CURSOR_HIDE
+	setCursorType(NOCURSOR); // 커서 숨기기
+#endif
 }
 
 void setCursorType(CURSOR_TYPE c) { // 커서 깜빡이지 않게 설정

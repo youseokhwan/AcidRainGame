@@ -12,12 +12,12 @@ int main(void) {
 
 		char selectNum[INPUT_BUFFER] = "";
 
-		printf("<< Acid Rain>> \n");
-		printf("1 게임시작\n");
-		printf("2 랭킹\n");
-		printf("3 진행로그\n");
-		printf("4 끝내기\n");
-		printf("선택 >> ");
+		gotoxy(0, 0); printf("<< Acid Rain>>");
+		gotoxy(0, 2); printf("1 게임시작\n");
+		gotoxy(0, 3); printf("2 랭킹\n");
+		gotoxy(0, 4); printf("3 진행로그\n");
+		gotoxy(0, 5); printf("4 끝내기\n");
+		gotoxy(0, 7); printf("선택 >> ");
 		scanf_s("%s", selectNum, INPUT_BUFFER);
 
 		switch (selectNum[0]) {
@@ -35,7 +35,7 @@ int main(void) {
 			printf("※ 게임을 종료합니다.\n");
 			exit(0);
 		default:
-			gotoxy(0, 7); printf("※ 잘못된 입력입니다.");
+			gotoxy(0, 9); printf("※ 잘못된 입력입니다.");
 			system("pause>nul");
 		}
 	}//while(true)
