@@ -1,10 +1,10 @@
 #include "game.h"
 
+#define NORMAL_SPEED
+//#define FAST_SPEED_FOR_TEST
+//#define SLOW_SPEED_FOR_TEST
 //#define ANSWER_COUNT_TEST
 //#define WORD_FILE_IO_CANCEL_FOR_TEST
-//#define NORMAL_SPEED
-//#define FAST_SPEED_FOR_TEST
-#define SLOW_SPEED_FOR_TEST
 
 void gameStart() { // 게임시작
 	system("cls");
@@ -69,7 +69,17 @@ void gameStart() { // 게임시작
 			PlaySound(TEXT(SOUND_FAIL), NULL, SND_FILENAME | SND_ASYNC);
 			gotoxy(0, 2); printf("Game Over!!\n");
 			gotoxy(0, 3); printf("완료한 스테이지: %d / 최종 스코어: %d", --gameStatus.stage, gameStatus.score);
-			system("pause>nul");
+
+			gotoxy(0, 5); printf("오른쪽 방향키를 누르면 진행됩니다.");
+			while (true) {
+				if (_kbhit()) {
+					if (_getch() == ARROW) {
+						if (_getch() == RIGHT_ARROW) {
+							break;
+						}
+					}
+				}
+			}
 
 			rankingFromGame(); // 랭킹으로 진입
 

@@ -9,7 +9,7 @@ void addRecord() { // 랭킹 추가
 		return;
 	}
 
-	gotoxy(0, 5); printf("이름 입력: ");
+	gotoxy(0, 5); printf("이름 입력:                          ");
 	gotoxy(0, 7); printf("※ 알파벳 대문자 5글자 이내로 입력해주세요! ex) YSH");
 	gotoxy(11, 5); scanf_s("%s", record[recordIndex].name, NAME_BUFFER);
 
@@ -64,7 +64,7 @@ void printRecords() { // 랭킹 출력
 			gotoxy(1, record[i].rank + 3); printf("%d", record[i].rank);
 			gotoxy(8, record[i].rank + 3); printf("%s", record[i].name);
 			gotoxy(20, record[i].rank + 3); printf("%d", record[i].stage);
-			gotoxy(29, record[i].rank + 3); printf("%04d", record[i].score);
+			gotoxy(29, record[i].rank + 3); printf("%d", record[i].score);
 
 			// 시간 출력
 			gotoxy(40, record[i].rank + 3);
