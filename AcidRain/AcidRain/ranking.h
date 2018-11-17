@@ -27,10 +27,10 @@ struct _record {
 	struct _time time; // 가공된 각 시간 값들을 저장
 } record[RECORD];
 
-void addRecord(); // 랭킹 등록
+void addRecord(struct _gameStatus* gameStatus); // 랭킹 등록
 void printRecords(); // 랭킹 출력
 
 void rankingFromMenu(); // 랭킹(메뉴에서 진입)
-void rankingFromGame(); // 랭킹(게임에서 진입)
+void rankingFromGame(struct _gameStatus* gameStatus); // 랭킹(게임에서 진입)
 
 #endif

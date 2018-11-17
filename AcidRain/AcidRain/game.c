@@ -10,6 +10,11 @@ void gameStart() { // 게임시작
 	system("cls");
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
+	// struct 선언
+	struct _gameStatus gs;
+	struct _gameStatus* gameStatus = &gs;
+	struct _word wordInStage[WORD_IN_STAGE];
+
 #ifdef WORD_FILE_IO_CANCEL_FOR_TEST
 	// 전체 단어 리스트 생성
 	char* wordList[WORD] = { "art", "able", "acid", "about", "air", "aim", "also", "ant", "arm", "army",
@@ -39,36 +44,36 @@ void gameStart() { // 게임시작
 #endif
 
 	// gameStatus 초기화
-	gameStatus.life = 5;
-	gameStatus.score = 0;
-	gameStatus.stage = 1;
-	gameStatus.correctAnswer = 0;
-	gameStatus.printCount = 0;
+	gameStatus->life = 5;
+	gameStatus->score = 0;
+	gameStatus->stage = 1;
+	gameStatus->correctAnswer = 0;
+	gameStatus->printCount = 0;
 	for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 조절
 #ifdef NORMAL_SPEED
-		gameStatus.dropSpeed[i] = 800 - 80 * i;
+		gameStatus->dropSpeed[i] = 800 - 80 * i;
 #endif
 #ifdef FAST_SPEED_FOR_TEST
-		gameStatus.dropSpeed[i] = 200;
+		gameStatus->dropSpeed[i] = 200;
 #endif
 #ifdef SLOW_SPEED_FOR_TEST
-		gameStatus.dropSpeed[i] = 500;
+		gameStatus->dropSpeed[i] = 500;
 #endif
 	}
 
 	while (true) { // 스테이지 진입
-		printStatus(); // status값 출력
+		printStatus(gameStatus); // status값 출력
 		printBorderLine(); // 경계선 출력
 		printPrompt(); // 입력 창 출력
 
-		if (gameStatus.life == 0) { // 라이프 0이면 게임 종료
+		if (gameStatus->life == 0) { // 라이프 0이면 게임 종료
 			clearStatus();
 			clearBoard();
 			clearPrompt();
 
 			PlaySound(TEXT(SOUND_FAIL), NULL, SND_FILENAME | SND_ASYNC); // fail.wav 재생
 			gotoxy(0, 2); printf("Game Over!!\n");
-			gotoxy(0, 3); printf("완료한 스테이지: %d / 최종 스코어: %d", --gameStatus.stage, gameStatus.score);
+			gotoxy(0, 3); printf("완료한 스테이지: %d / 최종 스코어: %d", --gameStatus->stage, gameStatus->score);
 
 			gotoxy(0, 5); printf("오른쪽 방향키를 누르면 진행됩니다.");
 			while (true) {
@@ -81,21 +86,21 @@ void gameStart() { // 게임시작
 				}
 			}
 
-			rankingFromGame(); // 랭킹으로 진입(ranking.c)
+			rankingFromGame(gameStatus); // 랭킹으로 진입(ranking.c)
 
 			break;
 		}
-		else if (gameStatus.stage > STAGE) { // 모든 스테이지 클리어
+		else if (gameStatus->stage > STAGE) { // 모든 스테이지 클리어
 			clearStatus();
 			clearBoard();
 
 			PlaySound(TEXT(SOUND_ALL_CLEAR), NULL, SND_FILENAME | SND_ASYNC); // allClear.wav 재생
 			gotoxy(0, 2); printf("모든 스테이지를 클리어하였습니다!!\n");
-			gotoxy(0, 3); printf("최종 스코어: %d", gameStatus.score);
-			gameStatus.stage--; // 현재 스테이지 값이 11이므로 1 감소
+			gotoxy(0, 3); printf("최종 스코어: %d", gameStatus->score);
+			gameStatus->stage--; // 현재 스테이지 값이 11이므로 1 감소
 			system("pause>null");
 
-			rankingFromGame(); // 랭킹으로 진입(ranking.c)
+			rankingFromGame(gameStatus); // 랭킹으로 진입(ranking.c)
 
 			break;
 		}
@@ -117,8 +122,8 @@ void gameStart() { // 게임시작
 				wordInStage[i].y = 2;
 			}
 
-			gameStatus.updateCount = 0;
-			gotoxy(0, 2); printf("스테이지 %d 시작!!", gameStatus.stage);
+			gameStatus->updateCount = 0;
+			gotoxy(0, 2); printf("스테이지 %d 시작!!", gameStatus->stage);
 			system("pause>nul");
 
 			// 단어 입력부분 초깃값 설정
@@ -130,7 +135,7 @@ void gameStart() { // 게임시작
 				inputBuffer[i] = (char)NULL;
 			}
 
-			gameStatus.startClock = clock(); // 시작시간 저장
+			gameStatus->startClock = clock(); // 시작시간 저장
 			while(true) { // 단어 출력 및 입력 구현
 #ifdef PRINT_STATUS_FOR_TEST
 				gotoxy(0, 26); printf("           ");
@@ -139,22 +144,22 @@ void gameStart() { // 게임시작
 #endif
 
 				// 라이프 0이거나 모든 스테이지 클리어 시 종료
-				if (gameStatus.life == 0 || gameStatus.stage > STAGE) {
+				if (gameStatus->life == 0 || gameStatus->stage > STAGE) {
 					// break 후 상위 while 루프에서 작업 수행
 
 					break;
 				}
 
 				// 단어 모두 정답이면
-				if (gameStatus.correctAnswer == WORD_IN_STAGE) {
+				if (gameStatus->correctAnswer == WORD_IN_STAGE) {
 					clearBoard();
 
 					PlaySound(TEXT(SOUND_STAGE_CLEAR), NULL, SND_FILENAME | SND_ASYNC); // stageClear.wav 재생
 
-					gameStatus.score += gameStatus.stage * 100;
-					gotoxy(0, 2); printf("스테이지 %d 클리어!!", gameStatus.stage++);
+					gameStatus->score += gameStatus->stage * 100;
+					gotoxy(0, 2); printf("스테이지 %d 클리어!!", gameStatus->stage++);
 
-					gameStatus.correctAnswer = 0;
+					gameStatus->correctAnswer = 0;
 					system("pause>nul");
 
 					break;
@@ -163,39 +168,39 @@ void gameStart() { // 게임시작
 				// 단어 모두 맞추지 못했지만 죽진 않았을 시
 				for (int i = 0; i < WORD_IN_STAGE; i++) {
 					if (wordInStage[i].isPrint == false) {
-						gameStatus.printCount++;
+						gameStatus->printCount++;
 					}
 				}
 
-				if (gameStatus.updateCount >= WORD_IN_STAGE) {
-					if (gameStatus.printCount == WORD_IN_STAGE) {
-						gameStatus.score += gameStatus.stage * 100;
-						gameStatus.correctAnswer = 0;
+				if (gameStatus->updateCount >= WORD_IN_STAGE) {
+					if (gameStatus->printCount == WORD_IN_STAGE) {
+						gameStatus->score += gameStatus->stage * 100;
+						gameStatus->correctAnswer = 0;
 
 						PlaySound(TEXT(SOUND_STAGE_CLEAR), NULL, SND_FILENAME | SND_ASYNC); // stageClear.wav 재생
 
-						gotoxy(0, 2); printf("스테이지 %d 클리어!!\n", gameStatus.stage++);
+						gotoxy(0, 2); printf("스테이지 %d 클리어!!\n", gameStatus->stage++);
 						system("pause>nul");
 
 						break;
 					}
 					else {
-						gameStatus.printCount = 0;
+						gameStatus->printCount = 0;
 					}
 				}
 				else {
-					gameStatus.printCount = 0;
+					gameStatus->printCount = 0;
 				}
 
 				// 단어 출력 부분
-				if ((clock() - gameStatus.startClock) % gameStatus.dropSpeed[gameStatus.stage - 1] == 0) { // 지정된 dropSpeed값에 의해 속도 조절
+				if ((clock() - gameStatus->startClock) % gameStatus->dropSpeed[gameStatus->stage - 1] == 0) { // 지정된 dropSpeed값에 의해 속도 조절
 					clearBoard();
 
-					if (gameStatus.updateCount < WORD_IN_STAGE) { // updateCount가 10이하이면 차례대로 단어 출력시작
-						wordInStage[gameStatus.updateCount].isPrint = true;
+					if (gameStatus->updateCount < WORD_IN_STAGE) { // updateCount가 10이하이면 차례대로 단어 출력시작
+						wordInStage[gameStatus->updateCount].isPrint = true;
 					}
 
-					for (int i = 0; i < gameStatus.updateCount; i++) { // 출력된 단어들 y값 ++
+					for (int i = 0; i < gameStatus->updateCount; i++) { // 출력된 단어들 y값 ++
 						if (i < WORD_IN_STAGE) {
 							wordInStage[i].y++;
 						}
@@ -210,17 +215,17 @@ void gameStart() { // 게임시작
 
 					for (int i = 0; i < WORD_IN_STAGE; i++) { // 라이프 깎이는 조건
 						if (wordInStage[i].y == 22 && wordInStage[i].isPrint == true) { // 바닥에 도달하면 life--;
-							gameStatus.life--;
+							gameStatus->life--;
 
 							wordInStage[i].isPrint = false; // 바닥에 도달하면 더 이상 보이지 않도록 설정
 
 							clearStatus();
-							printStatus();
+							printStatus(gameStatus);
 							printBorderLine();
 						}
 					}
 
-					gameStatus.updateCount++;
+					gameStatus->updateCount++;
 				}
 
 				// 단어 입력 부분
@@ -246,11 +251,11 @@ void gameStart() { // 게임시작
 						inputBuffer[iterator] = (char)NULL; // 입력된 문자들의 조합을 문자열로 인식시키기 위해 맨 뒤에 '\0'을 넣어줌
 						for (int i = 0; i < WORD_IN_STAGE; i++) {
 							if (strcmp(inputBuffer, wordInStage[i].text) == 0 && wordInStage[i].isPrint == true) { // 이미 맞춘 단어를 또 입력했을 때 중복 정답을 방지하기 위해 isPrint값이 true인 단어에 한해 검사)
-								gameStatus.score += 10;
+								gameStatus->score += 10;
 								clearStatus();
-								printStatus();
+								printStatus(gameStatus);
 
-								gameStatus.correctAnswer++;
+								gameStatus->correctAnswer++;
 								wordInStage[i].isPrint = false; // 맞추면 isPrint값을 false로 변경하여 더 이상 보이지 않도록 함
 
 								PlaySound(TEXT(SOUND_CORRECT), NULL, SND_FILENAME | SND_ASYNC); // correct.wav 출력

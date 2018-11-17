@@ -2,7 +2,7 @@
 
 int recordIndex = 0; // record iterator
 
-void addRecord() { // 랭킹 추가
+void addRecord(struct _gameStatus* gameStatus) { // 랭킹 추가
 	if (recordIndex > RECORD) { // 레코드 10개 꽉차면 Error 출력 및 입력과정 생략! -> 추후 수정 요소
 		gotoxy(0, 5); printf("레코드가 꽉 차서 더 이상 랭킹등록을 할 수 없습니다.");
 
@@ -14,8 +14,8 @@ void addRecord() { // 랭킹 추가
 	gotoxy(11, 5); scanf_s("%s", record[recordIndex].name, NAME_BUFFER);
 
 	record[recordIndex].rank = recordIndex + 1; // 우선 맨 밑에 넣어두고 add한 record와 함께 rank값 다시 초기화
-	record[recordIndex].stage = gameStatus.stage;
-	record[recordIndex].score = gameStatus.score;
+	record[recordIndex].stage = gameStatus->stage;
+	record[recordIndex].score = gameStatus->score;
 
 	// 시간 값 설정
 	record[recordIndex].presentTime = time(NULL); // 현재 시간 대입(초 단위)
@@ -79,7 +79,7 @@ void rankingFromMenu() { // 랭킹(메뉴에서 진입)
 	printRecords();
 }
 
-void rankingFromGame() { // 랭킹(게임에서 진입)
-	addRecord();
+void rankingFromGame(struct _gameStatus* gameStatus) { // 랭킹(게임에서 진입)
+	addRecord(gameStatus);
 	printRecords();
 }

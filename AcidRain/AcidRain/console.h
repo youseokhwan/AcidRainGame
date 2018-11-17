@@ -32,9 +32,8 @@ void consoleSetting(); // 최초 콘솔세팅
 void gotoxy(int x, int y); // 커서 특정 좌표로 이동
 
 void printBorderLine(); // 경계선 출력
-void printStatus(); // status값 출력
+void printStatus(struct _gameStatus* gameStatus); // status값 출력
 void printPrompt(); // 입력 창 출력
-
 void clearStatus(); // status값 지우기
 void clearBoard(); // 단어 지우기
 void clearPrompt(); // 입력창 지우기

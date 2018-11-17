@@ -41,16 +41,16 @@ void printBorderLine() { // 경계선 출력
 	gotoxy(0, 22); printf("===============================================================\n");
 }
 
-void printStatus() { // status값 출력
-	gotoxy(0, 0); printf("Stage: %d", gameStatus.stage);
+void printStatus(struct _gameStatus* gameStatus) { // status값 출력
+	gotoxy(0, 0); printf("Stage: %d", gameStatus->stage);
 	gotoxy(25, 0);
-	if (gameStatus.life == 1) {
-		printf("Life: %d", gameStatus.life);
+	if (gameStatus->life == 1) {
+		printf("Life: %d", gameStatus->life);
 	}
 	else {
-		printf("Lifes: %d", gameStatus.life);
+		printf("Lifes: %d", gameStatus->life);
 	}
-	gotoxy(50, 0); printf("Score: %d", gameStatus.score);
+	gotoxy(50, 0); printf("Score: %d", gameStatus->score);
 }
 
 void printPrompt() { // 입력 창 출력
