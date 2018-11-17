@@ -3,7 +3,7 @@
 #define NORMAL_SPEED
 //#define FAST_SPEED_FOR_TEST
 //#define SLOW_SPEED_FOR_TEST
-//#define ANSWER_COUNT_TEST
+//#define PRINT_STATUS_FOR_TEST
 //#define WORD_FILE_IO_CANCEL_FOR_TEST
 
 void gameStart() { // 게임시작
@@ -133,9 +133,10 @@ void gameStart() { // 게임시작
 			gameStatus.startClock = clock();
 			while(true) { // 단어 출력 및 입력 구현
 
-#ifdef ANSWER_COUNT_TEST
+#ifdef PRINT_STATUS_FOR_TEST
 				gotoxy(0, 26); printf("           ");
 				gotoxy(0, 26); printf("%d", gameStatus.correctAnswer1);
+				gotoxy(3, 26); printf("%d", gameStatus.life1);
 #endif
 
 				// 라이프 0이거나 모든 스테이지 클리어 시 종료
@@ -167,7 +168,7 @@ void gameStart() { // 게임시작
 					}
 				}
 
-				if (gameStatus.updateCount >= WORD_IN_STAGE) { // clock( ) 이용해서 바꿔야함
+				if (gameStatus.updateCount >= WORD_IN_STAGE) {
 					if (gameStatus.printCount == WORD_IN_STAGE) {
 						gameStatus.score += gameStatus.stage * 100;
 						gameStatus.correctAnswer = 0;
@@ -191,7 +192,7 @@ void gameStart() { // 게임시작
 				if ((clock() - gameStatus.startClock) % gameStatus.dropSpeed[gameStatus.stage - 1] == 0) {
 					clearBoard();
 
-					if (gameStatus.updateCount <= WORD_IN_STAGE) {
+					if (gameStatus.updateCount < WORD_IN_STAGE) {
 						wordInStage[gameStatus.updateCount].isPrint = true;
 					}
 
@@ -204,7 +205,7 @@ void gameStart() { // 게임시작
 
 					for (int i = 0; i < WORD_IN_STAGE; i++) { // 라이프 깎이는 조건
 						if (wordInStage[i].y == 22 && wordInStage[i].isPrint == true) { // 바닥에 도달하면 life--; isPrint 값을 false로 변경
-							gameStatus.life--;
+							gameStatus.life -= 1;
 
 							wordInStage[i].isPrint = false;
 
@@ -214,8 +215,10 @@ void gameStart() { // 게임시작
 						}
 					}
 
-					for (int i = 0; i <= gameStatus.updateCount; i++) { // 출력된 단어들 y값 ++
-						wordInStage[i].y++;
+					for (int i = 0; i < gameStatus.updateCount; i++) { // 출력된 단어들 y값 ++
+						if (i < WORD_IN_STAGE) {
+							wordInStage[i].y++;
+						}
 					}
 
 					gameStatus.updateCount++;
@@ -248,7 +251,7 @@ void gameStart() { // 게임시작
 								clearStatus();
 								printStatus();
 
-								gameStatus.correctAnswer++;
+								gameStatus.correctAnswer += 1;
 								wordInStage[i].isPrint = false;
 
 								PlaySound(TEXT(SOUND_CORRECT), NULL, SND_FILENAME | SND_ASYNC);

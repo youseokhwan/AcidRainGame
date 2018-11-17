@@ -1,12 +1,12 @@
 #include "console.h"
 
-#define CURSOR_HIDE
+#define HIDE_CURSOR
 
 void consoleSetting() { // 최초 콘솔 세팅 
 	system("title Acid Rain"); // 콘솔 타이틀 변경
 	system("mode con: cols=64 lines=27");
 
-#ifdef CURSOR_HIDE
+#ifdef HIDE_CURSOR
 	setCursorType(NOCURSOR); // 커서 숨기기
 #endif
 }
