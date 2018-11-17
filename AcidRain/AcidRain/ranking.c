@@ -1,9 +1,9 @@
 #include "ranking.h"
 
-int recordIndex = 0;
+int recordIndex = 0; // record iterator
 
 void addRecord() { // 랭킹 추가
-	if (recordIndex > RECORD) { // 레코드 10개 꽉차면 Error 출력 및 종료! -> 추후 수정
+	if (recordIndex > RECORD) { // 레코드 10개 꽉차면 Error 출력 및 입력과정 생략! -> 추후 수정 요소
 		gotoxy(0, 5); printf("레코드가 꽉 차서 더 이상 랭킹등록을 할 수 없습니다.");
 
 		return;
@@ -28,7 +28,7 @@ void addRecord() { // 랭킹 추가
 	record[recordIndex].time.min = record[recordIndex].timeStruct.tm_min;
 	record[recordIndex].time.sec = record[recordIndex].timeStruct.tm_sec;
 
-	// rank값 초기화(나름 sort)
+	// rank값 초기화(sort)
 	for (int i = 0; i <= recordIndex; i++) {
 		int rankCount = 1;
 		for (int j = 0; j <= recordIndex; j++) {
@@ -45,7 +45,7 @@ void addRecord() { // 랭킹 추가
 
 void printRecords() { // 랭킹 출력
 	system("cls");
-	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
 	gotoxy(0, 0); printf("<< Ranking >>");
 	gotoxy(0, 2); printf("Rank");
