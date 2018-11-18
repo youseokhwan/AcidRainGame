@@ -27,11 +27,12 @@
 typedef enum { NOCURSOR, SOLIDCURSOR, NORMALCURSOR } CURSOR_TYPE;
 void setCursorType(CURSOR_TYPE c); // 커서 숨기기
 
-void consoleSetting(); // 최초 콘솔세팅
+struct _record* consoleSetting(); // 최초 콘솔세팅
 
 void gotoxy(int x, int y); // 커서 특정 좌표로 이동
 
-void printBorderLine(); // 경계선 출력
+void printSingleBorderLine(); // rank, log 등에서 한 줄짜리 경계선 출력
+void printDoubleBorderLine(); // gameBoard에서 두 줄짜리 경계선 출력
 void printStatus(struct _gameStatus* gameStatus); // status값 출력
 void printPrompt(); // 입력 창 출력
 void clearStatus(); // status값 지우기

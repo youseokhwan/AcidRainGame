@@ -6,7 +6,7 @@
 //#define PRINT_STATUS_FOR_TEST
 //#define WORD_FILE_IO_CANCEL_FOR_TEST
 
-void gameStart() { // 게임시작
+void gameStart(struct _record* record) { // 게임시작
 	system("cls");
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
@@ -29,9 +29,21 @@ void gameStart() { // 게임시작
 	char fileBuffer[FILE_BUFFER];
 
 	fp = fopen("word_list.txt", "rt");
-	while (!feof(fp)) {
+
+	if (fp == NULL) {
+		system("cls");
+		gotoxy(0, 0); printf("word_list.txt 파일이 없습니다!");
+		gotoxy(0, 2); printf("프로그램을 종료합니다.");
+		gotoxy(0, 3);
+
+		free(record);
+
+		exit(1);
+	}
+	else {
 		fgets(fileBuffer, FILE_BUFFER, fp);
 	}
+
 	fclose(fp);
 
 	char* wordList[WORD];
@@ -61,9 +73,10 @@ void gameStart() { // 게임시작
 #endif
 	}
 
+	addLog("start a game\n");
 	while (true) { // 스테이지 진입
 		printStatus(gameStatus); // status값 출력
-		printBorderLine(); // 경계선 출력
+		printDoubleBorderLine(); // 경계선 출력
 		printPrompt(); // 입력 창 출력
 
 		if (gameStatus->life == 0) { // 라이프 0이면 게임 종료
@@ -86,7 +99,7 @@ void gameStart() { // 게임시작
 				}
 			}
 
-			rankingFromGame(gameStatus); // 랭킹으로 진입(ranking.c)
+			rankingFromGame(gameStatus, record); // 랭킹으로 진입(ranking.c)
 
 			break;
 		}
@@ -100,7 +113,7 @@ void gameStart() { // 게임시작
 			gameStatus->stage--; // 현재 스테이지 값이 11이므로 1 감소
 			system("pause>null");
 
-			rankingFromGame(gameStatus); // 랭킹으로 진입(ranking.c)
+			rankingFromGame(gameStatus, record); // 랭킹으로 진입(ranking.c)
 
 			break;
 		}
@@ -112,7 +125,6 @@ void gameStart() { // 게임시작
 				for (int j = 0; j < i; j++) {
 					if (strcmp(wordInStage[i].text, wordInStage[j].text) == 0) { // 중복 검사
 						i--;
-
 						break;
 					}
 				}
@@ -221,7 +233,7 @@ void gameStart() { // 게임시작
 
 							clearStatus();
 							printStatus(gameStatus);
-							printBorderLine();
+							printDoubleBorderLine();
 						}
 					}
 

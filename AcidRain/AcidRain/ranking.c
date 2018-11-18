@@ -2,7 +2,7 @@
 
 int recordIndex = 0; // record iterator
 
-void addRecord(struct _gameStatus* gameStatus) { // 랭킹 추가
+void addRecord(struct _gameStatus* gameStatus, struct _record* record) { // 랭킹 추가
 	if (recordIndex > RECORD) { // 레코드 10개 꽉차면 Error 출력 및 입력과정 생략! -> 추후 수정 요소
 		gotoxy(0, 5); printf("레코드가 꽉 차서 더 이상 랭킹등록을 할 수 없습니다.");
 
@@ -12,6 +12,12 @@ void addRecord(struct _gameStatus* gameStatus) { // 랭킹 추가
 	gotoxy(0, 5); printf("이름 입력:                          ");
 	gotoxy(0, 7); printf("※ 알파벳 대문자 5글자 이내로 입력해주세요! ex) YSH");
 	gotoxy(11, 5); scanf_s("%s", record[recordIndex].name, NAME_BUFFER);
+
+	addLog("end a game / register a rank");
+	// 이름까지 등록되도록 추후 수정
+	//addLog("register a ranking(name: ");
+	//addLog(record[recordIndex].name);
+	//addLog(")\n");
 
 	record[recordIndex].rank = recordIndex + 1; // 우선 맨 밑에 넣어두고 add한 record와 함께 rank값 다시 초기화
 	record[recordIndex].stage = gameStatus->stage;
@@ -43,7 +49,7 @@ void addRecord(struct _gameStatus* gameStatus) { // 랭킹 추가
 	recordIndex++;
 }
 
-void printRecords() { // 랭킹 출력
+void printRecords(struct _record* record) { // 랭킹 출력
 	system("cls");
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
@@ -54,7 +60,7 @@ void printRecords() { // 랭킹 출력
 	gotoxy(29, 2); printf("Score");
 	gotoxy(46, 2); printf("Time");
 
-	gotoxy(0, 3); printf("===============================================================");
+	printSingleBorderLine();
 
 	if (recordIndex < 1) { // 저장된 레코드가 한 개도 없을 경우
 		gotoxy(0, 4); printf("※ 저장된 기록이 없습니다!");
@@ -75,11 +81,11 @@ void printRecords() { // 랭킹 출력
 	system("pause>nul");
 }
 
-void rankingFromMenu() { // 랭킹(메뉴에서 진입)
-	printRecords();
+void rankingFromMenu(struct _record* record) { // 랭킹(메뉴에서 진입)
+	printRecords(record);
 }
 
-void rankingFromGame(struct _gameStatus* gameStatus) { // 랭킹(게임에서 진입)
-	addRecord(gameStatus);
-	printRecords();
+void rankingFromGame(struct _gameStatus* gameStatus, struct _record* record) { // 랭킹(게임에서 진입)
+	addRecord(gameStatus, record);
+	printRecords(record);
 }

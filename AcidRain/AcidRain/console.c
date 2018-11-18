@@ -2,13 +2,20 @@
 
 #define HIDE_CURSOR
 
-void consoleSetting() { // 최초 콘솔 세팅 
+struct _record* consoleSetting() { // 최초 콘솔 세팅
 	system("title Acid Rain"); // 콘솔 타이틀 변경
 	system("mode con: cols=64 lines=27"); // 콘솔 사이즈 변경
 
 #ifdef HIDE_CURSOR
 	setCursorType(NOCURSOR); // 커서 숨기기
 #endif
+
+	// _record 동적 할당
+	struct _record* rcPtr = malloc(sizeof(struct _record)*RECORD);
+	struct _record rc[RECORD];
+	*rcPtr = rc[RECORD];
+
+	return rcPtr;
 }
 
 void setCursorType(CURSOR_TYPE c) { // 커서 깜빡이지 않게 설정
@@ -36,7 +43,11 @@ void gotoxy(int x, int y) { // 커서 특정 좌표로 이동
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPosition);
 }
 
-void printBorderLine() { // 경계선 출력
+void printSingleBorderLine() { // rank, log 등에서 한 줄짜리 경계선 출력
+	gotoxy(0, 3); printf("===============================================================");
+}
+
+void printDoubleBorderLine() { // gameBoard에서 두 줄짜리 경계선 출력
 	gotoxy(0, 1); printf("===============================================================\n");
 	gotoxy(0, 22); printf("===============================================================\n");
 }

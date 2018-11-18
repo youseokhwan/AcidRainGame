@@ -19,7 +19,7 @@
 //#define LEFT_ARROW 75
 #define RIGHT_ARROW 77
 
-void gameStart(); // 게임시작
+void gameStart(struct _record* record); // 게임시작
 
 struct _gameStatus { // 게임을 전반적으로 총괄하는 struct
 	int life; // 남은 목숨(최초 5개)

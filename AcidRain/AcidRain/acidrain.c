@@ -4,8 +4,9 @@
 
 #include "console.h"
 
-int main(void) {
-	consoleSetting(); // 최초 콘솔세팅
+int main(int argc, char* argv[]) {
+	struct _record* record = consoleSetting(); // 최초 콘솔세팅
+	addLog("start a program\n");
 
 	while (true) { // 메뉴 출력 및 선택하여 진행
 		system("cls");
@@ -20,19 +21,27 @@ int main(void) {
 		gotoxy(0, 7); printf("선택 >> ");
 		scanf_s("%s", selectNum, INPUT_BUFFER);
 
+		if (selectNum[1] != (char)NULL) { // 두 글자 이상 입력했을 시 재입력하도록 유도
+			selectNum[0] = 0;
+		}
+
 		switch (selectNum[0]) {
 		case '1':
-			gameStart();
+			gameStart(record);
 			break;
 		case '2':
-			rankingFromMenu();
+			rankingFromMenu(record);
 			break;
 		case '3':
 			showLog();
 			break;
 		case '4':
 			system("cls");
-			printf("※ 게임을 종료합니다.\n");
+			gotoxy(0, 0); printf("※ 게임을 종료합니다.\n");
+			gotoxy(0, 2);
+
+			addLog("end a program\n");
+			free(record); // 동적 할당한 메모리 반환(console.c 참조)
 			exit(0);
 		default:
 			gotoxy(0, 9); printf("※ 잘못된 입력입니다.");
