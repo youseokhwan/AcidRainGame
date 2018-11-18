@@ -17,12 +17,12 @@
 #include "log.h"
 #include "ranking.h"
 
-#define SOUND_FAIL "sound\\fail.wav"
-#define SOUND_SELECT "sound\\select.wav"
-#define SOUND_CORRECT "sound\\correct.wav"
-#define SOUND_ALL_CLEAR "sound\\allClear.wav"
-#define SOUND_INCORRECT "sound\\incorrect.wav"
-#define SOUND_STAGE_CLEAR "sound\\stageClear.wav"
+#define SOUND_FAIL "dataFile\\sound\\fail.wav"
+#define SOUND_SELECT "dataFile\\sound\\select.wav"
+#define SOUND_CORRECT "dataFile\\sound\\correct.wav"
+#define SOUND_ALL_CLEAR "dataFile\\sound\\allClear.wav"
+#define SOUND_INCORRECT "dataFile\\sound\\incorrect.wav"
+#define SOUND_STAGE_CLEAR "dataFile\\sound\\stageClear.wav"
 
 typedef enum { NOCURSOR, SOLIDCURSOR, NORMALCURSOR } CURSOR_TYPE;
 void setCursorType(CURSOR_TYPE c); // Ä¿¼­ ¼û±â±â

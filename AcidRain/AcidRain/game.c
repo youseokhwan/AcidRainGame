@@ -28,7 +28,7 @@ void gameStart(struct _record* record) { // 게임시작
 	FILE *fp;
 	char fileBuffer[FILE_BUFFER];
 
-	fp = fopen("word_list.txt", "rt");
+	fp = fopen("dataFile\\word_list.txt", "rt");
 
 	if (fp == NULL) {
 		system("cls");
@@ -73,7 +73,7 @@ void gameStart(struct _record* record) { // 게임시작
 #endif
 	}
 
-	addLog("start a game\n");
+	addLog("enter a game\n", false);
 	while (true) { // 스테이지 진입
 		printStatus(gameStatus); // status값 출력
 		printDoubleBorderLine(); // 경계선 출력

@@ -1,0 +1,8 @@
+18-11-18 23:13:31   start a program
+18-11-18 23:13:36   enter a game
+18-11-18 23:14:14   register a ranking(name: YSH)
+18-11-18 23:14:17   enter a game
+18-11-18 23:14:48   register a ranking(name: ABC)
+18-11-18 23:15:54   end a program
+18-11-18 23:25:13   start a program
+18-11-18 23:25:16   enter a game

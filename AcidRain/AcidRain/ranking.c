@@ -13,11 +13,9 @@ void addRecord(struct _gameStatus* gameStatus, struct _record* record) { // 랭킹
 	gotoxy(0, 7); printf("※ 알파벳 대문자 5글자 이내로 입력해주세요! ex) YSH");
 	gotoxy(11, 5); scanf_s("%s", record[recordIndex].name, NAME_BUFFER);
 
-	addLog("end a game / register a rank");
-	// 이름까지 등록되도록 추후 수정
-	//addLog("register a ranking(name: ");
-	//addLog(record[recordIndex].name);
-	//addLog(")\n");
+	addLog("register a ranking(name: ", false);
+	addLog(record[recordIndex].name, true);
+	addLog(")\n", true);
 
 	record[recordIndex].rank = recordIndex + 1; // 우선 맨 밑에 넣어두고 add한 record와 함께 rank값 다시 초기화
 	record[recordIndex].stage = gameStatus->stage;

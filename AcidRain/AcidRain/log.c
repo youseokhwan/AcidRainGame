@@ -1,23 +1,28 @@
 #include "log.h"
 
-void addLog(char* newLog) { // 로그저장
+void addLog(char* newLog, bool fromRank) { // 로그저장
 	FILE *fp;
-	fp = fopen("game_log.txt", "at");
+	fp = fopen("dataFile\\game_log.txt", "at");
 
 	time_t presentTime = time(NULL);
 	struct tm timeStruct;
 	struct _time time;
 
-	// 시간 값 설정
-	timeStruct = *localtime(&presentTime);
-	time.year = (timeStruct.tm_year + 1900) % 2000;
-	time.month = timeStruct.tm_mon + 1;
-	time.day = timeStruct.tm_mday;
-	time.hour = timeStruct.tm_hour;
-	time.min = timeStruct.tm_min;
-	time.sec = timeStruct.tm_sec;
+	if (fromRank == true) {
+		// empty!!
+	}
+	else {
+		// 시간 값 설정
+		timeStruct = *localtime(&presentTime);
+		time.year = (timeStruct.tm_year + 1900) % 2000;
+		time.month = timeStruct.tm_mon + 1;
+		time.day = timeStruct.tm_mday;
+		time.hour = timeStruct.tm_hour;
+		time.min = timeStruct.tm_min;
+		time.sec = timeStruct.tm_sec;
 
-	fprintf(fp, "%02d-%02d-%02d %02d:%02d:%02d   ", time.year, time.month, time.day, time.hour, time.min, time.sec);
+		fprintf(fp, "%02d-%02d-%02d %02d:%02d:%02d   ", time.year, time.month, time.day, time.hour, time.min, time.sec);
+	}
 	fprintf(fp, newLog);
 
 	fclose(fp);
@@ -27,7 +32,7 @@ void showLog() { // 로그보기
 	system("cls");
 
 	FILE *fp;
-	fp = fopen("game_log.txt", "rt");
+	fp = fopen("dataFile\\game_log.txt", "rt");
 
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC);
 
@@ -60,6 +65,9 @@ void showLog() { // 로그보기
 
 				break;
 			}
+		}
+		else if (temp == '\0') {
+			temp = fgetc(fp);
 		}
 		else {
 			printf("%c", temp);

@@ -1,4 +1,0 @@
-18-11-18 16:26:54   start a program
-18-11-18 16:26:56   end a program
-18-11-18 16:26:57   start a program
-18-11-18 16:26:59   end a program

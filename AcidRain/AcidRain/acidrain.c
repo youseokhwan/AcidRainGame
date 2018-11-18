@@ -6,7 +6,7 @@
 
 int main(int argc, char* argv[]) {
 	struct _record* record = consoleSetting(); // 최초 콘솔세팅
-	addLog("start a program\n");
+	addLog("start a program\n", false);
 
 	while (true) { // 메뉴 출력 및 선택하여 진행
 		system("cls");
@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
 			gotoxy(0, 0); printf("※ 게임을 종료합니다.\n");
 			gotoxy(0, 2);
 
-			addLog("end a program\n");
+			addLog("end a program\n", false);
 			free(record); // 동적 할당한 메모리 반환(console.c 참조)
 			exit(0);
 		default:
