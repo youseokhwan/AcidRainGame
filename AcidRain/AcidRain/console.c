@@ -38,6 +38,64 @@ void setCursorType(CURSOR_TYPE c) { // 커서 깜빡이지 않게 설정
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &curInfo);
 }
 
+void printMenu(int* menuIndex) {
+	// 제목 출력
+
+	// 메뉴 목록 출력
+
+	// 화살표 출력
+}
+
+int mainMenu(int* menuIndex) {
+	printMenu(menuIndex);
+
+	while (true) {
+		while (_kbhit()) {
+			int userInput = _getch();
+
+			if (userInput == ARROW) {
+				userInput = _getch();
+
+				if (userInput == UP_ARROW) {
+					// *menuIndex 값 변경
+					printMenu(menuIndex);
+				}
+				else if (userInput == DOWN_ARROW) {
+					// *menuIndex 값 변경
+					printMenu(menuIndex);
+				}
+			}
+			//else if (userInput == ? ? ) {
+			//	// h 입력하면 도움말로 넘어가기
+			//}
+			//else if (userInput == ? ? ) {
+			//	// s입력하면 세팅으로 넘어가기
+			//}
+			//else if (userInput == ENTER) {
+			//	// 엔터치면 현재 그 index값 반환해버리기
+			//
+			//  // return *menuIndex;
+			//}
+		}
+	}
+
+	return 0; // 임시
+}
+
+void printHelp() {
+	system("cls");
+
+	gotoxy(0, 0); printf("도움말 출력!");
+	system("pause>nul");
+}
+
+void setting() {
+	system("cls");
+
+	gotoxy(0, 0); printf("setting() 진입");
+	system("pause>nul");
+}
+
 void gotoxy(int x, int y) { // 커서 특정 좌표로 이동
 	COORD cursorPosition = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPosition);

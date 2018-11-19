@@ -1,5 +1,7 @@
 #include "log.h"
 
+//#define LOG_TEST
+
 void addLog(char* newLog, bool fromRank) { // 로그저장
 	FILE *fp;
 	fp = fopen("dataFile\\game_log.txt", "at");
@@ -30,6 +32,10 @@ void addLog(char* newLog, bool fromRank) { // 로그저장
 
 void showLog() { // 로그보기
 	system("cls");
+
+#ifdef LOG_TEST
+	addLog("log test\n", false);
+#endif
 
 	FILE *fp;
 	fp = fopen("dataFile\\game_log.txt", "rt");

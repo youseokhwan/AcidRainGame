@@ -11,6 +11,7 @@ void addRecord(struct _gameStatus* gameStatus, struct _record* record) { // 랭킹
 
 	gotoxy(0, 5); printf("이름 입력:                          ");
 	gotoxy(0, 7); printf("※ 알파벳 대문자 5글자 이내로 입력해주세요! ex) YSH");
+
 	gotoxy(11, 5); scanf_s("%s", record[recordIndex].name, NAME_BUFFER);
 
 	addLog("register a ranking(name: ", false);
@@ -58,7 +59,7 @@ void printRecords(struct _record* record) { // 랭킹 출력
 	gotoxy(29, 2); printf("Score");
 	gotoxy(46, 2); printf("Time");
 
-	printSingleBorderLine();
+	printSingleBorderLine(); // 경계선 출력
 
 	if (recordIndex < 1) { // 저장된 레코드가 한 개도 없을 경우
 		gotoxy(0, 4); printf("※ 저장된 기록이 없습니다!");

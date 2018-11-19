@@ -29,6 +29,11 @@ void setCursorType(CURSOR_TYPE c); // 커서 숨기기
 
 struct _record* consoleSetting(); // 최초 콘솔세팅
 
+void printMenu(int* menuIndex); // 메뉴 출력
+int mainMenu(int* menuIndex); // 키보드 UX 정의 및 메뉴 선택값 반환
+void printHelp(); // 도움말 출력
+void setting(); // 설정
+
 void gotoxy(int x, int y); // 커서 특정 좌표로 이동
 
 void printSingleBorderLine(); // rank, log 등에서 한 줄짜리 경계선 출력

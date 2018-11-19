@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="acidrain.c" />
+    <ClCompile Include="main.c" />
     <ClCompile Include="console.c" />
     <ClCompile Include="game.c" />
     <ClCompile Include="log.c" />
