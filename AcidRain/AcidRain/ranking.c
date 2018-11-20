@@ -52,7 +52,9 @@ void printRecords(struct _record* record) { // 랭킹 출력
 	system("cls");
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
-	gotoxy(0, 0); printf("<< Ranking >>");
+	setColor(YELLOW);
+	gotoxy(0, 0); printf("● RANKING");
+	setColor(WHITE);
 	gotoxy(0, 2); printf("Rank");
 	gotoxy(8, 2); printf("Name");
 	gotoxy(18, 2); printf("Stage");

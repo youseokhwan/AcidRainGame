@@ -17,6 +17,20 @@
 #include "log.h"
 #include "ranking.h"
 
+#define DELAY 7
+
+#define DARK_GREEN 2
+#define DARK_CYAN 3
+#define DARK_YELLOW 6
+#define GRAY 8
+#define BLUE 9
+#define GREEN 10
+#define CYAN 11
+#define RED 12
+#define MAGENTA 13
+#define YELLOW 14
+#define WHITE 15
+
 #define SOUND_FAIL "dataFile\\sound\\fail.wav"
 #define SOUND_SELECT "dataFile\\sound\\select.wav"
 #define SOUND_CORRECT "dataFile\\sound\\correct.wav"
@@ -26,10 +40,17 @@
 
 typedef enum { NOCURSOR, SOLIDCURSOR, NORMALCURSOR } CURSOR_TYPE;
 void setCursorType(CURSOR_TYPE c); // 커서 숨기기
+void setColor(int colorNumber); // 폰트 색상 변경
 
 struct _record* consoleSetting(); // 최초 콘솔세팅
 
+void printTitle(); // 타이틀 출력
+void printMenuList(); // 메뉴 목록 출력
+void printRain(); // 비 출력
+void printOthers(); // 기타 정보 출력
+void printArrow(int* menuIndex); // 화살표 출력
 void printMenu(int* menuIndex); // 메뉴 출력
+
 int mainMenu(int* menuIndex); // 키보드 UX 정의 및 메뉴 선택값 반환
 void printHelp(); // 도움말 출력
 void setting(); // 설정

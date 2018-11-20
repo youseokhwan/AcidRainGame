@@ -76,7 +76,7 @@ void gameStart(struct _record* record) { // 게임시작
 	addLog("enter a game\n", false);
 	while (true) { // 스테이지 진입
 		printStatus(gameStatus); // status값 출력
-		printDoubleBorderLine(); // 경계선 출력
+		printDoubleBorderLine(false); // 경계선 출력
 		printPrompt(); // 입력 창 출력
 
 		if (gameStatus->life == 0) { // 라이프 0이면 게임 종료
@@ -221,7 +221,9 @@ void gameStart(struct _record* record) { // 게임시작
 					for (int i = 0; i < WORD_IN_STAGE; i++) { // isPrint값이 true면 단어 출력
 						if (wordInStage[i].isPrint == true) {
 							gotoxy(wordInStage[i].x, wordInStage[i].y);
+							setColor(YELLOW);
 							printf("%s", wordInStage[i].text);
+							setColor(YELLOW);
 						}
 					}
 
@@ -277,7 +279,9 @@ void gameStart(struct _record* record) { // 게임시작
 								for (int j = 0; j < WORD_IN_STAGE; j++) { // isPrint값이 true면 단어 출력
 									if (wordInStage[j].isPrint == true) {
 										gotoxy(wordInStage[j].x, wordInStage[j].y);
+										setColor(YELLOW);
 										printf("%s", wordInStage[j].text);
+										setColor(WHITE);
 									}
 								}
 							}
@@ -293,7 +297,9 @@ void gameStart(struct _record* record) { // 게임시작
 						iterator = 0;
 					}
 					else if (inputX < 18) { // 단어 입력(x 좌표가 18 이상이면 더 이상 입력되지 않도록 제한)
+						setColor(YELLOW);
 						gotoxy(inputX, inputY); printf("%c", keyboardInput);
+						setColor(WHITE);
 						inputX++;
 
 						if (iterator < INPUT_BUFFER) {

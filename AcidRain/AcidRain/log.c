@@ -42,7 +42,9 @@ void showLog() { // 로그보기
 
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC);
 
-	gotoxy(0, 0); printf("<< Log >>");
+	setColor(YELLOW);
+	gotoxy(0, 0); printf("● LOG");
+	setColor(WHITE);
 	gotoxy(0, 2); printf("No.");
 	gotoxy(11, 2); printf("Time");
 	gotoxy(25, 2); printf("Content");

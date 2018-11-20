@@ -1,8 +1,19 @@
-18-11-19 10:38:49   start a program
-18-11-19 10:39:05   start a program
-18-11-19 10:50:01   start a program
-18-11-19 16:23:16   start a program
-18-11-19 16:23:16   enter a game
-18-11-19 16:23:44   start a program
-18-11-19 16:23:46   enter a game
-18-11-19 16:55:21   start a program
+18-11-20 16:52:13   start a program
+18-11-20 16:52:14   enter a game
+18-11-20 16:52:37   register a ranking(name: YSH)
+18-11-20 16:54:00   start a program
+18-11-20 16:54:50   start a program
+18-11-20 16:55:10   start a program
+18-11-20 16:55:20   end a program
+18-11-20 16:55:37   start a program
+18-11-20 16:57:31   start a program
+18-11-20 16:57:57   start a program
+18-11-20 16:58:21   start a program
+18-11-20 16:58:30   start a program
+18-11-20 16:58:55   enter a game
+18-11-20 16:59:38   start a program
+18-11-20 16:59:42   enter a game
+18-11-20 17:00:04   start a program
+18-11-20 17:00:06   enter a game
+18-11-20 17:00:25   start a program
+18-11-20 17:00:29   enter a game
