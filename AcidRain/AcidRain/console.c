@@ -206,7 +206,7 @@ void printOthers() { // 기타 정보 출력
 
 	// 프로그램 정보 출력
 	setColor(DARK_YELLOW);
-	gotoxy(1, 26); printf("v1.0");
+	gotoxy(1, 26); printf("%s", VERSION);
 	gotoxy(20, 26); printf("https://github.com/youseokhwan/AcidRainGame");
 	setColor(WHITE);
 }
@@ -306,7 +306,32 @@ int mainMenu(int* menuIndex) { // 메인 메뉴 컨트롤
 void printHelp() { // 도움말 출력
 	system("cls");
 
-	gotoxy(0, 0); printf("도움말 출력!");
+	printSingleBorderLine(3);
+	printSingleBorderLine(8);
+	printSingleBorderLine(16);
+	printSingleBorderLine(23);
+
+	setColor(YELLOW);
+	gotoxy(0, 0); printf("● HELP");
+	gotoxy(0, 2); printf("○ Information");
+	gotoxy(0, 7); printf("○ How To Play");
+	gotoxy(0, 15); printf("○ Key Setting");
+	gotoxy(0, 22); printf("○ Made By");
+	setColor(WHITE);
+
+	gotoxy(0, 4); printf("\'Acid Rain\'은 산성비라는 뜻으로, ㈜한글과컴퓨터의 \'한컴타자연습\'");
+	gotoxy(0, 5); printf("의 \'산성비\' 게임을 모방한 C 콘솔게임입니다.");
+	gotoxy(0, 9); printf("내려오는 단어를 타이핑하여 없애야하며, 단어가 바닥까지 내려올 경");
+	gotoxy(0, 10); printf("우 라이프를 잃습니다. 라이프를 모두 읽으면 게임이 종료됩니다.");
+	gotoxy(0, 12); printf("총 10개의 스테이지로 구성되어있고, 영어 소문자만 사용합니다.");
+	gotoxy(0, 13); printf("왼쪽 방향키(←)를 누르면 중도 포기할 수 있습니다.");
+	gotoxy(0, 17); printf("메뉴 이동: ↑ ↓");
+	gotoxy(0, 18); printf("단어 입력: a ~ z 타이핑");
+	gotoxy(0, 19); printf("단어 제출: enter키");
+	gotoxy(0, 20); printf("단어 지우기: backspace키");
+	gotoxy(0, 24); printf("youseokhwan");
+	gotoxy(0, 25); printf("%s https://github.com/youseokhwan/AcidRainGame", VERSION);
+
 	system("pause>nul");
 }
 
@@ -322,9 +347,9 @@ void gotoxy(int x, int y) { // 커서 특정 좌표로 이동
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPosition);
 }
 
-void printSingleBorderLine() { // rank, log 등에서 한 줄짜리 경계선 출력
+void printSingleBorderLine(int y) { // rank, log 등에서 한 줄짜리 경계선 출력
 	setColor(DARK_YELLOW);
-	gotoxy(0, 3); printf("===============================================================");
+	gotoxy(0, y); printf("===============================================================");
 	setColor(WHITE);
 }
 

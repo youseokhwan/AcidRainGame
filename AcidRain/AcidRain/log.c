@@ -49,7 +49,7 @@ void showLog() { // 로그보기
 	gotoxy(11, 2); printf("Time");
 	gotoxy(25, 2); printf("Content");
 
-	printSingleBorderLine();
+	printSingleBorderLine(3);
 
 	int logNumber = 0;
 	int logIterator = 1;

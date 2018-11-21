@@ -3,7 +3,7 @@
 int recordIndex = 0; // record iterator
 
 void addRecord(struct _gameStatus* gameStatus, struct _record* record) { // 랭킹 추가
-	if (recordIndex > RECORD) { // 레코드 10개 꽉차면 Error 출력 및 입력과정 생략! -> 추후 수정 요소
+	if (recordIndex > RECORD) { // 레코드 10개 꽉차면 Error 출력 및 입력과정 생략
 		gotoxy(0, 5); printf("레코드가 꽉 차서 더 이상 랭킹등록을 할 수 없습니다.");
 
 		return;
@@ -61,7 +61,7 @@ void printRecords(struct _record* record) { // 랭킹 출력
 	gotoxy(29, 2); printf("Score");
 	gotoxy(46, 2); printf("Time");
 
-	printSingleBorderLine(); // 경계선 출력
+	printSingleBorderLine(3); // 경계선 출력
 
 	if (recordIndex < 1) { // 저장된 레코드가 한 개도 없을 경우
 		gotoxy(0, 4); printf("※ 저장된 기록이 없습니다!");

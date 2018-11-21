@@ -16,7 +16,7 @@
 #define ARROW 224
 #define UP_ARROW 72
 #define DOWN_ARROW 80
-//#define LEFT_ARROW 75
+#define LEFT_ARROW 75
 #define RIGHT_ARROW 77
 
 void gameStart(struct _record* record); // 게임시작

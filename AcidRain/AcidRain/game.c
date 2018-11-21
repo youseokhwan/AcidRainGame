@@ -63,7 +63,7 @@ void gameStart(struct _record* record) { // 게임시작
 	gameStatus->printCount = 0;
 	for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 조절
 #ifdef NORMAL_SPEED
-		gameStatus->dropSpeed[i] = 800 - 80 * i;
+		gameStatus->dropSpeed[i] = 800 - 60 * i;
 #endif
 #ifdef FAST_SPEED_FOR_TEST
 		gameStatus->dropSpeed[i] = 200;
@@ -131,7 +131,7 @@ void gameStart(struct _record* record) { // 게임시작
 
 				wordInStage[i].isPrint = false;
 				wordInStage[i].x = (rand() % 56) + 1; // 해당 언어의 랜덤 x값 지정
-				wordInStage[i].y = 2;
+				wordInStage[i].y = 1;
 			}
 
 			gameStatus->updateCount = 0;
@@ -208,12 +208,12 @@ void gameStart(struct _record* record) { // 게임시작
 				if ((clock() - gameStatus->startClock) % gameStatus->dropSpeed[gameStatus->stage - 1] == 0) { // 지정된 dropSpeed값에 의해 속도 조절
 					clearBoard();
 
-					if (gameStatus->updateCount < WORD_IN_STAGE) { // updateCount가 10이하이면 차례대로 단어 출력시작
-						wordInStage[gameStatus->updateCount].isPrint = true;
+					if (gameStatus->updateCount % 2 == 0 && gameStatus->updateCount < WORD_IN_STAGE * 2) { // updateCount가 10이하이면 차례대로 단어 출력시작
+						wordInStage[gameStatus->updateCount / 2].isPrint = true;
 					}
 
-					for (int i = 0; i < gameStatus->updateCount; i++) { // 출력된 단어들 y값 ++
-						if (i < WORD_IN_STAGE) {
+					for (int i = 0; i < WORD_IN_STAGE; i++) { // 출력된 단어들 y값 ++
+						if (wordInStage[i].isPrint == true) {
 							wordInStage[i].y++;
 						}
 					}
@@ -244,19 +244,31 @@ void gameStart(struct _record* record) { // 게임시작
 
 				// 단어 입력 부분
 				while (_kbhit()) {
-					int keyboardInput = _getch(); _getch(); // 키보드 값 입력받음, 뒤 바이트 버리기위해 _getch() 두 번 사용
+					int keyboardInput = _getch(); // 키보드 값 입력받음
 
 					if (keyboardInput == BACKSPACE && inputX != 9) { // 커서가 맨 앞에 있지 않을 때 백스페이스 입력 시 한글자 지움
+						_getch(); // 뒤 바이트 버리기
 						gotoxy(--inputX, inputY); printf(" ");
 						iterator--;
 					}
 					else if (keyboardInput == BACKSPACE && inputX == 9) { // 커서 맨 앞에 있으면 백스페이스 무시
-						// empty!!
+						_getch(); // 뒤 바이트 버리기
 					}
 					else if (keyboardInput == SPACEBAR) { // 스페이스바 입력 무시
-						// empty!!
+						_getch(); // 뒤 바이트 버리기
+					}
+					else if (keyboardInput == ARROW) { // 오른쪽 방향키 입력 시 게임포기 및 다른 방향키는 무시
+						keyboardInput = _getch();
+						
+						if (keyboardInput == LEFT_ARROW) {
+							gameStatus->life = 0;
+						}
+						else {
+							// empty!!
+						}
 					}
 					else if (keyboardInput == ENTER) { // 엔터 입력 시
+						_getch(); // 뒤 바이트 버리기
 						// 정답 여부 관계없이 엔터누르면 입력버퍼 초기화
 						inputX = 9; inputY = 24;
 						gotoxy(inputX, inputY); printf("                  ");
@@ -297,6 +309,8 @@ void gameStart(struct _record* record) { // 게임시작
 						iterator = 0;
 					}
 					else if (inputX < 18) { // 단어 입력(x 좌표가 18 이상이면 더 이상 입력되지 않도록 제한)
+						_getch(); // 뒤 바이트 버리기
+
 						setColor(YELLOW);
 						gotoxy(inputX, inputY); printf("%c", keyboardInput);
 						setColor(WHITE);
@@ -310,7 +324,7 @@ void gameStart(struct _record* record) { // 게임시작
 						}
 					}
 					else {
-						// empty!!
+						_getch(); // 뒤 바이트 버리기
 					}
 				}//while (_kbhit( ))
 			}//while(true)

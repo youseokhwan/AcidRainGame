@@ -17,3 +17,41 @@
 18-11-20 17:00:06   enter a game
 18-11-20 17:00:25   start a program
 18-11-20 17:00:29   enter a game
+18-11-21 08:18:23   start a program
+18-11-21 08:18:28   enter a game
+18-11-21 08:21:54   start a program
+18-11-21 08:21:56   enter a game
+18-11-21 08:25:20   start a program
+18-11-21 08:25:29   start a program
+18-11-21 08:25:31   enter a game
+18-11-21 08:25:41   register a ranking(name: YSH)
+18-11-21 08:25:45   enter a game
+18-11-21 08:25:57   register a ranking(name: FIR)
+18-11-21 08:27:48   enter a game
+18-11-21 08:29:49   start a program
+18-11-21 08:29:51   enter a game
+18-11-21 08:30:11   start a program
+18-11-21 08:30:13   enter a game
+18-11-21 08:36:48   start a program
+18-11-21 08:36:52   enter a game
+18-11-21 08:38:42   start a program
+18-11-21 08:39:00   enter a game
+18-11-21 08:41:02   start a program
+18-11-21 08:41:03   enter a game
+18-11-21 08:41:11   start a program
+18-11-21 08:41:12   enter a game
+18-11-21 08:41:34   start a program
+18-11-21 08:41:35   enter a game
+18-11-21 08:42:21   start a program
+18-11-21 08:42:22   enter a game
+18-11-21 08:49:57   start a program
+18-11-21 09:04:46   start a program
+18-11-21 09:05:43   start a program
+18-11-21 09:05:45   enter a game
+18-11-21 09:05:50   register a ranking(name: asd)
+18-11-21 09:11:03   start a program
+18-11-21 09:12:11   start a program
+18-11-21 09:15:29   start a program
+18-11-21 09:18:38   start a program
+18-11-21 09:22:26   start a program
+18-11-21 09:22:36   start a program
