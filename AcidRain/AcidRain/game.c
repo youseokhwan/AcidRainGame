@@ -23,7 +23,7 @@ void gameStart(struct _record* record, struct _gameStatus* gameStatus) { // 게임
 	FILE *fp;
 	char fileBuffer[FILE_BUFFER];
 
-	fp = fopen("dataFile\\word_list.txt", "rt");
+	fopen_s(&fp, "dataFile\\word_list.txt", "rt");
 
 	if (fp == NULL) {
 		system("cls");
@@ -42,11 +42,12 @@ void gameStart(struct _record* record, struct _gameStatus* gameStatus) { // 게임
 	fclose(fp);
 
 	char* wordList[WORD];
-	char* ptr = strtok(fileBuffer, " ");
+	char* nextContext = NULL;
+	char* ptr = strtok_s(fileBuffer, " ", &nextContext);
 
 	for (int i = 0; i < WORD; i++) {
 		wordList[i] = ptr;
-		ptr = strtok(NULL, " ");
+		ptr = strtok_s(NULL, " ", &nextContext);
 	}
 #endif
 

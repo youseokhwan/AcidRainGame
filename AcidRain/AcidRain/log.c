@@ -4,7 +4,7 @@
 
 void addLog(char* newLog, bool fromRank) { // 로그저장
 	FILE *fp;
-	fp = fopen("dataFile\\game_log.txt", "at");
+	fopen_s(&fp, "dataFile\\game_log.txt", "at");
 
 	time_t presentTime = time(NULL);
 	struct tm timeStruct;
@@ -15,7 +15,7 @@ void addLog(char* newLog, bool fromRank) { // 로그저장
 	}
 	else {
 		// 시간 값 설정
-		timeStruct = *localtime(&presentTime);
+		localtime_s(&timeStruct, &presentTime);
 		time.year = (timeStruct.tm_year + 1900) % 2000;
 		time.month = timeStruct.tm_mon + 1;
 		time.day = timeStruct.tm_mday;
@@ -38,7 +38,7 @@ void showLog() { // 로그보기
 #endif
 
 	FILE *fp;
-	fp = fopen("dataFile\\game_log.txt", "rt");
+	fopen_s(&fp, "dataFile\\game_log.txt", "rt");
 
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC);
 

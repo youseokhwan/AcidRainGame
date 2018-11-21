@@ -4,15 +4,16 @@
 // 18.11.20 v1.1 UI 업데이트
 // 18.11.21 v1.2 단어 간격 조정 및 도움말 업데이트
 // 18.11.21 v1.3 개발자 설정 업데이트
+// 18.11.21 v1.3.1 dropSpeed 관련 hotfix, Use safety function
 
 #include "console.h"
 
 int main(int argc, char* argv[]) {
-	struct _record* record = consoleSetting(); // 최초 콘솔세팅
-
 	//struct 선언부
 	struct _gameStatus gs;
 	struct _gameStatus* gameStatus = &gs;
+
+	struct _record* record = consoleSetting(gameStatus); // 최초 콘솔세팅
 
 	struct _settingValue sv = { 1, 0 }; // 초기 설정 값
 	struct _settingValue* settingValue = &sv;

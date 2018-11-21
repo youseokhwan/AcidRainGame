@@ -1,12 +1,15 @@
 #include "console.h"
 
-struct _record* consoleSetting() { // 최초 콘솔 세팅
+struct _record* consoleSetting(struct _gameStatus* gameStatus) { // 최초 콘솔 세팅
 	system("title Acid Rain"); // 콘솔 타이틀 변경
 	system("mode con: cols=64 lines=27"); // 콘솔 사이즈 변경
 
 	setCursorType(NOCURSOR); // 커서 숨기기
-
 	setColor(WHITE);
+
+	for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 최초 설정
+		gameStatus->dropSpeed[i] = 800 - 60 * i;
+	}
 
 	// _record 동적 할당
 	struct _record* rcPtr = malloc(sizeof(struct _record)*RECORD);
@@ -371,10 +374,6 @@ void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus)
 		gotoxy(2, 15); printf("●");
 	}
 
-	for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 최초 설정
-		gameStatus->dropSpeed[i] = 800 - 60 * i;
-	}
-
 	while (true) {
 		int keyboardInput = _getch();
 
@@ -426,7 +425,7 @@ void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus)
 				gotoxy(2, 15); printf("●");
 
 				for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 느리게
-					gameStatus->dropSpeed[i] = 1000;
+					gameStatus->dropSpeed[i] = 2000;
 				}
 
 				settingValue->dropSpeedToggle = 2;

@@ -24,7 +24,7 @@ void addRecord(struct _gameStatus* gameStatus, struct _record* record) { // 랭킹
 
 	// 시간 값 설정
 	record[recordIndex].presentTime = time(NULL); // 현재 시간 대입(초 단위)
-	record[recordIndex].timeStruct = *localtime(&(record[recordIndex].presentTime));
+	localtime_s(&record[recordIndex].timeStruct, &record[recordIndex].presentTime);
 
 	record[recordIndex].time.year = (record[recordIndex].timeStruct.tm_year + 1900) % 2000;
 	record[recordIndex].time.month = record[recordIndex].timeStruct.tm_mon + 1;

@@ -1,7 +1,6 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
-#define _CRT_SECURE_NO_WARNINGS
 #pragma comment(lib,"winmm.lib")
 
 #include <time.h>
@@ -17,7 +16,7 @@
 #include "log.h"
 #include "ranking.h"
 
-#define VERSION "v1.3"
+#define VERSION "v1.3.1"
 
 #define DELAY 7
 
@@ -44,7 +43,7 @@ typedef enum { NOCURSOR, SOLIDCURSOR, NORMALCURSOR } CURSOR_TYPE;
 void setCursorType(CURSOR_TYPE c); // 커서 숨기기
 void setColor(int colorNumber); // 폰트 색상 변경
 
-struct _record* consoleSetting(); // 최초 콘솔세팅
+struct _record* consoleSetting(struct _gameStatus* gameStatus); // 최초 콘솔세팅
 struct _settingValue {
 	int hideCursorToggle;
 	int dropSpeedToggle;
