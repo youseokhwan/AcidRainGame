@@ -16,7 +16,7 @@
 #include "log.h"
 #include "ranking.h"
 
-#define VERSION "v1.3.1"
+#define VERSION "v1.3.2"
 
 #define DELAY 7
 
@@ -69,5 +69,6 @@ void printPrompt(); // 입력 창 출력
 void clearStatus(); // status값 지우기
 void clearBoard(); // 단어 지우기
 void clearPrompt(); // 입력창 지우기
+void clearLog(); // 로그창 지우기
 
 #endif

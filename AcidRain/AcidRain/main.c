@@ -5,6 +5,7 @@
 // 18.11.21 v1.2 단어 간격 조정 및 도움말 업데이트
 // 18.11.21 v1.3 개발자 설정 업데이트
 // 18.11.21 v1.3.1 dropSpeed 관련 hotfix, Use safety function
+// 18.11.21 v1.3.2 log 페이지 업데이트
 
 #include "console.h"
 

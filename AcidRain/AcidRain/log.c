@@ -1,6 +1,6 @@
 #include "log.h"
 
-//#define LOG_TEST
+//#define ADD_LOG_FOR_TEST
 
 void addLog(char* newLog, bool fromRank) { // 로그저장
 	FILE *fp;
@@ -33,7 +33,7 @@ void addLog(char* newLog, bool fromRank) { // 로그저장
 void showLog() { // 로그보기
 	system("cls");
 
-#ifdef LOG_TEST
+#ifdef ADD_LOG_FOR_TEST
 	addLog("log test\n", false);
 #endif
 
@@ -52,10 +52,11 @@ void showLog() { // 로그보기
 	printSingleBorderLine(3);
 
 	int logNumber = 0;
-	int logIterator = 1;
+	int logIterator = 0;
+	int pageIterator = 0;
 
-	gotoxy(0, logIterator + 3); printf("%2d", logIterator);
-	gotoxy(5, logIterator + 3);
+	gotoxy(0, logIterator + 4); printf("%d", logIterator + 1);
+	gotoxy(5, logIterator + 4);
 
 	char temp = fgetc(fp);
 	while (true) {
@@ -64,12 +65,22 @@ void showLog() { // 로그보기
 		}
 		else if (temp == '\n') {
 			logIterator++;
-			gotoxy(0, logIterator + 3); printf("%2d", logIterator);
-			gotoxy(5, logIterator + 3);
+
+			if (logIterator % 20 == 0) {
+				pageIterator++;
+				gotoxy(10, 25); printf("%d페이지", pageIterator);
+				system("pause>nul");
+
+				clearLog();
+			}
+
+			gotoxy(0, logIterator + 4 - pageIterator * 20); printf("%d", logIterator + 1);
+			gotoxy(5, logIterator + 4 - pageIterator * 20);
 
 			temp = fgetc(fp);
 			if (temp == EOF) {
-				gotoxy(0, logIterator + 3); printf("    ");
+				gotoxy(0, logIterator + 4 - pageIterator * 20); printf("    ");
+				gotoxy(10, 25); printf("%d페이지", pageIterator+1);
 
 				break;
 			}

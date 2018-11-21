@@ -513,3 +513,9 @@ void clearBoard() { // 단어 지우기
 void clearPrompt() { // 입력창 지우기
 	gotoxy(0, 24); printf("                                 ");
 }
+
+void clearLog() { // 로그창 지우기
+	for (int i = 4; i <= 24; i++) {
+		gotoxy(0, i); printf("                                                             ");
+	}
+}
