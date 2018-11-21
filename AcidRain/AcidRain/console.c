@@ -1,14 +1,10 @@
 #include "console.h"
 
-#define HIDE_CURSOR
-
 struct _record* consoleSetting() { // 최초 콘솔 세팅
 	system("title Acid Rain"); // 콘솔 타이틀 변경
 	system("mode con: cols=64 lines=27"); // 콘솔 사이즈 변경
 
-#ifdef HIDE_CURSOR
 	setCursorType(NOCURSOR); // 커서 숨기기
-#endif
 
 	setColor(WHITE);
 
@@ -63,7 +59,7 @@ void printArrow(int* menuIndex) {
 	case 3:
 		gotoxy(9, 21); printf("로그보기"); break;
 	case 4:
-		gotoxy(9, 22); printf("설정"); break;
+		gotoxy(9, 22); printf("개발자 설정"); break;
 	case 5:
 		gotoxy(9, 23); printf("끝내기"); break;
 	}
@@ -173,7 +169,7 @@ void printMenuList() { // 메뉴 목록 출력
 	gotoxy(9, 19); printf("랭킹");
 	gotoxy(9, 20); printf("도움말");
 	gotoxy(9, 21); printf("로그보기");
-	gotoxy(9, 22); printf("설정");
+	gotoxy(9, 22); printf("개발자 설정");
 	gotoxy(9, 23); printf("끝내기");
 }
 
@@ -335,11 +331,122 @@ void printHelp() { // 도움말 출력
 	system("pause>nul");
 }
 
-void setting() { // 설정 창 출력
+void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus) { // 설정 창 출력
 	system("cls");
 
-	gotoxy(0, 0); printf("setting() 진입");
-	system("pause>nul");
+	printSingleBorderLine(3);
+	printSingleBorderLine(8);
+	printSingleBorderLine(12);
+
+	setColor(YELLOW);
+	gotoxy(0, 0); printf("● DEVELOPER SETTING");
+	gotoxy(0, 2); printf("○ 돌아가기(press \'←\' key)");
+	gotoxy(0, 7); printf("○ 콘솔 커서 보이기(press \'C\' key)");
+	gotoxy(0, 11); printf("○ 낙하 속도 조정(press \'S\' key)");
+	setColor(WHITE);
+
+	gotoxy(0, 4); printf("테스트를 위한 개발자 설정 메뉴입니다.");
+	gotoxy(0, 5); printf("왼쪽 방향키(←)를 누르면 메인메뉴로 돌아갑니다.");
+	gotoxy(5, 9); printf("On");
+	gotoxy(12, 9); printf("Off");
+	gotoxy(5, 13); printf("Normal");
+	gotoxy(5, 14); printf("Fast(All Stages)");
+	gotoxy(5, 15); printf("Slow(All Stages)");
+
+	setColor(DARK_YELLOW);
+	if (settingValue->hideCursorToggle == 0) {
+		gotoxy(2, 9); printf("●");
+	}
+	else {
+		gotoxy(9, 9); printf("●");
+	}
+
+	if (settingValue->dropSpeedToggle == 0) {
+		gotoxy(2, 13); printf("●");
+	}
+	else if (settingValue->dropSpeedToggle == 1) {
+		gotoxy(2, 14); printf("●");
+	}
+	else {
+		gotoxy(2, 15); printf("●");
+	}
+
+	for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 최초 설정
+		gameStatus->dropSpeed[i] = 800 - 60 * i;
+	}
+
+	while (true) {
+		int keyboardInput = _getch();
+
+		if (keyboardInput == ARROW) {
+			keyboardInput = _getch();
+
+			if (keyboardInput == LEFT_ARROW) {
+				break;
+			}
+			else {
+				// empty!!
+			}
+		}
+		else if (keyboardInput == 67 || keyboardInput == 99) { // c 혹은 C 입력했을 때
+			_getch();
+
+			if (settingValue->hideCursorToggle == 1) {
+				gotoxy(9, 9); printf("  ");
+				gotoxy(2, 9); printf("●");
+				
+				setCursorType(NORMALCURSOR); // 커서 보이기
+
+				settingValue->hideCursorToggle = 0;
+			}
+			else {
+				gotoxy(2, 9); printf("  ");
+				gotoxy(9, 9); printf("●");
+
+				setCursorType(NOCURSOR); // 커서 숨기기
+
+				settingValue->hideCursorToggle = 1;
+			}
+		}
+		else if (keyboardInput == 83 || keyboardInput == 115) { // s 혹은 S 입력했을 때
+			_getch();
+
+			if (settingValue->dropSpeedToggle == 0) {
+				gotoxy(2, 13); printf("  ");
+				gotoxy(2, 14); printf("●");
+
+				for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 빠르게
+					gameStatus->dropSpeed[i] = 200;
+				}
+
+				settingValue->dropSpeedToggle = 1;
+			}
+			else if (settingValue->dropSpeedToggle == 1) {
+				gotoxy(2, 14); printf("  ");
+				gotoxy(2, 15); printf("●");
+
+				for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 느리게
+					gameStatus->dropSpeed[i] = 1000;
+				}
+
+				settingValue->dropSpeedToggle = 2;
+			}
+			else {
+				gotoxy(2, 15); printf("  ");
+				gotoxy(2, 13); printf("●");
+
+				for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 정상으로
+					gameStatus->dropSpeed[i] = 800 - 60 * i;
+				}
+
+				settingValue->dropSpeedToggle = 0;
+			}
+		}
+		else {
+			_getch();
+		}
+	}
+	setColor(WHITE);
 }
 
 void gotoxy(int x, int y) { // 커서 특정 좌표로 이동

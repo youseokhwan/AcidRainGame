@@ -1,14 +1,22 @@
 ﻿// AcidRain C console game. Made by youseokhwan.
 // https://github.com/youseokhwan/AcidRainGame
-// 18.10.25 ~ 개발 중
-// 18.11.18 v1.0
+// 18.11.18 v1.0 기능구현 완료
 // 18.11.20 v1.1 UI 업데이트
 // 18.11.21 v1.2 단어 간격 조정 및 도움말 업데이트
+// 18.11.21 v1.3 개발자 설정 업데이트
 
 #include "console.h"
 
 int main(int argc, char* argv[]) {
 	struct _record* record = consoleSetting(); // 최초 콘솔세팅
+
+	//struct 선언부
+	struct _gameStatus gs;
+	struct _gameStatus* gameStatus = &gs;
+
+	struct _settingValue sv = { 1, 0 }; // 초기 설정 값
+	struct _settingValue* settingValue = &sv;
+	
 	addLog("start a program\n", false);
 
 	int mi = 0;
@@ -19,7 +27,7 @@ int main(int argc, char* argv[]) {
 
 		switch (userSelect) {
 		case 0:
-			gameStart(record);
+			gameStart(record, gameStatus);
 			break;
 		case 1:
 			rankingFromMenu(record);
@@ -31,7 +39,7 @@ int main(int argc, char* argv[]) {
 			showLog();
 			break;
 		case 4:
-			setting();
+			setting(settingValue, gameStatus);
 			break;
 		case 5:
 			system("cls");

@@ -55,3 +55,35 @@
 18-11-21 09:18:38   start a program
 18-11-21 09:22:26   start a program
 18-11-21 09:22:36   start a program
+18-11-21 11:11:49   start a program
+18-11-21 11:11:56   enter a game
+18-11-21 11:13:19   start a program
+18-11-21 11:13:20   enter a game
+18-11-21 11:15:20   register a ranking(name: YSH)
+18-11-21 11:16:17   end a program
+18-11-21 11:18:41   start a program
+18-11-21 11:29:05   start a program
+18-11-21 11:32:35   start a program
+18-11-21 11:35:59   start a program
+18-11-21 11:46:16   start a program
+18-11-21 11:47:11   start a program
+18-11-21 11:48:09   start a program
+18-11-21 11:50:00   start a program
+18-11-21 11:51:21   start a program
+18-11-21 12:00:53   start a program
+18-11-21 12:01:54   start a program
+18-11-21 12:04:47   start a program
+18-11-21 12:05:02   start a program
+18-11-21 12:06:57   start a program
+18-11-21 12:07:43   start a program
+18-11-21 12:08:35   start a program
+18-11-21 12:12:29   start a program
+18-11-21 12:12:37   enter a game
+18-11-21 12:17:20   start a program
+18-11-21 12:17:27   enter a game
+18-11-21 12:17:33   register a ranking(name: YSH)
+18-11-21 12:17:39   enter a game
+18-11-21 12:17:46   register a ranking(name: YSH)
+18-11-21 12:18:04   enter a game
+18-11-21 12:18:29   register a ranking(name: GOOD)
+18-11-21 12:21:27   start a program

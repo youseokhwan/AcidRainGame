@@ -1,18 +1,13 @@
 #include "game.h"
 
-#define NORMAL_SPEED
-//#define FAST_SPEED_FOR_TEST
-//#define SLOW_SPEED_FOR_TEST
 //#define PRINT_STATUS_FOR_TEST
 //#define WORD_FILE_IO_CANCEL_FOR_TEST
 
-void gameStart(struct _record* record) { // 게임시작
+void gameStart(struct _record* record, struct _gameStatus* gameStatus) { // 게임시작
 	system("cls");
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
 	// struct 선언
-	struct _gameStatus gs;
-	struct _gameStatus* gameStatus = &gs;
 	struct _word wordInStage[WORD_IN_STAGE];
 
 #ifdef WORD_FILE_IO_CANCEL_FOR_TEST
@@ -61,17 +56,6 @@ void gameStart(struct _record* record) { // 게임시작
 	gameStatus->stage = 1;
 	gameStatus->correctAnswer = 0;
 	gameStatus->printCount = 0;
-	for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 조절
-#ifdef NORMAL_SPEED
-		gameStatus->dropSpeed[i] = 800 - 60 * i;
-#endif
-#ifdef FAST_SPEED_FOR_TEST
-		gameStatus->dropSpeed[i] = 200;
-#endif
-#ifdef SLOW_SPEED_FOR_TEST
-		gameStatus->dropSpeed[i] = 500;
-#endif
-	}
 
 	addLog("enter a game\n", false);
 	while (true) { // 스테이지 진입
@@ -184,7 +168,7 @@ void gameStart(struct _record* record) { // 게임시작
 					}
 				}
 
-				if (gameStatus->updateCount >= WORD_IN_STAGE) {
+				if (gameStatus->updateCount >= WORD_IN_STAGE * 2) {
 					if (gameStatus->printCount == WORD_IN_STAGE) {
 						gameStatus->score += gameStatus->stage * 100;
 						gameStatus->correctAnswer = 0;

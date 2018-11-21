@@ -17,7 +17,7 @@
 #include "log.h"
 #include "ranking.h"
 
-#define VERSION "v1.2"
+#define VERSION "v1.3"
 
 #define DELAY 7
 
@@ -45,6 +45,10 @@ void setCursorType(CURSOR_TYPE c); // 커서 숨기기
 void setColor(int colorNumber); // 폰트 색상 변경
 
 struct _record* consoleSetting(); // 최초 콘솔세팅
+struct _settingValue {
+	int hideCursorToggle;
+	int dropSpeedToggle;
+};
 
 void printTitle(); // 타이틀 출력
 void printMenuList(); // 메뉴 목록 출력
@@ -55,7 +59,7 @@ void printMenu(int* menuIndex); // 메뉴 출력
 
 int mainMenu(int* menuIndex); // 키보드 UX 정의 및 메뉴 선택값 반환
 void printHelp(); // 도움말 출력
-void setting(); // 설정
+void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus); // 설정
 
 void gotoxy(int x, int y); // 커서 특정 좌표로 이동
 
