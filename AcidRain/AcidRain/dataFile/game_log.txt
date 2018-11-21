@@ -71,3 +71,37 @@
 18-11-21 18:41:06   enter a game
 18-11-21 18:41:17   register a ranking(name: sdf)
 18-11-21 18:43:42   start a program
+18-11-21 18:51:21   start a program
+18-11-21 18:52:51   start a program
+18-11-21 18:53:04   start a program
+18-11-21 18:53:12   start a program
+18-11-21 18:54:23   start a program
+18-11-21 18:54:41   start a program
+18-11-21 23:51:43   start a program
+18-11-21 23:52:20   start a program
+18-11-21 23:53:04   start a program
+18-11-21 23:54:14   start a program
+18-11-21 23:55:16   start a program
+18-11-21 23:59:30   start a program
+18-11-22 00:03:48   start a program
+18-11-22 00:05:32   start a program
+18-11-22 00:09:55   start a program
+18-11-22 00:13:34   start a program
+18-11-22 00:20:44   start a program
+18-11-22 00:23:55   start a program
+18-11-22 00:31:32   start a program
+18-11-22 00:32:41   start a program
+18-11-22 00:33:21   start a program
+18-11-22 00:33:50   start a program
+18-11-22 00:34:24   start a program
+18-11-22 00:34:51   start a program
+18-11-22 00:35:00   start a program
+18-11-22 00:35:31   enter a game
+18-11-22 00:35:38   register a ranking(name: ysh)
+18-11-22 00:36:14   enter a game
+18-11-22 00:36:18   register a ranking(name: ji)
+18-11-22 00:36:29   enter a game
+18-11-22 00:36:36   register a ranking(name: iji)
+18-11-22 00:38:21   start a program
+18-11-22 00:39:35   end a program
+18-11-22 00:40:31   start a program

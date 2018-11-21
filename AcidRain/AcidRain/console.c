@@ -72,51 +72,51 @@ void printArrow(int* menuIndex) {
 
 void printTitle() { // 타이틀 출력
 	// "A"cid Rain
+	gotoxy(5, 7); printf("##"); Sleep(DELAY);
 	gotoxy(5, 6); printf("##"); Sleep(DELAY);
-	gotoxy(5, 5); printf("##"); Sleep(DELAY);
+	gotoxy(6, 5); printf("##"); Sleep(DELAY);
 	gotoxy(6, 4); printf("##"); Sleep(DELAY);
-	gotoxy(6, 3); printf("##"); Sleep(DELAY);
-	gotoxy(7, 2); printf("##"); Sleep(DELAY);
-	gotoxy(8, 1); printf("###"); Sleep(DELAY);
-	gotoxy(10, 2); printf("##"); Sleep(DELAY);
-	gotoxy(11, 3); printf("##"); Sleep(DELAY);
+	gotoxy(7, 3); printf("##"); Sleep(DELAY);
+	gotoxy(8, 2); printf("###"); Sleep(DELAY);
+	gotoxy(10, 3); printf("##"); Sleep(DELAY);
 	gotoxy(11, 4); printf("##"); Sleep(DELAY);
-	gotoxy(12, 5); printf("##"); Sleep(DELAY);
+	gotoxy(11, 5); printf("##"); Sleep(DELAY);
 	gotoxy(12, 6); printf("##"); Sleep(DELAY);
-	gotoxy(8, 4); printf("#"); Sleep(DELAY);
-	gotoxy(9, 4); printf("##"); Sleep(DELAY);
-	gotoxy(10, 4); printf("##"); Sleep(DELAY);
+	gotoxy(12, 7); printf("##"); Sleep(DELAY);
+	gotoxy(8, 5); printf("#"); Sleep(DELAY);
+	gotoxy(9, 5); printf("##"); Sleep(DELAY);
+	gotoxy(10, 5); printf("##"); Sleep(DELAY);
 
 	// A"c"id Rain
-	gotoxy(21, 3); printf("##"); Sleep(DELAY);
-	gotoxy(19, 3); printf("##"); Sleep(DELAY);
-	gotoxy(17, 3); printf("##"); Sleep(DELAY);
-	gotoxy(16, 4); printf("##"); Sleep(DELAY);
+	gotoxy(21, 4); printf("##"); Sleep(DELAY);
+	gotoxy(19, 4); printf("##"); Sleep(DELAY);
+	gotoxy(17, 4); printf("##"); Sleep(DELAY);
 	gotoxy(16, 5); printf("##"); Sleep(DELAY);
-	gotoxy(17, 6); printf("##"); Sleep(DELAY);
-	gotoxy(19, 6); printf("##"); Sleep(DELAY);
-	gotoxy(21, 6); printf("#"); Sleep(DELAY);
+	gotoxy(16, 6); printf("##"); Sleep(DELAY);
+	gotoxy(17, 7); printf("##"); Sleep(DELAY);
+	gotoxy(19, 7); printf("##"); Sleep(DELAY);
+	gotoxy(21, 7); printf("#"); Sleep(DELAY);
 
 	// Ac"i"d Rain
-	gotoxy(25, 1); printf("##"); Sleep(DELAY);
-	gotoxy(25, 3); printf("##"); Sleep(DELAY);
+	gotoxy(25, 2); printf("##"); Sleep(DELAY);
 	gotoxy(25, 4); printf("##"); Sleep(DELAY);
 	gotoxy(25, 5); printf("##"); Sleep(DELAY);
 	gotoxy(25, 6); printf("##"); Sleep(DELAY);
+	gotoxy(25, 7); printf("##"); Sleep(DELAY);
 
 	// Aci"d" Rain
-	gotoxy(34, 1); printf("##"); Sleep(DELAY);
 	gotoxy(34, 2); printf("##"); Sleep(DELAY);
 	gotoxy(34, 3); printf("##"); Sleep(DELAY);
 	gotoxy(34, 4); printf("##"); Sleep(DELAY);
 	gotoxy(34, 5); printf("##"); Sleep(DELAY);
-	gotoxy(34, 6); printf("#"); Sleep(DELAY);
-	gotoxy(32, 3); printf("##"); Sleep(DELAY);
-	gotoxy(30, 3); printf("##"); Sleep(DELAY);
-	gotoxy(29, 4); printf("##"); Sleep(DELAY);
+	gotoxy(34, 6); printf("##"); Sleep(DELAY);
+	gotoxy(34, 7); printf("#"); Sleep(DELAY);
+	gotoxy(32, 4); printf("##"); Sleep(DELAY);
+	gotoxy(30, 4); printf("##"); Sleep(DELAY);
 	gotoxy(29, 5); printf("##"); Sleep(DELAY);
-	gotoxy(30, 6); printf("##"); Sleep(DELAY);
-	gotoxy(32, 6); printf("##"); Sleep(DELAY);
+	gotoxy(29, 6); printf("##"); Sleep(DELAY);
+	gotoxy(30, 7); printf("##"); Sleep(DELAY);
+	gotoxy(32, 7); printf("##"); Sleep(DELAY);
 
 	// Acid "R"ain
 	gotoxy(28, 10); printf("##"); Sleep(DELAY);
@@ -315,21 +315,222 @@ void printHelp() { // 도움말 출력
 	gotoxy(0, 2); printf("○ Information");
 	gotoxy(0, 7); printf("○ How To Play");
 	gotoxy(0, 15); printf("○ Key Setting");
-	gotoxy(0, 22); printf("○ Made By");
-	setColor(WHITE);
+	gotoxy(0, 22); printf("○ Made by");
+	
+	setColor(CYAN);
+	gotoxy(11, 22); printf("youseokhwan");
 
-	gotoxy(0, 4); printf("\'Acid Rain\'은 산성비라는 뜻으로, ㈜한글과컴퓨터의 \'한컴타자연습\'");
-	gotoxy(0, 5); printf("의 \'산성비\' 게임을 모방한 C 콘솔게임입니다.");
-	gotoxy(0, 9); printf("내려오는 단어를 타이핑하여 없애야하며, 단어가 바닥까지 내려올 경");
-	gotoxy(0, 10); printf("우 라이프를 잃습니다. 라이프를 모두 읽으면 게임이 종료됩니다.");
-	gotoxy(0, 12); printf("총 10개의 스테이지로 구성되어있고, 영어 소문자만 사용합니다.");
-	gotoxy(0, 13); printf("왼쪽 방향키(←)를 누르면 중도 포기할 수 있습니다.");
-	gotoxy(0, 17); printf("메뉴 이동: ↑ ↓");
-	gotoxy(0, 18); printf("단어 입력: a ~ z 타이핑");
-	gotoxy(0, 19); printf("단어 제출: enter키");
-	gotoxy(0, 20); printf("단어 지우기: backspace키");
-	gotoxy(0, 24); printf("youseokhwan");
-	gotoxy(0, 25); printf("%s https://github.com/youseokhwan/AcidRainGame", VERSION);
+	setColor(DARK_YELLOW);
+	gotoxy(1, 26); printf("%s", VERSION);
+	gotoxy(20, 26); printf("https://github.com/youseokhwan/AcidRainGame");
+
+	// 타이핑하는 것처럼 보이도록 구현
+	setColor(WHITE);
+	gotoxy(0, 4); printf("\'"); gotoxy(0, 9); printf("내");
+	gotoxy(0, 12); printf("총"); gotoxy(0, 17); printf("메"); Sleep(DELAY);
+
+	gotoxy(1, 4); printf("A"); gotoxy(2, 9); printf("려");
+	gotoxy(2, 12); printf(" "); gotoxy(2, 17); printf("뉴"); Sleep(DELAY);
+
+	gotoxy(2, 4); printf("c"); gotoxy(4, 9); printf("오");
+	gotoxy(3, 12); printf("1"); gotoxy(4, 17); printf(" "); Sleep(DELAY);
+
+	gotoxy(3, 4); printf("i"); gotoxy(6, 9); printf("는");
+	gotoxy(4, 12); printf("0"); gotoxy(5, 17); printf("이"); Sleep(DELAY);
+
+	gotoxy(4, 4); printf("d"); gotoxy(8, 9); printf(" ");
+	gotoxy(5, 12); printf("개"); gotoxy(7, 17); printf("동"); Sleep(DELAY);
+
+	gotoxy(5, 4); printf(" "); gotoxy(9, 9); printf("단");
+	gotoxy(7, 12); printf("의"); gotoxy(9, 17); printf(":"); Sleep(DELAY);
+
+	gotoxy(6, 4); printf("R"); gotoxy(11, 9); printf("어");
+	gotoxy(9, 12); printf(" "); gotoxy(10, 17); printf(" "); Sleep(DELAY);
+
+	gotoxy(7, 4); printf("a"); gotoxy(13, 9); printf("를");
+	gotoxy(10, 12); printf("스"); gotoxy(11, 17); printf("↑"); Sleep(DELAY);
+
+	gotoxy(8, 4); printf("i"); gotoxy(15, 9); printf(" ");
+	gotoxy(12, 12); printf("테"); gotoxy(13, 17); printf(" "); Sleep(DELAY);
+
+	gotoxy(9, 4); printf("n"); gotoxy(16, 9); printf("타");
+	gotoxy(14, 12); printf("이"); gotoxy(14, 17); printf("↓"); Sleep(DELAY);
+
+	gotoxy(10, 4); printf("\'"); gotoxy(18, 9); printf("이");
+	gotoxy(16, 12); printf("지"); gotoxy(0, 18); printf("단"); Sleep(DELAY);
+
+	gotoxy(11, 4); printf("은"); gotoxy(20, 9); printf("핑");
+	gotoxy(18, 12); printf("로"); gotoxy(2, 18); printf("어"); Sleep(DELAY);
+
+	gotoxy(13, 4); printf(" "); gotoxy(22, 9); printf("하");
+	gotoxy(20, 12); printf(" "); gotoxy(4, 18); printf(" "); Sleep(DELAY);
+
+	gotoxy(14, 4); printf("산"); gotoxy(24, 9); printf("여");
+	gotoxy(21, 12); printf("구"); gotoxy(5, 18); printf("입"); Sleep(DELAY);
+
+	gotoxy(16, 4); printf("성"); gotoxy(26, 9); printf(" ");
+	gotoxy(23, 12); printf("성"); gotoxy(7, 18); printf("력"); Sleep(DELAY);
+
+	gotoxy(18, 4); printf("비"); gotoxy(27, 9); printf("없");
+	gotoxy(25, 12); printf("되"); gotoxy(9, 18); printf(":"); Sleep(DELAY);
+
+	gotoxy(20, 4); printf("라"); gotoxy(29, 9); printf("애");
+	gotoxy(27, 12); printf("어"); gotoxy(10, 18); printf(" "); Sleep(DELAY);
+
+	gotoxy(22, 4); printf("는"); gotoxy(31, 9); printf("야");
+	gotoxy(29, 12); printf("있"); gotoxy(11, 18); printf("a"); Sleep(DELAY);
+
+	gotoxy(24, 4); printf(" "); gotoxy(33, 9); printf("하");
+	gotoxy(31, 12); printf("고"); gotoxy(12, 18); printf(" "); Sleep(DELAY);
+
+	gotoxy(25, 4); printf("뜻"); gotoxy(35, 9); printf("며");
+	gotoxy(33, 12); printf(","); gotoxy(13, 18); printf("~"); Sleep(DELAY);
+
+	gotoxy(27, 4); printf("으"); gotoxy(37, 9); printf(",");
+	gotoxy(34, 12); printf(" "); gotoxy(14, 18); printf(" "); Sleep(DELAY);
+
+	gotoxy(29, 4); printf("로"); gotoxy(38, 9); printf(" ");
+	gotoxy(35, 12); printf("영"); gotoxy(15, 18); printf("z"); Sleep(DELAY);
+
+	gotoxy(31, 4); printf(","); gotoxy(39, 9); printf("단");
+	gotoxy(37, 12); printf("어"); gotoxy(16, 18); printf(" "); Sleep(DELAY);
+
+	gotoxy(32, 4); printf(" "); gotoxy(41, 9); printf("어");
+	gotoxy(39, 12); printf(" "); gotoxy(17, 18); printf("타"); Sleep(DELAY);
+
+	gotoxy(33, 4); printf("㈜"); gotoxy(43, 9); printf("가");
+	gotoxy(40, 12); printf("소"); gotoxy(19, 18); printf("이"); Sleep(DELAY);
+
+	gotoxy(35, 4); printf("한"); gotoxy(45, 9); printf(" ");
+	gotoxy(42, 12); printf("문"); gotoxy(21, 18); printf("핑"); Sleep(DELAY);
+
+	gotoxy(37, 4); printf("글"); gotoxy(46, 9); printf("바");
+	gotoxy(44, 12); printf("자"); gotoxy(0, 19); printf("단"); Sleep(DELAY);
+
+	gotoxy(39, 4); printf("과"); gotoxy(48, 9); printf("닥");
+	gotoxy(46, 12); printf("만"); gotoxy(2, 19); printf("어"); Sleep(DELAY);
+
+	gotoxy(41, 4); printf("컴"); gotoxy(50, 9); printf("까");
+	gotoxy(48, 12); printf(" "); gotoxy(4, 19); printf(" "); Sleep(DELAY);
+
+	gotoxy(43, 4); printf("퓨"); gotoxy(52, 9); printf("지");
+	gotoxy(49, 12); printf("사"); gotoxy(5, 19); printf("제"); Sleep(DELAY);
+
+	gotoxy(45, 4); printf("터"); gotoxy(54, 9); printf(" ");
+	gotoxy(51, 12); printf("용"); gotoxy(7, 19); printf("출"); Sleep(DELAY);
+
+	gotoxy(47, 4); printf("의"); gotoxy(55, 9); printf("내");
+	gotoxy(53, 12); printf("합"); gotoxy(9, 19); printf(":"); Sleep(DELAY);
+
+	gotoxy(49, 4); printf(" "); gotoxy(57, 9); printf("려");
+	gotoxy(55, 12); printf("니"); gotoxy(10, 19); printf(" "); Sleep(DELAY);
+
+	gotoxy(50, 4); printf("\'"); gotoxy(59, 9); printf("올");
+	gotoxy(57, 12); printf("다"); gotoxy(11, 19); printf("e"); Sleep(DELAY);
+
+	gotoxy(51, 4); printf("한"); gotoxy(61, 9); printf(" ");
+	gotoxy(59, 12); printf("."); gotoxy(12, 19); printf("n"); Sleep(DELAY);
+
+	gotoxy(53, 4); printf("컴"); gotoxy(62, 9); printf("경");
+	gotoxy(0, 13); printf("왼"); gotoxy(13, 19); printf("t"); Sleep(DELAY);
+
+	gotoxy(55, 4); printf("타"); gotoxy(0, 10); printf("우");
+	gotoxy(2, 13); printf("쪽"); gotoxy(14, 19); printf("e"); Sleep(DELAY);
+
+	gotoxy(57, 4); printf("자"); gotoxy(2, 10); printf(" ");
+	gotoxy(4, 13); printf(" "); gotoxy(15, 19); printf("r"); Sleep(DELAY);
+
+	gotoxy(59, 4); printf("연"); gotoxy(3, 10); printf("라");
+	gotoxy(5, 13); printf("방"); gotoxy(16, 19); printf("키"); Sleep(DELAY);
+
+	gotoxy(61, 4); printf("습"); gotoxy(5, 10); printf("이");
+	gotoxy(7, 13); printf("향"); gotoxy(0, 20); printf("단"); Sleep(DELAY);
+
+	gotoxy(63, 4); printf("\'"); gotoxy(7, 10); printf("프");
+	gotoxy(9, 13); printf("키"); gotoxy(2, 20); printf("어"); Sleep(DELAY);
+
+	gotoxy(0, 5); printf("의"); gotoxy(9, 10); printf("를");
+	gotoxy(11, 13); printf("("); gotoxy(4, 20); printf(" "); Sleep(DELAY);
+
+	gotoxy(2, 5); printf(" "); gotoxy(11, 10); printf(" ");
+	gotoxy(12, 13); printf("←"); gotoxy(5, 20); printf("지"); Sleep(DELAY);
+
+	gotoxy(3, 5); printf("\'"); gotoxy(12, 10); printf("잃");
+	gotoxy(14, 13); printf(")"); gotoxy(7, 20); printf("우"); Sleep(DELAY);
+
+	gotoxy(4, 5); printf("산"); gotoxy(14, 10); printf("습");
+	gotoxy(15, 13); printf("를"); gotoxy(9, 20); printf("기"); Sleep(DELAY);
+
+	gotoxy(6, 5); printf("성"); gotoxy(16, 10); printf("니");
+	gotoxy(17, 13); printf(" "); gotoxy(11, 20); printf(":"); Sleep(DELAY);
+
+	gotoxy(8, 5); printf("비"); gotoxy(18, 10); printf("다");
+	gotoxy(18, 13); printf("누"); gotoxy(12, 20); printf(" "); Sleep(DELAY);
+
+	gotoxy(10, 5); printf("\'"); gotoxy(20, 10); printf(".");
+	gotoxy(20, 13); printf("르"); gotoxy(13, 20); printf("b"); Sleep(DELAY);
+
+	gotoxy(11, 5); printf(" "); gotoxy(21, 10); printf(" ");
+	gotoxy(22, 13); printf("면"); gotoxy(14, 20); printf("a"); Sleep(DELAY);
+
+	gotoxy(12, 5); printf("게"); gotoxy(22, 10); printf("라");
+	gotoxy(24, 13); printf(" "); gotoxy(15, 20); printf("c"); Sleep(DELAY);
+
+	gotoxy(14, 5); printf("임"); gotoxy(24, 10); printf("이");
+	gotoxy(25, 13); printf("중"); gotoxy(16, 20); printf("k"); Sleep(DELAY);
+
+	gotoxy(16, 5); printf("을"); gotoxy(26, 10); printf("프");
+	gotoxy(27, 13); printf("도"); gotoxy(17, 20); printf("s"); Sleep(DELAY);
+
+	gotoxy(18, 5); printf(" "); gotoxy(28, 10); printf("를");
+	gotoxy(29, 13); printf(" "); gotoxy(18, 20); printf("p"); Sleep(DELAY);
+
+	gotoxy(19, 5); printf("모"); gotoxy(30, 10); printf(" ");
+	gotoxy(30, 13); printf("포"); gotoxy(19, 20); printf("a"); Sleep(DELAY);
+
+	gotoxy(21, 5); printf("방"); gotoxy(31, 10); printf("모");
+	gotoxy(32, 13); printf("기"); gotoxy(20, 20); printf("c"); Sleep(DELAY);
+
+	gotoxy(23, 5); printf("한"); gotoxy(33, 10); printf("두");
+	gotoxy(34, 13); printf("할"); gotoxy(21, 20); printf("e"); Sleep(DELAY);
+
+	gotoxy(25, 5); printf(" "); gotoxy(35, 10); printf(" ");
+	gotoxy(36, 13); printf(" "); gotoxy(22, 20); printf("키"); Sleep(DELAY);
+
+	gotoxy(26, 5); printf("C"); gotoxy(36, 10); printf("잃");
+	gotoxy(37, 13); printf("수"); Sleep(DELAY);
+
+	gotoxy(27, 5); printf(" "); gotoxy(38, 10); printf("으");
+	gotoxy(39, 13); printf(" "); Sleep(DELAY);
+
+	gotoxy(28, 5); printf("콘"); gotoxy(40, 10); printf("면");
+	gotoxy(40, 13); printf("있"); Sleep(DELAY);
+
+	gotoxy(30, 5); printf("솔"); gotoxy(42, 10); printf(" ");
+	gotoxy(42, 13); printf("습"); Sleep(DELAY);
+
+	gotoxy(32, 5); printf("게"); gotoxy(43, 10); printf("게");
+	gotoxy(44, 13); printf("니"); Sleep(DELAY);
+
+	gotoxy(34, 5); printf("임"); gotoxy(45, 10); printf("임");
+	gotoxy(46, 13); printf("다"); Sleep(DELAY);
+
+	gotoxy(36, 5); printf("입"); gotoxy(47, 10); printf("이");
+	gotoxy(48, 13); printf("."); Sleep(DELAY);
+
+	gotoxy(38, 5); printf("니"); gotoxy(49, 10); printf(" "); Sleep(DELAY);
+
+	gotoxy(40, 5); printf("다"); gotoxy(50, 10); printf("종"); Sleep(DELAY);
+
+	gotoxy(42, 5); printf("."); gotoxy(52, 10); printf("료"); Sleep(DELAY);
+
+	gotoxy(54, 10); printf("됩"); Sleep(DELAY);
+
+	gotoxy(56, 10); printf("니"); Sleep(DELAY);
+
+	gotoxy(58, 10); printf("다"); Sleep(DELAY);
+
+	gotoxy(60, 10); printf("."); Sleep(DELAY);
 
 	system("pause>nul");
 }

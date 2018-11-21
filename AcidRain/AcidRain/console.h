@@ -16,7 +16,7 @@
 #include "log.h"
 #include "ranking.h"
 
-#define VERSION "v1.3.2"
+#define VERSION "v1.3.3"
 
 #define DELAY 7
 
