@@ -172,3 +172,13 @@
 18-11-23 18:00:14   enter a game
 18-11-23 18:00:40   start a program
 18-11-23 18:00:41   enter a game
+18-11-23 18:34:32   start a program
+18-11-23 18:34:45   enter a game
+18-11-23 21:19:52   start a program
+18-11-23 21:20:17   enter a game
+18-11-23 21:20:23   register a ranking(name: YSH)
+18-11-23 21:20:26   end a program
+18-11-23 21:21:21   start a program
+18-11-23 21:21:28   enter a game
+18-11-23 21:21:33   register a ranking(name: YSH)
+18-11-23 21:21:54   end a program

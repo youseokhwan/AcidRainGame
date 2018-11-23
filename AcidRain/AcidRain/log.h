@@ -3,7 +3,8 @@
 
 #include "console.h"
 
-void addLog(char* newLog, bool fromRank); // 로그저장
-void showLog(); // 로그보기
+void clearLog();
+void addLog(char* newLog, bool fromRank);
+void showLog();
 
 #endif

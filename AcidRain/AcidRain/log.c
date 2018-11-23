@@ -1,8 +1,20 @@
 #include "log.h"
 
-//#define ADD_LOG_FOR_TEST
+/*
+	로그 창 지우기 위한 함수
+	페이지 넘기면서 내용 업데이트하기 위함
+*/
+void clearLog() {
+	for (int i = 4; i <= 24; i++) {
+		gotoxy(0, i); printf("                                                             ");
+	}
+}
 
-void addLog(char* newLog, bool fromRank) { // 로그저장
+/*
+	로그 추가하는 함수
+	fromRank 값이 false일 경우 시간 값 추가하지 않음
+*/
+void addLog(char* newLog, bool fromRank) {
 	FILE *fp;
 	fopen_s(&fp, "dataFile\\game_log.txt", "at");
 
@@ -14,7 +26,9 @@ void addLog(char* newLog, bool fromRank) { // 로그저장
 		// empty!!
 	}
 	else {
-		// 시간 값 설정
+		/*
+			현재 시간으로 초기화
+		*/
 		localtime_s(&timeStruct, &presentTime);
 		time.year = (timeStruct.tm_year + 1900) % 2000;
 		time.month = timeStruct.tm_mon + 1;
@@ -30,17 +44,16 @@ void addLog(char* newLog, bool fromRank) { // 로그저장
 	fclose(fp);
 }
 
-void showLog() { // 로그보기
-	clearScreen();
-
-#ifdef ADD_LOG_FOR_TEST
-	addLog("log test\n", false);
-#endif
+/*
+	로그 목록 출력하는 함수
+*/
+void showLog() {
+	system("cls");
 
 	FILE *fp;
 	fopen_s(&fp, "dataFile\\game_log.txt", "rt");
 
-	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
 	setColor(YELLOW);
 	gotoxy(0, 0); printf("● LOG");
@@ -52,11 +65,11 @@ void showLog() { // 로그보기
 	printSingleBorderLine(3);
 
 	int logNumber = 0;
-	int logIterator = 0;
-	int pageIterator = 0;
+	int logIndex = 0;
+	int pageIndex = 0;
 
-	gotoxy(0, logIterator + 4); printf("%d", logIterator + 1);
-	gotoxy(5, logIterator + 4);
+	gotoxy(0, logIndex + 4); printf("%d", logIndex + 1);
+	gotoxy(5, logIndex + 4);
 
 	char temp = fgetc(fp);
 	while (true) {
@@ -64,23 +77,23 @@ void showLog() { // 로그보기
 			break;
 		}
 		else if (temp == '\n') {
-			logIterator++;
+			logIndex++;
 
-			if (logIterator % 20 == 0) {
-				pageIterator++;
-				gotoxy(10, 25); printf("%d페이지", pageIterator);
+			if (logIndex % 20 == 0) {
+				pageIndex++;
+				gotoxy(10, 25); printf("%d페이지", pageIndex);
 				system("pause>nul");
 
 				clearLog();
 			}
 
-			gotoxy(0, logIterator + 4 - pageIterator * 20); printf("%d", logIterator + 1);
-			gotoxy(5, logIterator + 4 - pageIterator * 20);
+			gotoxy(0, logIndex + 4 - pageIndex * 20); printf("%d", logIndex + 1);
+			gotoxy(5, logIndex + 4 - pageIndex * 20);
 
 			temp = fgetc(fp);
 			if (temp == EOF) {
-				gotoxy(0, logIterator + 4 - pageIterator * 20); printf("    ");
-				gotoxy(10, 25); printf("%d페이지", pageIterator+1);
+				gotoxy(0, logIndex + 4 - pageIndex * 20); printf("    ");
+				gotoxy(10, 25); printf("%d페이지", pageIndex+1);
 
 				break;
 			}

@@ -1,9 +1,16 @@
 #include "ranking.h"
 
-int recordIndex = 0; // record iterator
+int recordIndex = 0;
 
-void addRecord(struct _gameStatus* gameStatus, struct _record* record) { // 랭킹 추가
-	if (recordIndex > RECORD) { // 레코드 10개 꽉차면 Error 출력 및 입력과정 생략
+/*
+	랭킹 추가하는 함수
+*/
+void addRecord(struct _gameStatus* gameStatus, struct _record* record) {
+	/*
+		랭킹 10개 이상 입력 불가
+		추후 수정해야 할 부분
+	*/
+	if (recordIndex > RECORD) {
 		gotoxy(0, 5); printf("레코드가 꽉 차서 더 이상 랭킹등록을 할 수 없습니다.");
 
 		return;
@@ -18,12 +25,17 @@ void addRecord(struct _gameStatus* gameStatus, struct _record* record) { // 랭킹
 	addLog(record[recordIndex].name, true);
 	addLog(")\n", true);
 
-	record[recordIndex].rank = recordIndex + 1; // 우선 맨 밑에 넣어두고 add한 record와 함께 rank값 다시 초기화
+	/*
+		rank값 우선 맨 밑으로 넣어두고 밑에서 sort 진행
+	*/
+	record[recordIndex].rank = recordIndex + 1;
 	record[recordIndex].stage = gameStatus->stage;
 	record[recordIndex].score = gameStatus->score;
 
-	// 시간 값 설정
-	record[recordIndex].presentTime = time(NULL); // 현재 시간 대입(초 단위)
+	/*
+		현재 시간으로 초기화
+	*/
+	record[recordIndex].presentTime = time(NULL);
 	localtime_s(&record[recordIndex].timeStruct, &record[recordIndex].presentTime);
 
 	record[recordIndex].time.year = (record[recordIndex].timeStruct.tm_year + 1900) % 2000;
@@ -33,7 +45,9 @@ void addRecord(struct _gameStatus* gameStatus, struct _record* record) { // 랭킹
 	record[recordIndex].time.min = record[recordIndex].timeStruct.tm_min;
 	record[recordIndex].time.sec = record[recordIndex].timeStruct.tm_sec;
 
-	// rank값 초기화(sort)
+	/*
+		각 record의 rank값 초기화
+	*/
 	for (int i = 0; i <= recordIndex; i++) {
 		int rankCount = 1;
 		for (int j = 0; j <= recordIndex; j++) {
@@ -48,8 +62,11 @@ void addRecord(struct _gameStatus* gameStatus, struct _record* record) { // 랭킹
 	recordIndex++;
 }
 
-void printRecords(struct _record* record) { // 랭킹 출력
-	clearScreen();
+/*
+	랭킹 출력하는 함수
+*/
+void printRecords(struct _record* record) {
+	system("cls");
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
 	setColor(YELLOW);
@@ -61,9 +78,12 @@ void printRecords(struct _record* record) { // 랭킹 출력
 	gotoxy(29, 2); printf("Score");
 	gotoxy(46, 2); printf("Time");
 
-	printSingleBorderLine(3); // 경계선 출력
+	printSingleBorderLine(3);
 
-	if (recordIndex < 1) { // 저장된 레코드가 한 개도 없을 경우
+	/*
+		저장된 랭크가 한 개도 없을 경우
+	*/
+	if (recordIndex < 1) {
 		gotoxy(0, 4); printf("※ 저장된 기록이 없습니다!");
 	}
 	else {
@@ -73,7 +93,6 @@ void printRecords(struct _record* record) { // 랭킹 출력
 			gotoxy(20, record[i].rank + 3); printf("%d", record[i].stage);
 			gotoxy(29, record[i].rank + 3); printf("%d", record[i].score);
 
-			// 시간 출력
 			gotoxy(40, record[i].rank + 3);
 			printf("%02d-%02d-%02d %02d:%02d:%02d", record[i].time.year, record[i].time.month, record[i].time.day, record[i].time.hour, record[i].time.min, record[i].time.sec);
 		}
@@ -82,11 +101,17 @@ void printRecords(struct _record* record) { // 랭킹 출력
 	system("pause>nul");
 }
 
-void rankingFromMenu(struct _record* record) { // 랭킹(메뉴에서 진입)
+/*
+	메인 화면에서 랭킹 메뉴 진입
+*/
+void rankingFromMenu(struct _record* record) {
 	printRecords(record);
 }
 
-void rankingFromGame(struct _gameStatus* gameStatus, struct _record* record) { // 랭킹(게임에서 진입)
+/*
+	게임에서 랭킹 메뉴 진입
+*/
+void rankingFromGame(struct _gameStatus* gameStatus, struct _record* record) {
 	addRecord(gameStatus, record);
 	printRecords(record);
 }

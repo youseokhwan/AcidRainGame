@@ -2,7 +2,12 @@
 #define CONSOLE_H
 
 #pragma comment(lib,"winmm.lib")
-#define ISSUE // _getch() 문제있을 시 주석풀고 실행
+/*
+	<< #define ISSUE >>
+	선언한 이유: 여러 PC에서 테스트한 결과 _getch()에서 문제가 생기는 PC와 그렇지 않은 PC 존재함(원인 파악 못함)
+	만약 두 번 눌러야 인식이 된다면 이 ISSUE를 주석 해제하고 실행할 것
+*/
+//#define ISSUE
 
 #include <time.h>
 #include <conio.h>
@@ -17,7 +22,7 @@
 #include "log.h"
 #include "ranking.h"
 
-#define VERSION "v1.3.3"
+#define VERSION "v1.3.4" // 현재 버전 정보
 
 #define DELAY 7
 
@@ -41,37 +46,34 @@
 #define SOUND_STAGE_CLEAR "dataFile\\sound\\stageClear.wav"
 
 typedef enum { NOCURSOR, SOLIDCURSOR, NORMALCURSOR } CURSOR_TYPE;
-void setCursorType(CURSOR_TYPE c); // 커서 숨기기
-void setColor(int colorNumber); // 폰트 색상 변경
+void setCursorType(CURSOR_TYPE c);
+void setColor(int colorNumber);
 
-void clearScreen(); // system("cls");
-
-void consoleSetting(struct _gameStatus* gameStatus); // 최초 콘솔세팅
+void consoleSetting(struct _gameStatus* gameStatus);
 struct _settingValue {
 	int hideCursorToggle;
 	int dropSpeedToggle;
 };
 
-void printTitle(); // 타이틀 출력
-void printMenuList(); // 메뉴 목록 출력
-void printRain(); // 비 출력
-void printOthers(); // 기타 정보 출력
-void printArrow(int* menuIndex); // 화살표 출력
-void printMenu(int* menuIndex); // 메뉴 출력
+void printTitle();
+void printMenuList();
+void printRain();
+void printOthers();
+void printArrow(int* menuIndex);
+void printMenu(int* menuIndex);
 
-int mainMenu(int* menuIndex); // 키보드 UX 정의 및 메뉴 선택값 반환
-void printHelp(); // 도움말 출력
-void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus); // 설정
+int mainMenu(int* menuIndex);
+void printHelp();
+void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus);
 
-void gotoxy(int x, int y); // 커서 특정 좌표로 이동
+void gotoxy(int x, int y);
 
-void printSingleBorderLine(int y); // rank, log 등에서 한 줄짜리 경계선 출력
-void printDoubleBorderLine(); // gameBoard에서 두 줄짜리 경계선 출력
-void printStatus(struct _gameStatus* gameStatus); // status값 출력
-void printPrompt(); // 입력 창 출력
-void clearStatus(); // status값 지우기
-void clearBoard(); // 단어 지우기
-void clearPrompt(); // 입력창 지우기
-void clearLog(); // 로그창 지우기
+void printSingleBorderLine(int y);
+void printDoubleBorderLine();
+void printStatus(struct _gameStatus* gameStatus);
+void printPrompt();
+void clearStatus();
+void clearBoard();
+void clearPrompt();
 
 #endif

@@ -1,31 +1,36 @@
 #include "console.h"
 
-void clearScreen() { // system("cls");
-	// system("cls"); 기능에 애니메이션 추가
-	for (int i = 0; i < 28; i++) {
-		gotoxy(0, i); printf("                                                                 ");
+/*
+	title 및 콘솔 사이즈 변경
+	커서 숨기기, 단어 낙하속도 보통으로 설정
+*/
+void consoleSetting(struct _gameStatus* gameStatus) {
+	system("title Acid Rain");
+	system("mode con: cols=64 lines=27");
 
-		Sleep(3);
-	}
-}
-
-void consoleSetting(struct _gameStatus* gameStatus) { // 최초 콘솔 세팅
-	system("title Acid Rain"); // 콘솔 타이틀 변경
-	system("mode con: cols=64 lines=27"); // 콘솔 사이즈 변경
-
-	setCursorType(NOCURSOR); // 커서 숨기기
+	setCursorType(NOCURSOR);
 	setColor(WHITE);
 
-	for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 최초 설정
+	for (int i = 0; i < STAGE; i++) {
 		gameStatus->dropSpeed[i] = 800 - 60 * i;
 	}
 }
 
+/*
+	콘솔 글자색 변경
+	색상 코드는 console.h 참고
+*/
 void setColor(int colorNumber) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorNumber);
 }
 
-void setCursorType(CURSOR_TYPE c) { // 커서 깜빡이지 않게 설정
+/*
+	콘솔에서 커서 상태 변경하는 함수
+	NOCURSOR: 커서 숨김
+	SOLIDCURSOR: solid 형태 커서로 변경
+	NORMALCURSOR: 일반 _ 커서로 변경(콘솔 디폴트 값)
+*/
+void setCursorType(CURSOR_TYPE c) {
 	CONSOLE_CURSOR_INFO curInfo;
 	switch (c) {
 	case NOCURSOR:
@@ -45,6 +50,10 @@ void setCursorType(CURSOR_TYPE c) { // 커서 깜빡이지 않게 설정
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &curInfo);
 }
 
+/*
+	메인 화면에서 화살표 출력하는 함수
+	printMenu( )에서 사용
+*/
 void printArrow(int* menuIndex) {
 	for (int i = 0; i < 6; i++) {
 		gotoxy(5, 18 + i); printf("  ");
@@ -72,7 +81,11 @@ void printArrow(int* menuIndex) {
 	setColor(WHITE);
 }
 
-void printTitle() { // 타이틀 출력
+/*
+	메인 화면에서 Acid Rain 애니메이션 출력하는 함수
+	printMenu( )에서 사용
+*/
+void printTitle() {
 	// "A"cid Rain
 	gotoxy(5, 7); printf("##"); Sleep(DELAY);
 	gotoxy(5, 6); printf("##"); Sleep(DELAY);
@@ -169,7 +182,12 @@ void printTitle() { // 타이틀 출력
 	gotoxy(57, 14); printf("##"); Sleep(DELAY);
 }
 
-void printMenuList() { // 메뉴 목록 출력
+
+/*
+	메인 화면에서 메뉴 목록 출력하는 함수
+	printMenu( )에서 사용
+*/
+void printMenuList() {
 	gotoxy(9, 18); printf("게임시작");
 	gotoxy(9, 19); printf("랭킹");
 	gotoxy(9, 20); printf("도움말");
@@ -178,7 +196,11 @@ void printMenuList() { // 메뉴 목록 출력
 	gotoxy(9, 23); printf("끝내기");
 }
 
-void printOthers() { // 기타 정보 출력
+/*
+	메인 화면에서 HOW TO PLAY, 프로그램 정보 출력하는 함수
+	printMenu( )에서 사용
+*/
+void printOthers() {
 	// HOW TO PLAY 출력
 	gotoxy(30, 18); printf("┌─  ");
 	gotoxy(45, 18); printf(" ────────┐");
@@ -212,7 +234,11 @@ void printOthers() { // 기타 정보 출력
 	setColor(WHITE);
 }
 
-void printRain() { // 비 출력
+/*
+	메인 화면에서 비 내리는 애니메이션 출력하는 함수
+	printMenu( )에서 사용
+*/
+void printRain() {
 	setColor(DARK_CYAN);
 
 	gotoxy(20, 0); printf("*");
@@ -248,23 +274,28 @@ void printRain() { // 비 출력
 	gotoxy(25, 14); printf("*");
 	gotoxy(5, 15); printf("*");
 	gotoxy(32, 17); printf("*");
-	// gotoxy(53, 24); printf("*");
 	gotoxy(18, 26); printf("*"); Sleep(DELAY * 4);
 
 	setColor(WHITE);
 }
 
-void printMenu(int* menuIndex) { // 메인화면 출력
-	clearScreen();
+/*
+	메인 화면 출력하는 함수
+*/
+void printMenu(int* menuIndex) {
+	system("cls");
 
-	printTitle(); // 타이틀 출력
-	printMenuList(); // 메뉴 목록 출력
-	printOthers(); // 기타 정보 출력
-	printRain(); // 비 출력
-	printArrow(menuIndex); // 화살표 출력
+	printTitle();
+	printMenuList();
+	printOthers();
+	printRain();
+	printArrow(menuIndex);
 }
 
-int mainMenu(int* menuIndex) { // 메인 메뉴 컨트롤
+/*
+	메인 목록에서 방향키 제어 및 인덱스 값 반환하는 함수
+*/
+int mainMenu(int* menuIndex) {
 	printMenu(menuIndex);
 
 	while (true) {
@@ -275,7 +306,6 @@ int mainMenu(int* menuIndex) { // 메인 메뉴 컨트롤
 				userInput = _getch();
 
 				if (userInput == UP_ARROW) {
-					// *menuIndex 값 변경
 					if (*menuIndex != 0) {
 						(*menuIndex)--;
 					}
@@ -284,7 +314,6 @@ int mainMenu(int* menuIndex) { // 메인 메뉴 컨트롤
 					printArrow(menuIndex);
 				}
 				else if (userInput == DOWN_ARROW) {
-					// *menuIndex 값 변경
 					if (*menuIndex != 5) {
 						(*menuIndex)++;
 					}
@@ -293,21 +322,22 @@ int mainMenu(int* menuIndex) { // 메인 메뉴 컨트롤
 					printArrow(menuIndex);
 				}
 			}
-			else if (userInput == ENTER) { // 엔터키누르면 현재 화살표가 가리키는 인덱스 반환
+			else if (userInput == ENTER) { // 현재 인덱스 반환
 #ifndef ISSUE
-				_getch(); // 불필요한 바이트 버리기
+				_getch(); // 입력 스트림 비우기
 #endif
 
 				return *menuIndex;
 			}
 		}
 	}
-
-	return 0; // 위 내용 완성되면 삭제
 }
 
-void printHelp() { // 도움말 출력
-	clearScreen();
+/*
+	도움말 출력
+*/
+void printHelp() {
+	system("cls");
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
 	printSingleBorderLine(3);
@@ -329,7 +359,9 @@ void printHelp() { // 도움말 출력
 	gotoxy(1, 26); printf("%s", VERSION);
 	gotoxy(20, 26); printf("https://github.com/youseokhwan/AcidRainGame");
 
-	// 타이핑하는 것처럼 보이도록 구현
+	/*
+		도움말 텍스트 애니메이션으로 구현
+	*/
 	setColor(WHITE);
 	gotoxy(0, 4); printf("\'"); gotoxy(0, 9); printf("내");
 	gotoxy(0, 12); printf("총"); gotoxy(0, 17); printf("메"); Sleep(DELAY);
@@ -540,8 +572,11 @@ void printHelp() { // 도움말 출력
 	system("pause>nul");
 }
 
-void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus) { // 설정 창 출력
-	clearScreen();
+/*
+	개발자 설정 출력
+*/
+void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus) {
+	system("cls");
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
 	printSingleBorderLine(3);
@@ -654,32 +689,46 @@ void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus)
 		}
 		else {
 #ifndef ISSUE
-			_getch();
+			_getch(); // 입력 스트림 비우기
 #endif
 		}
 	}
 	setColor(WHITE);
 }
 
-void gotoxy(int x, int y) { // 커서 특정 좌표로 이동
+/*
+	콘솔 커서를 특정 좌표로 이동시키는 함수
+*/
+void gotoxy(int x, int y) {
 	COORD cursorPosition = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPosition);
 }
 
-void printSingleBorderLine(int y) { // rank, log 등에서 한 줄짜리 경계선 출력
+/*
+	경계선 한 줄 출력하는 함수
+	랭킹, 로그, 도움말, 설정 창에서 사용
+*/
+void printSingleBorderLine(int y) {
 	setColor(DARK_YELLOW);
 	gotoxy(0, y); printf("===============================================================");
 	setColor(WHITE);
 }
 
-void printDoubleBorderLine() { // gameBoard에서 두 줄짜리 경계선 출력
+/*
+	경계선 두 줄 출력하는 함수
+	게임 화면에서 단어 낙하 시작점, 도착점으로 사용
+*/
+void printDoubleBorderLine() {
 	setColor(DARK_YELLOW);
 	gotoxy(0, 1); printf("===============================================================\n");
 	gotoxy(0, 22); printf("===============================================================\n");
 	setColor(WHITE);
 }
 
-void printStatus(struct _gameStatus* gameStatus) { // status값 출력
+/*
+	게임 화면에서 화면 상단에 스테이지, 라이프, 스코어 출력하는 함수
+*/
+void printStatus(struct _gameStatus* gameStatus) {
 	setColor(DARK_YELLOW);
 	
 	gotoxy(0, 0); printf("Stage: ");
@@ -705,30 +754,39 @@ void printStatus(struct _gameStatus* gameStatus) { // status값 출력
 	setColor(WHITE);
 }
 
-void printPrompt() { // 입력 창 출력
+/*
+	게임 화면에서 하단에 단어 입력부 프롬프트 출력하는 함수
+*/
+void printPrompt() {
 	setColor(DARK_YELLOW);
 	gotoxy(0, 24);  printf("Input >> ");
 	setColor(WHITE);
 }
 
-void clearStatus() { // status값 지우기
+/*
+	게임 화면에서 상단의 Status값 지우는 함수
+	Status값 업데이트하기 위함
+*/
+void clearStatus() {
 	gotoxy(0, 0);
 	printf("                                                                ");
 }
 
-void clearBoard() { // 단어 지우기
+/*
+	게임 화면에서 단어 출력 부 지우는 함수
+	단어 낙하하는 애니메이션 구현하기 위함
+*/
+void clearBoard() {
 	for (int i = 2; i <= 21; i++) {
 		gotoxy(0, i);
 		printf("                                                                ");
 	}
 }
 
-void clearPrompt() { // 입력창 지우기
+/*
+	게임 화면에서 단어 입력 부 지우는 함수
+	단어 입력 후 엔터키 누를 시 지우기 위함
+*/
+void clearPrompt() {
 	gotoxy(0, 24); printf("                                 ");
-}
-
-void clearLog() { // 로그창 지우기
-	for (int i = 4; i <= 24; i++) {
-		gotoxy(0, i); printf("                                                             ");
-	}
 }
