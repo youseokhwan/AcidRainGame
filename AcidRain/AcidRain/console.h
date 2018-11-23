@@ -43,7 +43,9 @@ typedef enum { NOCURSOR, SOLIDCURSOR, NORMALCURSOR } CURSOR_TYPE;
 void setCursorType(CURSOR_TYPE c); // 커서 숨기기
 void setColor(int colorNumber); // 폰트 색상 변경
 
-struct _record* consoleSetting(struct _gameStatus* gameStatus); // 최초 콘솔세팅
+void clearScreen(); // system("cls");
+
+void consoleSetting(struct _gameStatus* gameStatus); // 최초 콘솔세팅
 struct _settingValue {
 	int hideCursorToggle;
 	int dropSpeedToggle;

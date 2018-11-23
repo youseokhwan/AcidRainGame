@@ -4,7 +4,7 @@
 //#define WORD_FILE_IO_CANCEL_FOR_TEST
 
 void gameStart(struct _record* record, struct _gameStatus* gameStatus) { // 게임시작
-	system("cls");
+	clearScreen();
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
 	// struct 선언
@@ -26,7 +26,7 @@ void gameStart(struct _record* record, struct _gameStatus* gameStatus) { // 게임
 	fopen_s(&fp, "dataFile\\word_list.txt", "rt");
 
 	if (fp == NULL) {
-		system("cls");
+		clearScreen();
 		gotoxy(0, 0); printf("word_list.txt 파일이 없습니다!");
 		gotoxy(0, 2); printf("프로그램을 종료합니다.");
 		gotoxy(0, 3);

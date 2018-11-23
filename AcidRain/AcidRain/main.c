@@ -15,11 +15,13 @@ int main(int argc, char* argv[]) {
 	struct _gameStatus gs;
 	struct _gameStatus* gameStatus = &gs;
 
-	struct _record* record = consoleSetting(gameStatus); // 최초 콘솔세팅
+	struct _record rc[RECORD];
+	struct _record* record = &rc[0];
 
 	struct _settingValue sv = { 1, 0 }; // 초기 설정 값
 	struct _settingValue* settingValue = &sv;
 	
+	consoleSetting(gameStatus); // 최초 콘솔세팅
 	addLog("start a program\n", false);
 
 	int mi = 0;
@@ -45,12 +47,11 @@ int main(int argc, char* argv[]) {
 			setting(settingValue, gameStatus);
 			break;
 		case 5:
-			system("cls");
+			clearScreen();
 			gotoxy(0, 0); printf("※ 게임을 종료합니다.\n");
 			gotoxy(0, 2);
 
 			addLog("end a program\n", false);
-			free(record); // 동적 할당한 메모리 반환(console.c 참조)
 			exit(0);
 		default:
 			gotoxy(0, 9); printf("※ 잘못된 입력입니다.");

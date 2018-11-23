@@ -49,7 +49,7 @@ void addRecord(struct _gameStatus* gameStatus, struct _record* record) { // ·©Å·
 }
 
 void printRecords(struct _record* record) { // ·©Å· Ãâ·Â
-	system("cls");
+	clearScreen();
 	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav Àç»ý
 
 	setColor(YELLOW);

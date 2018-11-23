@@ -1,6 +1,15 @@
 #include "console.h"
 
-struct _record* consoleSetting(struct _gameStatus* gameStatus) { // 최초 콘솔 세팅
+void clearScreen() { // system("cls");
+	// system("cls"); 기능에 애니메이션 추가
+	for (int i = 0; i < 28; i++) {
+		gotoxy(0, i); printf("                                                                 ");
+
+		Sleep(DELAY);
+	}
+}
+
+void consoleSetting(struct _gameStatus* gameStatus) { // 최초 콘솔 세팅
 	system("title Acid Rain"); // 콘솔 타이틀 변경
 	system("mode con: cols=64 lines=27"); // 콘솔 사이즈 변경
 
@@ -10,13 +19,6 @@ struct _record* consoleSetting(struct _gameStatus* gameStatus) { // 최초 콘솔 세
 	for (int i = 0; i < STAGE; i++) { // 단어 낙하속도 최초 설정
 		gameStatus->dropSpeed[i] = 800 - 60 * i;
 	}
-
-	// _record 동적 할당
-	struct _record* rcPtr = malloc(sizeof(struct _record)*RECORD);
-	struct _record rc[RECORD];
-	*rcPtr = rc[RECORD];
-
-	return rcPtr;
 }
 
 void setColor(int colorNumber) {
@@ -253,7 +255,7 @@ void printRain() { // 비 출력
 }
 
 void printMenu(int* menuIndex) { // 메인화면 출력
-	system("cls");
+	clearScreen();
 
 	printTitle(); // 타이틀 출력
 	printMenuList(); // 메뉴 목록 출력
@@ -303,7 +305,8 @@ int mainMenu(int* menuIndex) { // 메인 메뉴 컨트롤
 }
 
 void printHelp() { // 도움말 출력
-	system("cls");
+	clearScreen();
+	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
 	printSingleBorderLine(3);
 	printSingleBorderLine(8);
@@ -536,7 +539,8 @@ void printHelp() { // 도움말 출력
 }
 
 void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus) { // 설정 창 출력
-	system("cls");
+	clearScreen();
+	PlaySound(TEXT(SOUND_SELECT), NULL, SND_FILENAME | SND_ASYNC); // select.wav 재생
 
 	printSingleBorderLine(3);
 	printSingleBorderLine(8);

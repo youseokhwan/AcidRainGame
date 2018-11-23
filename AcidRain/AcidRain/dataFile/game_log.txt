@@ -105,3 +105,48 @@
 18-11-22 00:38:21   start a program
 18-11-22 00:39:35   end a program
 18-11-22 00:40:31   start a program
+18-11-22 21:10:10   start a program
+18-11-22 21:11:34   start a program
+18-11-22 21:12:58   enter a game
+18-11-22 21:13:35   register a ranking(name: YSH)
+18-11-22 21:15:33   enter a game
+18-11-22 21:15:36   register a ranking(name: ,ll)
+18-11-22 21:15:39   end a program
+18-11-23 12:03:01   start a program
+18-11-23 12:04:19   enter a game
+18-11-23 12:08:21   start a program
+18-11-23 12:08:25   start a program
+18-11-23 12:08:26   enter a game
+18-11-23 12:08:30   register a ranking(name: qwe)
+18-11-23 12:10:32   start a program
+18-11-23 12:10:34   enter a game
+18-11-23 12:10:38   register a ranking(name: 123)
+18-11-23 12:10:44   enter a game
+18-11-23 12:10:59   register a ranking(name: 323s)
+18-11-23 12:11:04   end a program
+18-11-23 12:14:08   start a program
+18-11-23 12:14:12   enter a game
+18-11-23 12:14:18   register a ranking(name: ysh)
+18-11-23 12:14:24   enter a game
+18-11-23 12:14:33   register a ranking(name: WSK)
+18-11-23 12:16:04   start a program
+18-11-23 12:16:09   enter a game
+18-11-23 12:16:14   register a ranking(name: YSH)
+18-11-23 12:16:28   start a program
+18-11-23 12:16:29   enter a game
+18-11-23 12:16:36   register a ranking(name: YSH)
+18-11-23 12:16:40   enter a game
+18-11-23 12:17:01   register a ranking(name: SOA)
+18-11-23 12:24:53   start a program
+18-11-23 12:31:03   start a program
+18-11-23 12:31:17   start a program
+18-11-23 12:31:19   enter a game
+18-11-23 12:31:31   start a program
+18-11-23 12:32:10   start a program
+18-11-23 12:32:37   start a program
+18-11-23 12:32:47   start a program
+18-11-23 12:34:30   start a program
+18-11-23 12:34:43   enter a game
+18-11-23 12:34:48   register a ranking(name: YSH)
+18-11-23 12:35:50   start a program
+18-11-23 12:46:56   start a program

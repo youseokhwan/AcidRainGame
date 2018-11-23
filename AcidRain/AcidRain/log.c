@@ -31,7 +31,7 @@ void addLog(char* newLog, bool fromRank) { // 로그저장
 }
 
 void showLog() { // 로그보기
-	system("cls");
+	clearScreen();
 
 #ifdef ADD_LOG_FOR_TEST
 	addLog("log test\n", false);
