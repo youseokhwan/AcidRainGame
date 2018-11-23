@@ -2,6 +2,7 @@
 #define CONSOLE_H
 
 #pragma comment(lib,"winmm.lib")
+#define ISSUE // _getch() 문제있을 시 주석풀고 실행
 
 #include <time.h>
 #include <conio.h>

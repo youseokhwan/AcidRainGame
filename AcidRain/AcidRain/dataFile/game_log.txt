@@ -150,3 +150,25 @@
 18-11-23 12:34:48   register a ranking(name: YSH)
 18-11-23 12:35:50   start a program
 18-11-23 12:46:56   start a program
+18-11-23 17:38:02   start a program
+18-11-23 17:38:17   start a program
+18-11-23 17:47:11   start a program
+18-11-23 17:47:18   enter a game
+18-11-23 17:47:56   register a ranking(name: YSH)
+18-11-23 17:48:17   enter a game
+18-11-23 17:48:58   register a ranking(name: a)
+18-11-23 17:49:00   enter a game
+18-11-23 17:49:04   register a ranking(name: asdf)
+18-11-23 17:49:11   enter a game
+18-11-23 17:49:41   start a program
+18-11-23 17:49:42   enter a game
+18-11-23 17:51:26   start a program
+18-11-23 17:51:35   enter a game
+18-11-23 17:52:07   start a program
+18-11-23 17:52:14   enter a game
+18-11-23 17:53:55   start a program
+18-11-23 17:53:58   enter a game
+18-11-23 18:00:12   start a program
+18-11-23 18:00:14   enter a game
+18-11-23 18:00:40   start a program
+18-11-23 18:00:41   enter a game

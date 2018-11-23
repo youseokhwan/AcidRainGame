@@ -232,15 +232,21 @@ void gameStart(struct _record* record, struct _gameStatus* gameStatus) { // 게임
 					int keyboardInput = _getch(); // 키보드 값 입력받음
 
 					if (keyboardInput == BACKSPACE && inputX != 9) { // 커서가 맨 앞에 있지 않을 때 백스페이스 입력 시 한글자 지움
+#ifndef ISSUE
 						_getch(); // 뒤 바이트 버리기
+#endif
 						gotoxy(--inputX, inputY); printf(" ");
 						iterator--;
 					}
 					else if (keyboardInput == BACKSPACE && inputX == 9) { // 커서 맨 앞에 있으면 백스페이스 무시
+#ifndef ISSUE
 						_getch(); // 뒤 바이트 버리기
+#endif
 					}
 					else if (keyboardInput == SPACEBAR) { // 스페이스바 입력 무시
+#ifndef ISSUE
 						_getch(); // 뒤 바이트 버리기
+#endif
 					}
 					else if (keyboardInput == ARROW) { // 오른쪽 방향키 입력 시 게임포기 및 다른 방향키는 무시
 						keyboardInput = _getch();
@@ -253,7 +259,9 @@ void gameStart(struct _record* record, struct _gameStatus* gameStatus) { // 게임
 						}
 					}
 					else if (keyboardInput == ENTER) { // 엔터 입력 시
+#ifndef ISSUE
 						_getch(); // 뒤 바이트 버리기
+#endif
 						// 정답 여부 관계없이 엔터누르면 입력버퍼 초기화
 						inputX = 9; inputY = 24;
 						gotoxy(inputX, inputY); printf("                  ");
@@ -294,7 +302,9 @@ void gameStart(struct _record* record, struct _gameStatus* gameStatus) { // 게임
 						iterator = 0;
 					}
 					else if (inputX < 18) { // 단어 입력(x 좌표가 18 이상이면 더 이상 입력되지 않도록 제한)
+#ifndef ISSUE
 						_getch(); // 뒤 바이트 버리기
+#endif
 
 						setColor(YELLOW);
 						gotoxy(inputX, inputY); printf("%c", keyboardInput);
@@ -309,7 +319,9 @@ void gameStart(struct _record* record, struct _gameStatus* gameStatus) { // 게임
 						}
 					}
 					else {
+#ifndef ISSUE
 						_getch(); // 뒤 바이트 버리기
+#endif
 					}
 				}//while (_kbhit( ))
 			}//while(true)

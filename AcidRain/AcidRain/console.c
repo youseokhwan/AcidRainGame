@@ -5,7 +5,7 @@ void clearScreen() { // system("cls");
 	for (int i = 0; i < 28; i++) {
 		gotoxy(0, i); printf("                                                                 ");
 
-		Sleep(DELAY);
+		Sleep(3);
 	}
 }
 
@@ -294,7 +294,9 @@ int mainMenu(int* menuIndex) { // 메인 메뉴 컨트롤
 				}
 			}
 			else if (userInput == ENTER) { // 엔터키누르면 현재 화살표가 가리키는 인덱스 반환
+#ifndef ISSUE
 				_getch(); // 불필요한 바이트 버리기
+#endif
 
 				return *menuIndex;
 			}
@@ -593,7 +595,9 @@ void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus)
 			}
 		}
 		else if (keyboardInput == 67 || keyboardInput == 99) { // c 혹은 C 입력했을 때
+#ifndef ISSUE
 			_getch();
+#endif
 
 			if (settingValue->hideCursorToggle == 1) {
 				gotoxy(9, 9); printf("  ");
@@ -613,7 +617,9 @@ void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus)
 			}
 		}
 		else if (keyboardInput == 83 || keyboardInput == 115) { // s 혹은 S 입력했을 때
+#ifndef ISSUE
 			_getch();
+#endif
 
 			if (settingValue->dropSpeedToggle == 0) {
 				gotoxy(2, 13); printf("  ");
@@ -647,7 +653,9 @@ void setting(struct _settingValue* settingValue, struct _gameStatus* gameStatus)
 			}
 		}
 		else {
+#ifndef ISSUE
 			_getch();
+#endif
 		}
 	}
 	setColor(WHITE);
