@@ -30,3 +30,5 @@
 * 스크린샷<br>
 
 <img src="https://i.imgur.com/kUTPYI1.png" width="410" height="346"> <img src="https://i.imgur.com/oway0Y2.png" width="410" height="346">
+
+> [exe파일](https://github.com/youseokhwan/AcidRainGame/blob/master/AcidRain/AcidRain/download/AcidRain.zip?raw=true)
