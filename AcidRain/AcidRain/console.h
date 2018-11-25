@@ -22,7 +22,7 @@
 #include "log.h"
 #include "ranking.h"
 
-#define VERSION "v1.3.4" // 현재 버전 정보
+#define VERSION "v1.3.5" // 현재 버전 정보
 
 #define DELAY 7
 
