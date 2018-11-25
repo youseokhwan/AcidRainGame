@@ -195,7 +195,7 @@ void gameStart(struct _record* record, struct _gameStatus* gameStatus) {
 					단어 모두 정답으로 입력하면 다음 스테이지 진행
 				*/
 				if (gameStatus->correctAnswer == WORD_IN_STAGE) {
-					system("cls");
+					clearBoard();
 
 					PlaySound(TEXT(SOUND_STAGE_CLEAR), NULL, SND_FILENAME | SND_ASYNC); // stageClear.wav 재생
 

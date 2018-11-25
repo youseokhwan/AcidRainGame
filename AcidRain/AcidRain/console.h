@@ -59,7 +59,7 @@ void printTitle();
 void printMenuList();
 void printRain();
 void printOthers();
-void printArrow(int* menuIndex);
+void printMenuArrow(int* menuIndex);
 void printMenu(int* menuIndex);
 
 int mainMenu(int* menuIndex);

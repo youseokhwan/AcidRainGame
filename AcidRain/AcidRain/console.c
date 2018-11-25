@@ -54,7 +54,7 @@ void setCursorType(CURSOR_TYPE c) {
 	메인 화면에서 화살표 출력하는 함수
 	printMenu( )에서 사용
 */
-void printArrow(int* menuIndex) {
+void printMenuArrow(int* menuIndex) {
 	for (int i = 0; i < 6; i++) {
 		gotoxy(5, 18 + i); printf("  ");
 	}
@@ -289,7 +289,7 @@ void printMenu(int* menuIndex) {
 	printMenuList();
 	printOthers();
 	printRain();
-	printArrow(menuIndex);
+	printMenuArrow(menuIndex);
 }
 
 /*
@@ -311,7 +311,7 @@ int mainMenu(int* menuIndex) {
 					}
 
 					printMenuList();
-					printArrow(menuIndex);
+					printMenuArrow(menuIndex);
 				}
 				else if (userInput == DOWN_ARROW) {
 					if (*menuIndex != 5) {
@@ -319,7 +319,7 @@ int mainMenu(int* menuIndex) {
 					}
 
 					printMenuList();
-					printArrow(menuIndex);
+					printMenuArrow(menuIndex);
 				}
 			}
 			else if (userInput == ENTER) { // 현재 인덱스 반환
@@ -710,7 +710,7 @@ void gotoxy(int x, int y) {
 */
 void printSingleBorderLine(int y) {
 	setColor(DARK_YELLOW);
-	gotoxy(0, y); printf("===============================================================");
+	gotoxy(0, y); printf("================================================================");
 	setColor(WHITE);
 }
 
@@ -720,8 +720,8 @@ void printSingleBorderLine(int y) {
 */
 void printDoubleBorderLine() {
 	setColor(DARK_YELLOW);
-	gotoxy(0, 1); printf("===============================================================\n");
-	gotoxy(0, 22); printf("===============================================================\n");
+	gotoxy(0, 1); printf("================================================================");
+	gotoxy(0, 22); printf("================================================================");
 	setColor(WHITE);
 }
 

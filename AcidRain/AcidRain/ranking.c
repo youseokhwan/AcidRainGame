@@ -3,6 +3,128 @@
 int recordIndex = 0;
 
 /*
+	알파벳 목록 출력하는 함수
+*/
+void printAlphabetTable() {
+	for (int i = 0; i < 4; i++) {
+		gotoxy(0, 7 + i); printf("                                                 ");
+	}
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 7; j++) {
+			gotoxy(2 + (j * 4), 7 + i); printf("%c", 'A' + (i * 7) + j);
+		}
+	}
+
+	gotoxy(22, 10); printf("_              ");
+	gotoxy(26, 10); printf("완료");
+}
+
+/*
+	알파벳 목록에서 화살표 출력하는 함수
+*/
+void printAlphabetArrow(int x, int y) {
+	setColor(YELLOW);
+	gotoxy(0 + x * 4, 7 + y); printf("→");
+	setColor(WHITE);
+}
+
+/*
+	이름 등록하는 함수
+*/
+void registerName(struct _record* record) {
+	char name[NAME_BUFFER] = "";
+	int nameIndex = 0;
+	int x = 0, y = 0;
+
+	gotoxy(0, 5); printf("이름 입력:                          ");
+	printAlphabetTable();
+	printAlphabetArrow(x, y);
+
+	while (true) {
+		int keyboardInput = _getch();
+
+		if (keyboardInput == ARROW) {
+			keyboardInput = _getch();
+
+			if (keyboardInput == UP_ARROW) {
+				if (y == 0) {
+					// empty!!
+				}
+				else {
+					y--;
+					printAlphabetTable();
+					printAlphabetArrow(x, y);
+				}
+			}
+			else if (keyboardInput == DOWN_ARROW) {
+				if (y == 3) {
+					// empty!!
+				}
+				else {
+					y++;
+					printAlphabetTable();
+					printAlphabetArrow(x, y);
+				}
+			}
+			else if (keyboardInput == LEFT_ARROW) {
+				if (x == 0) {
+					// empty!!
+				}
+				else {
+					x--;
+					printAlphabetTable();
+					printAlphabetArrow(x, y);
+				}
+			}
+			else if (keyboardInput == RIGHT_ARROW) {
+				if (x == 6) {
+					// empty!!
+				}
+				else {
+					x++;
+					printAlphabetTable();
+					printAlphabetArrow(x, y);
+				}
+			}
+			else {
+				// empty!!
+			}
+		}
+		else if (keyboardInput == ENTER) {
+#ifndef ISSUE
+			_getch(); // 입력 스트림 비우기
+#endif
+
+			if (x == 6 && y == 3 && nameIndex <= 3) {
+				strcpy_s(record[recordIndex].name, NAME_BUFFER, name);
+				
+				break;
+			}
+			else if (nameIndex >= 3) {
+				gotoxy(0, 12); printf("더 이상 입력할 수 없습니다. \"완료\"를 눌러주세요.");
+			}
+			else {
+				if (x == 5 && y == 3) {
+					name[nameIndex] = '_';
+				}
+				else {
+					name[nameIndex] = 'A' + (x + y * 7);
+				}
+				gotoxy(11 + nameIndex, 5);
+				printf("%c", name[nameIndex]);
+				nameIndex++;
+			}
+		}
+		else {
+#ifndef ISSUE
+			_getch(); // 입력 스트림 비우기
+#endif
+		}
+	}
+}
+
+/*
 	랭킹 추가하는 함수
 */
 void addRecord(struct _gameStatus* gameStatus, struct _record* record) {
@@ -16,10 +138,12 @@ void addRecord(struct _gameStatus* gameStatus, struct _record* record) {
 		return;
 	}
 
-	gotoxy(0, 5); printf("이름 입력:                          ");
-	gotoxy(0, 7); printf("※ 알파벳 대문자 5글자 이내로 입력해주세요! ex) YSH");
+	//gotoxy(0, 5); printf("이름 입력:                          ");
+	//gotoxy(0, 7); printf("※ 알파벳 대문자 5글자 이내로 입력해주세요! ex) YSH");
 
-	gotoxy(11, 5); scanf_s("%s", record[recordIndex].name, NAME_BUFFER);
+	//gotoxy(11, 5); scanf_s("%s", record[recordIndex].name, NAME_BUFFER);
+
+	registerName(record);
 
 	addLog("register a ranking(name: ", false);
 	addLog(record[recordIndex].name, true);
