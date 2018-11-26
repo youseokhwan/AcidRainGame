@@ -26,9 +26,12 @@
 > 3. PC마다 getch( ) 인식이 다름(?) -> 두 번 입력해야 입력되는 ISSUE<br>
 > 모든 환경에서 그런 것은 아니며 문제 발생 시 "#define issue"를 주석 해제하면 임시 해결<br>
 > 4. 같은 코드, 같은 OS임에도 낙하가 불규칙적으로 진행되는 PC가 간혹 있음
+> 5. 스코어 동점일 경우 처리하는 알고리즘 추가해야 함
 
 * 스크린샷<br>
 
 <img src="https://i.imgur.com/kUTPYI1.png" width="410" height="346"> <img src="https://i.imgur.com/oway0Y2.png" width="410" height="346">
 
-> [exe파일](https://github.com/youseokhwan/AcidRainGame/blob/master/AcidRain/AcidRain/download/AcidRain.zip?raw=true)
+> [다운로드](https://github.com/youseokhwan/AcidRainGame/blob/master/AcidRain/AcidRain/download/AcidRain.zip?raw=true)<br>
+> Debug로 빌드된 exe파일이며, dataFile 폴더를 같은 디렉토리에 두고 실행해야함.<br>
+> 위에 명시된 입력 버그, 낙하 버그가 있을 시 알려주시면 감사하겠습니다.<br>
